@@ -200,6 +200,11 @@ body {
   color: #FFF;
 }
 .btn-primary:hover { background: var(--primary-hover); }
+.btn-success {
+  background: var(--success);
+  color: #FFF;
+}
+.btn-success:hover { background: #059669; }
 .btn-outline {
   background: transparent;
   border: 1px solid var(--border);
@@ -600,9 +605,14 @@ th.num { text-align: right; }
       <select id="weekSelect" class="week-select" onchange="onWeekChange(this.value)"></select>
     </div>
 
+    <button class="btn btn-success" onclick="exportWeekToExcel(currentWeekKey)" title="Tải file Excel báo cáo tuần này về máy">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>📥 Tải Excel</span>
+    </button>
+
     <button class="btn btn-primary" onclick="openUploadModal()">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      <span>+ Cập nhật tuần</span>
+      <span>+ Cập nhật</span>
     </button>
 
     <button class="btn btn-outline btn-icon-only" onclick="toggleTheme()" title="Đổi giao diện Sáng/Tối">
@@ -645,6 +655,10 @@ th.num { text-align: right; }
     <button class="bottom-nav-btn" id="mnav-compare" onclick="showTab('compare')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y4="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       <span>So sánh</span>
+    </button>
+    <button class="bottom-nav-btn" onclick="exportWeekToExcel(currentWeekKey)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Tải Excel</span>
     </button>
     <button class="bottom-nav-btn" onclick="openUploadModal()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -847,7 +861,7 @@ function showTab(tabName) {
   document.getElementById('tab-topic').style.display = tabName === 'topic' ? 'block' : 'none';
 
   document.querySelectorAll('.nav-item, .bottom-nav-btn').forEach(el => el.classList.remove('active'));
-  
+
   if (tabName === 'overview') {
     document.getElementById('nav-overview')?.classList.add('active');
     document.getElementById('mnav-overview')?.classList.add('active');
@@ -873,16 +887,235 @@ function fmt(v, suffix) {
   return s + suffix;
 }
 
+function generateWeeklyInsights(weekData) {
+  if (!weekData || !weekData.topics) {
+    return {
+      assessmentList: ["Chưa có đủ dữ liệu để phân tích nhận định cho tuần này."],
+      recommendations: ["Cập nhật bổ sung dữ liệu file Excel để xem nhận định."]
+    };
+  }
+
+  const topics = weekData.topics;
+  const thuTD = topics['4THUTD'];
+  const noNSNN = topics['41NONSNN'];
+  const doXa = topics['7DOXA'];
+  const doDem = topics['6THAYDK'];
+  const crm = topics['1CRM'];
+  const matDien = topics['2MATDIENTBACC'];
+  const haiLong = topics['3HAILONGKH'];
+  const dienNhan = topics['10DIENNHANTUAN'];
+
+  const insightsList = [];
+  const recsList = [];
+
+  // 1. Thu tiền điện
+  if (thuTD && thuTD.rows) {
+    const datCount = thuTD.dat_count || 0;
+    const total = thuTD.total || 11;
+    const topUnit = thuTD.top3 && thuTD.top3[0] ? thuTD.top3[0].unit + ' (' + thuTD.top3[0].value + '%)' : '';
+    const botUnit = thuTD.bottom3 && thuTD.bottom3[0] ? thuTD.bottom3[0].unit + ' (' + thuTD.bottom3[0].value + '%)' : '';
+    
+    if (datCount === total) {
+      insightsList.push('<b>Thu tiền điện:</b> 100% Đơn vị (' + datCount + '/' + total + ') hoàn thành kế hoạch tuần. Đơn vị dẫn đầu xuất sắc là ' + topUnit + '.');
+    } else {
+      insightsList.push('<b>Thu tiền điện:</b> Ghi nhận ' + datCount + '/' + total + ' Đơn vị đạt chỉ tiêu tuần. Đơn vị dẫn đầu là ' + topUnit + ', trong khi ' + botUnit + ' cần đôn đốc thu hồi nợ đọng cuối kỳ.');
+      recsList.push('Đơn vị chưa đạt thu tiền điện (' + (botUnit ? botUnit.split(' ')[0] : 'tồn nợ') + ') tập trung đôn đốc thu nợ các nhóm khách hàng lớn, phối hợp ngân hàng & tổ chức trung gian thanh toán xử lý nợ đọng.');
+    }
+  }
+
+  // 2. Nợ NSNN
+  if (noNSNN) {
+    const totalNo = noNSNN.total_incidents || (noNSNN.rows ? noNSNN.rows.reduce((a,b)=>(a + (b.value||0)), 0) : 0);
+    if (totalNo === 0) {
+      insightsList.push('<b>Nợ Ngân sách Nhà nước:</b> Kiểm soát rất tốt, 0 phát sinh nợ đọng Ngân sách Nhà nước trên toàn Công ty.');
+    } else {
+      const topNoUnit = noNSNN.top3 && noNSNN.top3[0] ? noNSNN.top3[0].unit : 'một số đơn vị';
+      insightsList.push('<b>Nợ Ngân sách Nhà nước:</b> Còn tồn nợ tại ' + topNoUnit + ', cần làm việc trực tiếp với Kho bạc để giải ngân trước kỳ chốt sổ.');
+      recsList.push('Phân công Trưởng phòng Kinh doanh làm việc trực tiếp với Kho bạc Nhà nước & Sở Tài chính thẩm định hồ sơ giải ngân nợ NSNN trong 48h.');
+    }
+  }
+
+  // 3. Công tác Đo xa & Kiểm định
+  if (doXa || doDem) {
+    let textDoXa = doXa && doXa.rows && doXa.rows[0] ? 'Tỷ lệ đo xa dẫn đầu đạt ' + doXa.rows[0].value + '% (' + doXa.rows[0].unit + ')' : 'Tỷ lệ đo xa duy trì ổn định';
+    let textDoDem = doDem && doDem.dat_count !== undefined ? doDem.dat_count + '/' + doDem.total + ' Đơn vị hoàn thành kiểm định' : '';
+    insightsList.push('<b>Đo xa & Đo đếm:</b> ' + textDoXa + '. ' + textDoDem + '.');
+    if (doDem && doDem.bottom3 && doDem.bottom3.length > 0) {
+      const slowUnits = doDem.bottom3.map(u => u.unit).join(', ');
+      recsList.push('Điện lực (' + slowUnits + ') lập kế hoạch ưu tiên lực lượng kỹ thuật thay thế ngay công tơ quá hạn kiểm định, giải quyết dứt điểm nợ đọng.');
+    }
+  }
+
+  // 4. Chất lượng DVKH (CRM, Mất điện lặp lại)
+  if (crm || matDien || haiLong) {
+    const crmCount = crm ? (crm.total_incidents || 0) : 0;
+    const matDienCount = matDien ? (matDien.total_incidents || 0) : 0;
+    const haiLongCount = haiLong ? (haiLong.total_incidents || 0) : 0;
+
+    insightsList.push('<b>Chất lượng DVKH & Vận hành:</b> Ghi nhận ' + crmCount + ' phiếu CRM gọi lại nhiều lần, ' + matDienCount + ' trạm biến áp mất điện lặp lại và ' + haiLongCount + ' phản ánh chưa hài lòng.');
+
+    if (crmCount > 0) {
+      const crmUnits = crm.counts ? crm.counts.slice(0,3).map(c => c[0]).join(', ') : 'đơn vị phát sinh';
+      recsList.push('Chấn chỉnh công tác tiếp nhận CRM tại ' + crmUnits + ': Xử lý triệt để yêu cầu khách hàng ngay lần đầu, không để phát sinh cuộc gọi đôn đốc lần 2-3.');
+    }
+    if (matDienCount > 0) {
+      recsList.push('Đội Quản lý vận hành & Kỹ thuật kiểm tra nguyên nhân nhảy aptomat/sự cố lặp lại tại các trạm biến áp, thực hiện cân pha san tải dứt điểm trong tuần.');
+    }
+  }
+
+  // 5. Điện nhận
+  if (dienNhan) {
+    insightsList.push('<b>Sản lượng điện nhận:</b> Tổng điện nhận toàn Công ty đạt ' + (dienNhan.tong37 ? dienNhan.tong37.toLocaleString('vi-VN') : '—') + ' kWh (' + (dienNhan.tongsosanh || 100) + '% so với tuần trước).');
+  }
+
+  if (recsList.length === 0) {
+    recsList.push("Duy trì tốc độ hoàn thành các chỉ tiêu kinh doanh và dịch vụ khách hàng như hiện tại.");
+    recsList.push("Tăng cường kiểm tra phúc tra ghi chỉ số và dịch vụ khách hàng định kỳ.");
+  }
+
+  return {
+    assessmentList: insightsList,
+    recommendations: recsList
+  };
+}
+
+function exportWeekToExcel(weekKey) {
+  const wKey = weekKey || currentWeekKey;
+  const weekData = STORE[wKey];
+  if (!weekData) {
+    alert('Không tìm thấy dữ liệu cho ' + wKey);
+    return;
+  }
+
+  if (typeof XLSX === 'undefined') {
+    alert('Thư viện Excel đang được khởi tạo, vui lòng bấm lại sau vài giây.');
+    return;
+  }
+
+  const wb = XLSX.utils.book_new();
+  const insights = generateWeeklyInsights(weekData);
+
+  // Sheet 1: Tổng quan & Nhận định
+  const summaryRows = [
+    ["BÁO CÁO KINH DOANH & DỊCH VỤ KHÁCH HÀNG — " + wKey.toUpperCase()],
+    ["Thời gian báo cáo:", weekData.period || ''],
+    ["Ngày xuất file:", new Date().toLocaleDateString('vi-VN')],
+    [],
+    ["I. NHẬN ĐỊNH BÁO CÁO SÁT SƯỜN TỔNG THỂ:"],
+  ];
+
+  insights.assessmentList.forEach(item => {
+    const plainText = item.replace(/<[^>]+>/g, '');
+    summaryRows.push([plainText]);
+  });
+
+  summaryRows.push([]);
+  summaryRows.push(["II. YÊU CẦU & GIẢI PHÁP CHỈ ĐẠO KHẢ THI, THỰC TẾ:"]);
+  insights.recommendations.forEach((rec, idx) => {
+    summaryRows.push([(idx + 1) + ". " + rec]);
+  });
+
+  summaryRows.push([]);
+  summaryRows.push(["III. THỐNG KÊ TỔNG HỢP CÁC CHUYÊN ĐỀ:"]);
+  summaryRows.push(["STT", "Chuyên đề", "Chỉ tiêu / Hiện trạng", "Đánh giá"]);
+
+  let idx = 1;
+  ALL_TOPIC_IDS.forEach(id => {
+    const t = weekData.topics ? weekData.topics[id] : null;
+    if (t) {
+      let valStr = '—', statusStr = '';
+      if (t.type === 'ranked' && t.rows && t.rows[0]) {
+        valStr = 'Dẫn đầu: ' + t.rows[0].unit + ' (' + t.rows[0].value + (t.value_suffix || '') + ')';
+        statusStr = t.dat_count + '/' + t.total + ' Đơn vị đạt';
+      } else if (t.type === 'incident') {
+        valStr = (t.total_incidents ?? 0) + ' vụ việc/trạm phát sinh';
+        statusStr = t.total_incidents === 0 ? 'Tốt (0 vụ)' : 'Cần xử lý dứt điểm';
+      } else if (t.type === 'trend') {
+        valStr = (t.tong37 || 0).toLocaleString('vi-VN') + ' kWh';
+        statusStr = (t.tongsosanh || 100) + '% so tuần trước';
+      }
+      summaryRows.push([idx++, TOPIC_LABELS[id] || id, valStr, statusStr]);
+    }
+  });
+
+  const wsSummary = XLSX.utils.aoa_to_sheet(summaryRows);
+  XLSX.utils.book_append_sheet(wb, wsSummary, "Tong_Quan_Nhan_Dinh");
+
+  // Detailed sheets for each topic
+  ALL_TOPIC_IDS.forEach(id => {
+    const t = weekData.topics ? weekData.topics[id] : null;
+    if (!t) return;
+    const topicTitle = TOPIC_LABELS[id] || id;
+    const sheetData = [];
+    sheetData.push([topicTitle.toUpperCase() + ' — ' + wKey]);
+    sheetData.push(["Chỉ tiêu / Mô tả:", t.target_desc || '']);
+    sheetData.push([]);
+
+    if (t.type === 'ranked' && t.rows) {
+      sheetData.push(["STT", "Đơn vị (Điện lực)", "Giá trị (" + (t.value_suffix || '') + ")", "Chỉ tiêu KH", "Tỷ lệ Đạt (%)", "Trạng thái", "Ghi chú"]);
+      t.rows.forEach((r, i) => {
+        sheetData.push([
+          i + 1,
+          r.unit || '',
+          r.value ?? '',
+          r.target ?? '',
+          r.rate ?? '',
+          r.status || '',
+          r.note || ''
+        ]);
+      });
+    } else if (t.type === 'incident' && (t.counts || t.rows)) {
+      sheetData.push(["STT", "Đơn vị (Điện lực)", "Nội dung / Số vụ việc", "Ghi chú"]);
+      const items = t.counts || t.rows || [];
+      items.forEach((item, i) => {
+        if (Array.isArray(item)) {
+          sheetData.push([i + 1, item[0] || '', item[1] ?? '', '']);
+        } else if (item) {
+          sheetData.push([i + 1, item.unit || item.tram || '', item.count || item.content || item.value || 1, item.note || '']);
+        }
+      });
+    }
+
+    if (t.assessment) {
+      sheetData.push([]);
+      sheetData.push(["Nhận định chuyên đề:", t.assessment]);
+    }
+
+    const ws = XLSX.utils.aoa_to_sheet(sheetData);
+    const cleanSheetName = (id + '_' + topicTitle).replace(/[\/?*[]]/g, '').slice(0, 30);
+    XLSX.utils.book_append_sheet(wb, ws, cleanSheetName);
+  });
+
+  const cleanWeekName = wKey.replace(/s+/g, '_');
+  XLSX.writeFile(wb, 'BAO_CAO_KD_DVKH_' + cleanWeekName + '.xlsx');
+}
+
 function renderOverview() {
   const sec = document.getElementById('tab-overview');
   const weekData = getActiveWeekData();
   const topics = weekData.topics || {};
+  const insights = generateWeeklyInsights(weekData);
 
-  let html = '<div class="card" style="background: linear-gradient(135deg, var(--bg-card) 0%, var(--primary-light) 100%);">' +
-    '<div style="font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.05em;">Báo cáo tổng hợp</div>' +
+  let html = '<div class="card" style="background: linear-gradient(135deg, var(--bg-card) 0%, var(--primary-light) 100%); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">' +
+    '<div><div style="font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.05em;">Báo cáo tổng hợp</div>' +
     '<h2 style="font-size:20px; font-weight:800; margin-top:2px;">Kinh doanh & Dịch vụ Khách hàng — ' + currentWeekKey + '</h2>' +
-    '<p style="font-size:13px; color:var(--text-muted); margin-top:4px;">' + (weekData.period || '') + '</p>' +
-    '</div><div class="ov-grid">';
+    '<p style="font-size:13px; color:var(--text-muted); margin-top:4px;">' + (weekData.period || '') + '</p></div>' +
+    '<button class="btn btn-success" onclick="exportWeekToExcel(currentWeekKey)">📥 Tải File Excel Tuần Này</button>' +
+    '</div>';
+
+  // Section 2: Nhận định & Giải pháp sát sườn
+  html += '<div class="card">' +
+    '<div class="card-title"><span class="dash"></span>📌 Nhận Định Báo Cáo Tuần (Sát Sườn Số Liệu)</div>' +
+    '<div class="assess-box" style="margin-top:12px;">' +
+    insights.assessmentList.map(item => '<p style="margin-bottom:8px;">' + item + '</p>').join('') +
+    '</div>' +
+    '<div class="recom-box"><h5>⚡ Yêu Cầu Chỉ Đạo & Giải Pháp Khả Thi, Thực Tế</h5>' +
+    '<ul>' + insights.recommendations.map(r => '<li>' + r + '</li>').join('') + '</ul>' +
+    '</div></div>';
+
+  // Section 3: Overview Grid
+  html += '<div class="card-title" style="margin:20px 0 12px 0;"><span class="dash"></span>Chi Tiết 12 Chuyên Đề Báo Cáo</div>';
+  html += '<div class="ov-grid">';
 
   ALL_TOPIC_IDS.forEach(id => {
     const t = topics[id];
@@ -908,7 +1141,7 @@ function renderOverview() {
       }
     }
 
-    html += '<div class="ov-card" onclick="showTopic(\'' + id + '\')">' +
+    html += '<div class="ov-card" onclick="showTopic(&quot;' + id + '&quot;)">' +
       '<div class="ov-top"><div class="ov-title">' + TOPIC_LABELS[id] + '</div>' + badgeHtml + '</div>' +
       '<div class="ov-metric">' + valStr + '</div>' +
       '<div class="ov-lbl">' + lblStr + '</div>' +
@@ -951,7 +1184,8 @@ function renderTopicDetails(topicId) {
       '</tbody></table></div></div>';
   }
 
-  sec.innerHTML = '<div class="card"><div class="card-header"><div><div style="font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase;">Chuyên đề Báo cáo</div><h2 class="card-title" style="margin-top:2px;">' + t.title + '</h2></div><span class="status-tag status-dat">' + currentWeekKey + '</span></div>' +
+  sec.innerHTML = '<div class="card"><div class="card-header"><div><div style="font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase;">Chuyên đề Báo cáo</div><h2 class="card-title" style="margin-top:2px;">' + t.title + '</h2></div>' +
+    '<div style="display:flex; gap:8px;"><button class="btn btn-success" onclick="exportWeekToExcel(currentWeekKey)">📥 Tải Excel Tuần</button><span class="status-tag status-dat">' + currentWeekKey + '</span></div></div>' +
     '<p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">' + (t.target_desc || '') + '</p>' +
     (t.assessment ? '<div class="assess-box"><b>📌 Nhận định tuần:</b> ' + t.assessment + '</div>' : '') +
     (t.recommendation && t.recommendation.length ? '<div class="recom-box"><h5>⚡ Yêu cầu thực hiện & Giải pháp</h5><ul>' + t.recommendation.map(r => '<li>' + r + '</li>').join('') + '</ul></div>' : '') +
@@ -1899,6 +2133,146 @@ function renderApp() {
   if (activeTab === 'overview') renderOverview();
   else if (activeTab === 'compare') renderCompare();
   else if (activeTab === 'topic') renderTopicDetails(activeTopicId);
+}
+
+renderWeekSelector();
+renderApp();
+</script>
+</body>
+</html
+
+function handleExcelFileUpload(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = new Uint8Array(e.target.result);
+      const wb = XLSX.read(data, { type: 'array' });
+      const result = buildTopicsFromWorkbook(wb);
+      enrichTopics(result);
+
+      const matchWeek = file.name.match(/TUAN\s*(\d+)/i);
+      let weekKey = matchWeek ? 'Tuần ' + matchWeek[1] : (result.period || 'Tuần mới');
+
+      STORE[weekKey] = result;
+      saveStore();
+      currentWeekKey = weekKey;
+
+      alert('🎉 Đã cập nhật thành công dữ liệu ' + weekKey + '! App đã lưu trữ tuần này. Sếp mở link web trên Zalo là có ngay số liệu mới.');
+      closeUploadModal();
+      renderWeekSelector();
+      renderApp();
+    } catch(err) {
+      alert('Lỗi khi đọc file Excel: ' + err.message);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function exportDataJson() {
+  const jsonStr = JSON.stringify(STORE, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'data_history.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function openUploadModal() { document.getElementById('uploadModal').classList.add('active'); }
+function closeUploadModal() { document.getElementById('uploadModal').classList.remove('active'); }
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('KD_THEME', next);
+}
+if (localStorage.getItem('KD_THEME') === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+
+function renderApp() {
+  renderSidebarTopics();
+  if (activeTab === 'overview') renderOverview();
+  else if (activeTab === 'compare') renderCompare();
+  else if (activeTab === 'topic') renderTopicDetails(activeTopicId);
+}
+
+if (cloudUrl) {
+  document.getElementById('cloudUrlInput').value = cloudUrl;
+  syncFromCloud();
+}
+
+renderWeekSelector();
+renderApp();
+</script>
+</body>
+</html
+
+function handleExcelFileUpload(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = new Uint8Array(e.target.result);
+      const wb = XLSX.read(data, { type: 'array' });
+      const result = buildTopicsFromWorkbook(wb);
+      enrichTopics(result);
+
+      const matchWeek = file.name.match(/TUAN\s*(\d+)/i);
+      let weekKey = matchWeek ? 'Tuần ' + matchWeek[1] : (result.period || 'Tuần mới');
+
+      STORE[weekKey] = result;
+      saveStore();
+      currentWeekKey = weekKey;
+
+      alert('🎉 Đã cập nhật thành công dữ liệu ' + weekKey + '! App đã lưu trữ tuần này. Sếp mở link web trên Zalo là có ngay số liệu mới.');
+      closeUploadModal();
+      renderWeekSelector();
+      renderApp();
+    } catch(err) {
+      alert('Lỗi khi đọc file Excel: ' + err.message);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function exportDataJson() {
+  const jsonStr = JSON.stringify(STORE, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'data_history.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function openUploadModal() { document.getElementById('uploadModal').classList.add('active'); }
+function closeUploadModal() { document.getElementById('uploadModal').classList.remove('active'); }
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('KD_THEME', next);
+}
+if (localStorage.getItem('KD_THEME') === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+
+function renderApp() {
+  renderSidebarTopics();
+  if (activeTab === 'overview') renderOverview();
+  else if (activeTab === 'compare') renderCompare();
+  else if (activeTab === 'topic') renderTopicDetails(activeTopicId);
+}
+
+if (cloudUrl) {
+  document.getElementById('cloudUrlInput').value = cloudUrl;
+  syncFromCloud();
 }
 
 renderWeekSelector();
