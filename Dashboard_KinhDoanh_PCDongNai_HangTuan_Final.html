@@ -1051,7 +1051,7 @@ function doExportWeekToExcel(weekKey) {
     ["Thời gian báo cáo:", weekData.period || ''],
     ["Ngày xuất file:", new Date().toLocaleDateString('vi-VN')],
     [],
-    ["I. NHẬN ĐỊNH BÁO CÁO SÁT SƯỜN TỔNG THỂ:"],
+    ["I. NHẬN ĐỊNH BÁO CÁO TỔNG THỂ:"],
   ];
 
   insights.assessmentList.forEach(item => {
@@ -1155,7 +1155,7 @@ function renderOverview() {
 
   // Section 2: Nhận định & Giải pháp sát sườn (Safe Escaped)
   html += '<div class="card">' +
-    '<div class="card-title"><span class="dash"></span>📌 Nhận Định Báo Cáo Tuần (Sát Sườn Số Liệu)</div>' +
+    '<div class="card-title"><span class="dash"></span>📌 Nhận Định Báo Cáo Tuần</div>' +
     '<div class="assess-box" style="margin-top:12px;">' +
     insights.assessmentList.map(item => '<p style="margin-bottom:8px;">' + item + '</p>').join('') +
     '</div>' +
