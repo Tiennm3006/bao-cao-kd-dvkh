@@ -694,11 +694,11 @@ function checkAuthStatus() {
   const appContainer = document.getElementById('appContainer');
 
   if (!currentUser) {
-    loginModal.classList.add('active');
-    appContainer.style.display = 'none';
+    if (loginModal) loginModal.classList.add('active');
+    if (appContainer) appContainer.style.display = 'none';
   } else {
-    loginModal.classList.remove('active');
-    appContainer.style.display = 'block';
+    if (loginModal) loginModal.classList.remove('active');
+    if (appContainer) appContainer.style.display = 'block';
 
     const userBadge = document.getElementById('userBadge');
     if (userBadge) {
@@ -1364,6 +1364,577 @@ function onSearchInput(query) {
     return;
   }
 }
+
+// ============================================================================
+// EXCEL WORKBOOK PARSER ENGINE (buildTopicsFromWorkbook & enrichTopics)
+// ============================================================================
+function normVN(s){
+  if(s===null || s===undefined) return '';
+  s = String(s);
+  s = s.replace(/đ/g,'d').replace(/Đ/g,'D');
+  s = s.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  return s.trim().toUpperCase().replace(/\s+/g,' ');
+}
+
+const UNIT_LIST = [
+  ['DONG XOAI','Đồng Xoài'], ['PHUOC LONG','Phước Long'], ['BU DANG','Bù Đăng'],
+  ['PHU RIENG','Phú Riềng'], ['CHON THANH','Chơn Thành'], ['BINH LONG','Bình Long'],
+  ['LOC NINH','Lộc Ninh'], ['BU DOP','Bù Đốp'], ['DONG PHU','Đồng Phú'],
+  ['BU GIA MAP','Bù Gia Mập'], ['HON QUAN','Hớn Quản'], ['TRAN BIEN','Trấn Biên'],
+  ['DAU GIAY','Dầu Giây'], ['TRI AN','Trị An'], ['LONG KHANH','Long Khánh'],
+  ['XUAN LOC','Xuân Lộc'], ['DINH QUAN','Định Quán'], ['LONG THANH','Long Thành'],
+  ['NHON TRACH','Nhơn Trạch'], ['CAM MY','Cẩm Mỹ'], ['TRANG BOM','Trảng Bom'],
+  ['LONG BINH','Long Bình']
+];
+const UNIT_MAP = {};
+UNIT_LIST.forEach(([k,v])=> UNIT_MAP[k]=v);
+
+function matchUnit(raw){
+  if(raw===null||raw===undefined) return null;
+  let n = normVN(raw);
+  n = n.replace(/^DIEN LUC\s+/,'').trim();
+  return UNIT_MAP[n] || null;
+}
+
+// ============ Sheet helpers ============
+function findSheet(wb, patterns){
+  const names = wb.SheetNames;
+  for(const nm of names){
+    const norm = normVN(nm).replace(/\s+/g,'');
+    for(const p of patterns){
+      if(norm.includes(normVN(p).replace(/\s+/g,''))) return nm;
+    }
+  }
+  return null;
+}
+
+function sheetAOA(wb, name){
+  if(!name) return null;
+  const ws = wb.Sheets[name];
+  return XLSX.utils.sheet_to_json(ws, {header:1, defval:null, raw:true});
+}
+
+function rowJoined(row){
+  return normVN((row||[]).map(c=>c===null||c===undefined?'':String(c)).join(' | '));
+}
+
+function findHeaderRow(aoa, keyword){
+  const key = normVN(keyword);
+  for(let r=0;r<aoa.length;r++){
+    if(rowJoined(aoa[r]).includes(key)) return r;
+  }
+  return -1;
+}
+
+// Collect {unit, rowIdx} pairs by scanning a window after a header/title row
+function collectUnitRows(aoa, headerIdx, unitCol, window){
+  window = window || 30;
+  const out = [];
+  const seen = new Set();
+  for(let r=headerIdx+1; r<Math.min(aoa.length, headerIdx+1+window); r++){
+    const row = aoa[r];
+    if(!row) continue;
+    const u = matchUnit(row[unitCol]);
+    if(u && !seen.has(u)){ out.push({r, unit:u}); seen.add(u); }
+  }
+  return out;
+}
+
+function num(v){
+  if(v===null||v===undefined||v==='') return null;
+  const n = Number(v);
+  return isNaN(n) ? null : n;
+}
+function r1(v,d){ d = d===undefined?1:d; return v===null? null : Math.round(v*Math.pow(10,d))/Math.pow(10,d); }
+
+// ============ Topic builders ============
+function buildRanked(rows, cfg){
+  const arr = rows.map(({r,unit})=>{
+    const o = {unit};
+    Object.entries(cfg.cols).forEach(([key, spec])=>{
+      let v = aoaRow(spec.aoa, r)[spec.col];
+      if(spec.type==='pct') v = r1(num(v)*100, spec.digits ?? 1);
+      else if(spec.type==='num') v = spec.digits!==undefined ? r1(num(v), spec.digits) : num(v);
+      else v = v;
+      o[key]=v;
+    });
+    return o;
+  }).filter(o=>o.value!==null && o.value!==undefined);
+  return arr;
+}
+function aoaRow(aoa, r){ return aoa[r] || []; }
+
+function topBottom(rows, higherBetter, n){
+  n = n||3;
+  const sorted = [...rows].sort((a,b)=> higherBetter ? b.value-a.value : a.value-b.value);
+  return {
+    sorted,
+    top3: sorted.slice(0,n),
+    bottom3: [...sorted].reverse().slice(0,n)
+  };
+}
+
+function extractPeriodLabel(wb){
+  const patterns = ['8TRUYTHU','TRUYTHU','6THAYDK','THAYDK','3HAILONGKH','HAILONGKH'];
+  for(const p of [patterns.slice(0,2), patterns.slice(2,4), patterns.slice(4,6)]){
+    try{
+      const name = findSheet(wb, p);
+      if(!name) continue;
+      const aoa = sheetAOA(wb, name);
+      if(!aoa) continue;
+      for(let r=0; r<Math.min(8, aoa.length); r++){
+        const row = aoa[r];
+        if(!row) continue;
+        for(const cell of row){
+          if(typeof cell !== 'string') continue;
+          const mWeek = cell.match(/TUẦN\s*0*(\d{1,2})/i);
+          const mRange = cell.match(/T[ỪU]\s*NGÀY\s*([\d\/]+)\s*ĐẾN\s*NGÀY\s*([\d\/]+)/i);
+          if(mWeek || mRange){
+            let label = '';
+            if(mWeek) label += 'Tuần ' + mWeek[1];
+            if(mRange){
+              const endParts = mRange[2].split('/');
+              const year = endParts.length===3 ? endParts[2] : '';
+              if(label && year) label += '/' + year;
+              label += (label?' ':'') + '(' + mRange[1].slice(0,5) + ' - ' + mRange[2].slice(0,5) + (year?'/'+year:'') + ')';
+            }
+            if(label) return label;
+          }
+        }
+      }
+    }catch(e){ /* thử tab khác */ }
+  }
+  return null;
+}
+
+// ============ Main builder ============
+function buildTopicsFromWorkbook(wb){
+  const topics = {};
+  const failed = [];
+  const allIds = ['4THUTD','41NONSNN','5NLMT','6THAYDK','7DOXA','8TRUYTHU','9KTSDĐ','9DUBAOPHUTAI','1CRM','2MATDIENTBACC','3HAILONGKH','10DIENNHANTUAN'];
+
+  function getAOA(patterns){
+    const name = findSheet(wb, patterns);
+    if(!name) throw new Error('Không tìm thấy tab dữ liệu tương ứng trong file (tìm theo: ' + patterns.join('/') + ').');
+    const aoa = sheetAOA(wb, name);
+    if(!aoa || aoa.length===0) throw new Error('Tab "' + name + '" trống, không có dữ liệu.');
+    return {name, aoa};
+  }
+  function getHeader(aoa, sheetName, keyword){
+    const h = findHeaderRow(aoa, keyword);
+    if(h===-1) throw new Error('Không tìm thấy vùng dữ liệu (tiêu đề "' + keyword + '") trong tab "' + sheetName + '". Cấu trúc tab có thể đã thay đổi.');
+    return h;
+  }
+
+  // wrap each topic block so one missing/changed sheet doesn't break the whole file
+  function section(id, label, fn){
+    try{
+      const t = fn();
+      if(!t) throw new Error('Không có dữ liệu.');
+      topics[id] = t;
+    }catch(e){
+      failed.push({id, label, reason: e.message});
+    }
+  }
+
+  // ---- 4THUTD ----
+  section('4THUTD','Thu tiền điện', ()=>{
+    const {name, aoa} = getAOA(['4THUTD','THUTD']);
+    const h = getHeader(aoa, name, 'Tên đơn vị');
+    const found = collectUnitRows(aoa, h, 1, 30);
+    const rows = found.map(({r,unit})=>{
+      const row = aoa[r];
+      const ratio = num(row[9]); const kh = num(row[10]);
+      if(ratio===null) return null;
+      return {unit, value:r1(ratio*100,2), target: kh? r1(kh*100,2):null, status: (kh && ratio>=kh)?'Đạt':'Không đạt'};
+    }).filter(Boolean);
+    if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
+    const {sorted, top3, bottom3} = topBottom(rows, true);
+    const dat = rows.filter(r=>r.status==='Đạt').length;
+    return {nav:'Thu tiền điện', title:'Tỷ lệ thu tiền điện', unit_label:'Điện lực',
+      metric_label:'Tỷ lệ thu/phải thu (%)', target_desc:'Chỉ tiêu công ty giao: ≥ 99,8% tổng số tiền phải thu',
+      rows: sorted, top3, bottom3, dat_count: dat, total: rows.length, type:'ranked', value_suffix:'%', higher_is_better:true};
+  });
+
+  // ---- 41NONSNN ----
+  section('41NONSNN','Nợ NSNN', ()=>{
+    const {name, aoa} = getAOA(['41NONSNN','NONSNN']);
+    const h = getHeader(aoa, name, 'Tổng tiền nợ');
+    const found = collectUnitRows(aoa, h, 1, 30);
+    const rows = found.map(({r,unit})=>{
+      const row = aoa[r];
+      const tien = num(row[11]); const hd = num(row[10]);
+      if(tien===null) return null;
+      return {unit, value:r1(tien/1e6,1), hd};
+    }).filter(Boolean);
+    if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
+    const rowsDesc = [...rows].sort((a,b)=>b.value-a.value);
+    return {nav:'Nợ NSNN', title:'Nợ ngân sách nhà nước', unit_label:'Điện lực',
+      metric_label:'Tổng tiền nợ (triệu đồng)', target_desc:'Chỉ tiêu: không phát sinh nợ ngân sách nhà nước quá hạn (0 đồng)',
+      rows: rowsDesc, top3: [...rowsDesc].reverse().slice(0,3), bottom3: rowsDesc.slice(0,3),
+      dat_count: rows.filter(r=>r.value===0).length, total: rows.length, type:'ranked', value_suffix:' triệu đồng', higher_is_better:false};
+  });
+
+  // ---- 5NLMT ----
+  section('5NLMT','Điện mặt trời mái nhà', ()=>{
+    const {name, aoa} = getAOA(['5NLMT','NLMT']);
+    const h = getHeader(aoa, name, 'cần xử lý');
+    const found = collectUnitRows(aoa, h, 1, 20);
+    const rows = found.map(({r,unit})=>{
+      const row = aoa[r];
+      const cantong = num(row[2]); const hoantat = num(row[6]);
+      if(!cantong) return null;
+      return {unit, value:r1((hoantat||0)/cantong*100,1), total_cases:cantong, done:hoantat};
+    }).filter(Boolean);
+    if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
+    const {sorted, top3, bottom3} = topBottom(rows, true);
+    return {nav:'Điện mặt trời mái nhà', title:'Tiến độ xử lý tồn tại Điện mặt trời mái nhà', unit_label:'Điện lực',
+      metric_label:'Tỷ lệ xử lý hoàn tất (%)', target_desc:'Chỉ tiêu: xử lý hoàn tất 100% hồ sơ pháp lý ĐMTMN tồn đọng',
+      rows: sorted, top3, bottom3, dat_count: rows.filter(r=>r.value>=100).length, total: rows.length, type:'ranked', value_suffix:'%', higher_is_better:true};
+  });
+
+  // ---- 6THAYDK (bảng lũy kế năm) ----
+  section('6THAYDK','Thiết bị đo đếm quá hạn', ()=>{
+    const {name, aoa} = getAOA(['6THAYDK','THAYDK']);
+    const h = getHeader(aoa, name, 'CÒN LẠI CỦA NĂM');
+    const found = collectUnitRows(aoa, h, 1, 30);
+    const rows = found.map(({r,unit})=>{
+      const row = aoa[r];
+      const tong = num(row[5]);
+      if(tong===null) return null;
+      return {unit, value: tong};
+    }).filter(Boolean);
+    if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
+    const rowsDesc = [...rows].sort((a,b)=>b.value-a.value);
+    return {nav:'Thiết bị đo đếm quá hạn', title:'Thiết bị đo đếm (công tơ, TU, TI) quá hạn kiểm định', unit_label:'Điện lực',
+      metric_label:'Số lượng thiết bị quá hạn (cái)', target_desc:'Chỉ tiêu: không để tồn thiết bị quá hạn kiểm định (0 thiết bị)',
+      rows: rowsDesc, top3: [...rowsDesc].reverse().slice(0,3), bottom3: rowsDesc.slice(0,3),
+      dat_count: rows.filter(r=>r.value===0).length, total: rows.length, type:'ranked', value_suffix:' thiết bị', higher_is_better:false};
+  });
+
+  // ---- 7DOXA ----
+  section('7DOXA','Công tác đo xa', ()=>{
+    const {name, aoa} = getAOA(['7DOXA','DOXA']);
+    let h = findHeaderRow(aoa, 'thu thập dữ liệu chung');
+    let rows;
+    if(h!==-1){
+      // mẫu mới: cột gộp sẵn tỷ lệ chung + cột đánh giá đạt/không đạt
+      const found = collectUnitRows(aoa, h, 1, 30);
+      rows = found.map(({r,unit})=>{
+        const row = aoa[r];
+        const c = num(row[2]), dd = num(row[3]);
+        const e = row[4], f = row[5];
+        if(c===null) return null;
+        return {unit, value:r1(c*100,1), khaithac:r1((dd||0)*100,1), status_doxa:e, status_khaithac:f};
+      }).filter(Boolean);
+    } else {
+      // mẫu cũ: cột riêng DCU/Modem, không có cột đánh giá sẵn -> tự tính
+      h = getHeader(aoa, name, 'khai thác công tơ điện tử trên đo xa');
+      const found = collectUnitRows(aoa, h, 1, 30);
+      rows = found.map(({r,unit})=>{
+        const row = aoa[r];
+        const khaithac = num(row[2]); // tỷ lệ khai thác CTĐT (0-1)
+        const dcu = num(row[3]);      // đã ở dạng % (vd 98.3)
+        const modem = num(row[4]);    // đã ở dạng % (vd 99.0)
+        if(khaithac===null) return null;
+        const chung = r1(((dcu||0)+(modem||0))/2, 1);
+        const kt = r1(khaithac*100,1);
+        return {unit, value: chung, khaithac: kt,
+          status_doxa: chung>=99 ? 'Đạt' : 'Không đạt',
+          status_khaithac: kt>=99.5 ? 'Đạt' : 'Không đạt'};
+      }).filter(Boolean);
+    }
+    if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
+    const {sorted, top3, bottom3} = topBottom(rows, true);
+    return {nav:'Công tác đo xa', title:'Tỷ lệ thu thập dữ liệu & khai thác công tơ điện tử qua đo xa', unit_label:'Điện lực',
+      metric_label:'Tỷ lệ thu thập dữ liệu chung (%)', target_desc:'Chỉ tiêu: tỷ lệ đo xa ≥ 99% và tỷ lệ khai thác CTĐT ≥ 99,5%',
+      rows: sorted, top3, bottom3, dat_count: rows.filter(r=>r.status_doxa==='Đạt').length, total: rows.length, type:'ranked', value_suffix:'%', higher_is_better:true};
+  });
+
+  // ---- 9KTSDĐ ----
+  section('9KTSDĐ','Kiểm tra SDĐ định kỳ', ()=>{
+    const {name, aoa} = getAOA(['9KTSD','KTSD']);
+    const h = getHeader(aoa, name, 'KẾT QUẢ KIỂM TRA ĐỊNH KỲ');
+    const found = collectUnitRows(aoa, h, 1, 30);
+    const rows = found.map(({r,unit})=>{
+      const row = aoa[r];
+      const g = num(row[6]);
+      if(g===null) return null;
+      return {unit, value:r1(g*100,1)};
+    }).filter(Boolean);
+    if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
+    const {sorted, top3, bottom3} = topBottom(rows, true);
+    return {nav:'Kiểm tra SDĐ định kỳ', title:'Kết quả kiểm tra sử dụng điện định kỳ (lũy kế)', unit_label:'Điện lực',
+      metric_label:'Thực hiện/Kế hoạch lũy kế (%)', target_desc:'Chỉ tiêu: thực hiện kiểm tra định kỳ đạt 100% kế hoạch năm theo tiến độ',
+      rows: sorted, top3, bottom3, dat_count: rows.filter(r=>r.value>=100).length, total: rows.length, type:'ranked', value_suffix:'%', higher_is_better:true};
+  });
+
+  // ---- 9DUBAOPHUTAI ----
+  section('9DUBAOPHUTAI','Dự báo phụ tải', ()=>{
+    const {name, aoa} = getAOA(['9DUBAOPHUTAI','DUBAOPHUTAI','DUBAO']);
+    const h = getHeader(aoa, name, 'CHẤM ĐIỂM');
+    const found = collectUnitRows(aoa, h, 1, 30);
+    const frac = v=>{ if(!v) return 0; const m=String(v).split('/'); const n=parseInt(m[0],10); return isNaN(n)?0:n; };
+    const rows = found.map(({r,unit})=>{
+      const row = aoa[r];
+      const c=frac(row[2]), dd=frac(row[3]);
+      return {unit, value:c+dd, sai_so:c, dtp_tong:dd};
+    });
+    if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
+    const {sorted, top3, bottom3} = topBottom(rows, true);
+    return {nav:'Dự báo phụ tải', title:'Kết quả công tác dự báo điện thương phẩm (lũy kế năm)', unit_label:'Điện lực',
+      metric_label:'Tổng số tháng đạt cả 2 tiêu chí (/16 tháng-tiêu chí)', target_desc:'Chỉ tiêu: sai số dự báo nhóm KH >1 triệu kWh và ĐTP tổng đạt so kế hoạch hàng tháng',
+      rows: sorted, top3, bottom3, dat_count: null, total: rows.length, type:'ranked', value_suffix:'/16', higher_is_better:true};
+  });
+
+  // ---- 8TRUYTHU ----
+  section('8TRUYTHU','Truy thu hư hỏng & trộm cắp', ()=>{
+    const {name, aoa} = getAOA(['8TRUYTHU','TRUYTHU']);
+    const h = getHeader(aoa, name, 'Bảng dữ liệu lũy kế truy thu');
+    const found = collectUnitRows(aoa, h, 1, 30);
+    const rows = found.map(({r,unit})=>{
+      const row = aoa[r];
+      const g = num(row[6]);
+      if(g===null) return null;
+      return {unit, value:r1(g*100,1)};
+    }).filter(Boolean);
+    if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
+    const {sorted, top3, bottom3} = topBottom(rows, true);
+    let theft = [];
+    try{
+      const h2 = findHeaderRow(aoa, 'Bảng dữ liệu trộm cắp điện');
+      if(h2!==-1){
+        const found2 = collectUnitRows(aoa, h2, 1, 30);
+        theft = found2.map(({r,unit})=>{
+          const row = aoa[r]; const vu = num(row[2]);
+          return {unit, vu: vu||0};
+        }).sort((a,b)=>b.vu-a.vu).slice(0,5);
+      }
+    }catch(e){ theft = []; }
+    const avg = rows.reduce((a,r)=>a+r.value,0)/rows.length;
+    return {nav:'Truy thu hư hỏng & trộm cắp', title:'Truy thu sản lượng hư cháy, sai lệch đo đếm và trộm cắp điện (lũy kế)', unit_label:'Điện lực',
+      metric_label:'So sánh kế hoạch sản lượng truy thu lũy kế (%)', target_desc:'Chỉ tiêu: thực hiện truy thu đạt tiến độ so kế hoạch sản lượng năm',
+      rows: sorted, top3, bottom3, dat_count: rows.filter(r=>r.value>=avg).length, total: rows.length,
+      type:'ranked', value_suffix:'%', higher_is_better:true, theft_rows: theft};
+  });
+
+  // ---- 3HAILONGKH ----
+  section('3HAILONGKH','Khách hàng không hài lòng', ()=>{
+    const {name, aoa} = getAOA(['3HAILONGKH','HAILONGKH']);
+    const h = getHeader(aoa, name, 'Nội dung ghi nhận');
+    const rows = [];
+    for(let r=h+1; r<aoa.length; r++){
+      const row = aoa[r]; if(!row) { if(rows.length) break; else continue; }
+      const maphieu = num(row[2]);
+      if(maphieu===null){ if(rows.length) break; else continue; }
+      rows.push({unit: matchUnit(row[1]) || (row[1]||'').toString(), noidung: row[3]});
+    }
+    return {nav:'Khách hàng không hài lòng', title:'Khách hàng đánh giá không hài lòng', unit_label:'Điện lực',
+      metric_label:'Số lượt không hài lòng', target_desc:'Chỉ tiêu: 0 lượt khách hàng đánh giá không hài lòng',
+      rows, total_incidents: rows.length, type:'incident'};
+  });
+
+  // ---- 1CRM ----
+  section('1CRM','Phiếu yêu cầu nhiều lần (CRM)', ()=>{
+    const {name, aoa} = getAOA(['1CRM','CRM']);
+    const h = getHeader(aoa, name, 'Mã phiếu');
+    const rows = [];
+    for(let r=h+1; r<aoa.length; r++){
+      const row = aoa[r]; if(!row) { if(rows.length) break; else continue; }
+      const stt = num(row[0]);
+      if(stt===null){ if(rows.length) break; else continue; }
+      rows.push({unit: matchUnit(row[2]) || (row[2]||'').toString(), loai: row[3], danhgia: row[6]});
+    }
+    const cnt = {};
+    rows.forEach(rr=>{ cnt[rr.unit] = (cnt[rr.unit]||0)+1; });
+    const counts = Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
+    return {nav:'Phiếu yêu cầu nhiều lần (CRM)', title:'Phiếu yêu cầu nhiều lần trên CRM', unit_label:'Điện lực',
+      metric_label:'Số phiếu gọi nhiều lần', target_desc:'Chỉ tiêu: hạn chế tối đa phát sinh phiếu gọi lại nhiều lần (0 phiếu)',
+      counts, total_incidents: rows.length, type:'incident'};
+  });
+
+  // ---- 2MATDIENTBACC ----
+  section('2MATDIENTBACC','Trạm mất điện lặp lại', ()=>{
+    const {name, aoa} = getAOA(['2MATDIENTBACC','MATDIENTBACC','MATDIEN']);
+    const h = getHeader(aoa, name, 'Tên trạm');
+    const rows = [];
+    for(let r=h+1; r<aoa.length; r++){
+      const row = aoa[r]; if(!row) { if(rows.length) break; else continue; }
+      const stt = num(row[0]);
+      if(stt===null){ if(rows.length) break; else continue; }
+      rows.push({unit: matchUnit(row[1]) || (row[1]||'').toString(), tram: row[3], lanmatdien: num(row[11])});
+    }
+    const groups = {};
+    rows.forEach(rr=>{
+      if(!groups[rr.unit]) groups[rr.unit] = {unit:rr.unit, so_tram:0, tong_lan:0};
+      groups[rr.unit].so_tram += 1;
+      groups[rr.unit].tong_lan += (rr.lanmatdien||0);
+    });
+    const combined = Object.values(groups).sort((a,b)=>b.tong_lan-a.tong_lan);
+    return {nav:'Trạm mất điện lặp lại', title:'Danh sách trạm mất điện lặp lại trong tuần', unit_label:'Điện lực',
+      metric_label:'Tổng số lần mất điện (các trạm lặp lại)', target_desc:'Chỉ tiêu: hạn chế trạm mất điện lặp lại nhiều lần trong tuần',
+      rows: combined, total_incidents: rows.length, total_tram: combined.length, type:'incident'};
+  });
+
+  // ---- 10/12 DIENNHANTUAN (tab cuối - tên/nội dung có thể đổi theo tuần) ----
+  section('10DIENNHANTUAN','Điện nhận tuần', ()=>{
+    const {name, aoa} = getAOA(['DIENNHANTUAN']);
+    const h = getHeader(aoa, name, 'Tuần 36');
+    const rows = [];
+    let tong36=null, tong37=null, tongsosanh=null;
+    for(let r=h+1; r<Math.min(aoa.length,h+9); r++){
+      const row = aoa[r]; if(!row) continue;
+      const ngay = row[1];
+      if(ngay===null || ngay===undefined) continue;
+      if(String(ngay).toLowerCase().includes('tổng')){
+        tong36=num(row[2]); tong37=num(row[3]); tongsosanh=r1((num(row[4])||0)*100,1);
+        continue;
+      }
+      rows.push({ngay: String(ngay), tuan36:num(row[2]), tuan37:num(row[3]), sosanh: r1((num(row[4])||0)*100,1)});
+    }
+    if(rows.length===0) throw new Error('Không đọc được dữ liệu theo ngày trong tab.');
+    return {nav:'Điện nhận tuần', title:'Sản lượng điện nhận theo ngày trong tuần', unit_label:'Ngày',
+      metric_label:'Điện nhận (kWh)', target_desc:'Theo dõi biến động sản lượng điện nhận toàn Công ty theo tuần',
+      rows, tong36, tong37, tongsosanh, type:'trend'};
+  });
+
+  const order = allIds.filter(id=>topics[id]);
+  const period = extractPeriodLabel(wb);
+  return {order, topics, failed, period};
+}
+
+// ============ Assessment / recommendation text (ported from Python enrich.py) ============
+function topNames(lst, n){ n=n||3; return lst.slice(0,n).map(x=>x.unit).join(', '); }
+
+function enrichTopics(result){
+  const d = result.topics;
+
+    if(d['4THUTD']) try { const t=d['4THUTD']; const w=t.bottom3;
+    t.assessment = `Kỳ báo cáo này, ${t.dat_count}/${t.total} Điện lực đạt tỷ lệ thu ≥ 99,8% theo chỉ tiêu Công ty giao. `+
+      `Nhóm dẫn đầu gồm ${topNames(t.top3)} duy trì tỷ lệ thu gần như tuyệt đối. `+
+      `Ngược lại, ${topNames(w)} là các đơn vị có tỷ lệ thu thấp nhất, cần rà soát nguyên nhân tồn đọng nợ cuối kỳ.`;
+    t.recommendation = [
+      `${w[0].unit}, ${w[1].unit}, ${w[2].unit}: rà soát danh sách khách hàng nợ cuối kỳ, phân loại nợ khó đòi/nợ chờ xử lý, giao chỉ tiêu thu nợ theo ngày cho từng tổ/đội.`,
+      "Tăng cường nhắc nợ qua Zalo/SMS/App CSKH trước hạn thanh toán 3-5 ngày để giảm phát sinh nợ mới.",
+      "Đối chiếu số liệu nợ cuối kỳ với hóa đơn phát sinh trong 7 ngày gần nhất để tránh nợ ảo do độ trễ thu tiền.",
+      "Báo cáo Công ty các trường hợp nợ do ngân sách nhà nước chưa bố trí để có hướng xử lý riêng."
+    ];
+  } catch(e){ console.warn('enrich failed for 4THUTD:', e.message); }
+  if(d['41NONSNN']) try { const t=d['41NONSNN']; const w=t.bottom3;
+    t.assessment = `Nợ ngân sách nhà nước tập trung chủ yếu tại ${topNames(w)}. `+
+      `${t.dat_count}/${t.total} Điện lực hiện không phát sinh nợ ngân sách nhà nước tồn đọng.`;
+    t.recommendation = [
+      `${w[0].unit}, ${w[1].unit}, ${w[2].unit}: chủ động làm việc với đơn vị sử dụng ngân sách để xác nhận công nợ, đề xuất kế hoạch bố trí vốn thanh toán theo từng đợt.`,
+      "Phối hợp Phòng Tài chính kế toán lập danh sách nợ theo niên độ ngân sách, ưu tiên xử lý các hóa đơn nợ trên 07 ngày.",
+      "Gửi văn bản đôn đốc định kỳ hàng tháng đến cơ quan chủ quản ngân sách, lưu hồ sơ làm căn cứ báo cáo Công ty."
+    ];
+  } catch(e){ console.warn('enrich failed for 41NONSNN:', e.message); }
+  if(d['5NLMT']) try { const t=d['5NLMT']; const w=t.bottom3;
+    t.assessment = `${t.dat_count}/${t.total} Điện lực đã xử lý hoàn tất 100% hồ sơ tồn tại ĐMTMN. `+
+      `${topNames(w)} là các đơn vị còn tỷ lệ xử lý thấp nhất, cần đẩy nhanh tiến độ trong tuần tới.`;
+    t.recommendation = [
+      `${w[0].unit}: tập trung xử lý dứt điểm các hồ sơ còn lại, chủ động liên hệ khách hàng để hoàn tất thủ tục pháp lý.`,
+      "Với các trường hợp khách hàng chưa hợp tác hoặc đã bán/chuyển nhượng tài sản, lập biên bản và báo cáo hướng xử lý riêng.",
+      "Cập nhật tiến độ xử lý hàng tuần để Phòng Kinh doanh theo dõi, tránh phát sinh chậm trễ do thiếu đôn đốc."
+    ];
+  } catch(e){ console.warn('enrich failed for 5NLMT:', e.message); }
+  if(d['6THAYDK']) try { const t=d['6THAYDK']; const w=t.bottom3;
+    const tongTon = t.rows.reduce((a,r)=>a+r.value,0);
+    t.assessment = `Toàn Công ty còn tồn ${tongTon.toLocaleString('vi-VN')} thiết bị đo đếm quá hạn kiểm định. `+
+      `Tồn đọng tập trung lớn nhất tại ${topNames(w)}, chiếm tỷ trọng đáng kể trong tổng số quá hạn toàn Công ty.`;
+    t.recommendation = [
+      `${w[0].unit}, ${w[1].unit}, ${w[2].unit}: xây dựng kế hoạch thay thế công tơ/TU/TI quá hạn theo tuần, ưu tiên các vị trí có sản lượng lớn.`,
+      "Rà soát nguồn lực nhân công thay công tơ, tăng ca hoặc điều phối hỗ trợ liên đội với các đơn vị tồn đọng cao.",
+      "Kiểm soát tiến độ đặt hàng vật tư (công tơ, TU, TI) để không bị động về nguồn cung khi triển khai thay thế hàng loạt."
+    ];
+  } catch(e){ console.warn('enrich failed for 6THAYDK:', e.message); }
+  if(d['7DOXA']) try { const t=d['7DOXA']; const w=t.bottom3;
+    t.assessment = `${t.dat_count}/${t.total} Điện lực đạt tỷ lệ thu thập dữ liệu đo xa ≥ 99%. `+
+      `${topNames(w)} chưa đạt chỉ tiêu này, cần kiểm tra nguyên nhân mất tín hiệu modem/DCU. `+
+      `Chỉ tiêu khai thác công tơ điện tử (≥99,5%) hầu hết các đơn vị đã đạt.`;
+    t.recommendation = [
+      `${w[0].unit}, ${w[1].unit}, ${w[2].unit}: kiểm tra, khắc phục các điểm đo mất tín hiệu (modem/DCU lỗi, mất sóng, mất nguồn) để tăng tỷ lệ thu thập dữ liệu.`,
+      "Lập danh sách công tơ điện tử không kết nối được đo xa quá 07 ngày để xử lý ưu tiên, tránh ảnh hưởng tính hóa đơn.",
+      "Bổ sung/thay thế thiết bị DCU, modem tại các khu vực tín hiệu yếu; phối hợp nhà mạng kiểm tra chất lượng SIM."
+    ];
+  } catch(e){ console.warn('enrich failed for 7DOXA:', e.message); }
+  if(d['9KTSDĐ']) try { const t=d['9KTSDĐ']; const w=t.bottom3;
+    t.assessment = `Lũy kế đến kỳ báo cáo, ${t.dat_count}/${t.total} Điện lực có tiến độ kiểm tra sử dụng điện định kỳ đạt/vượt kế hoạch (≥100%). `+
+      `${topNames(w)} có tiến độ thực hiện thấp nhất, cần đẩy nhanh khối lượng kiểm tra trong các tuần còn lại.`;
+    t.recommendation = [
+      `${w[0].unit}, ${w[1].unit}, ${w[2].unit}: rà soát nhân lực đội kiểm tra sử dụng điện, xây dựng lại lịch kiểm tra tuần để bù tiến độ.`,
+      "Ưu tiên kiểm tra nhóm khách hàng trọng điểm, sản lượng lớn và các vị trí có nguy cơ tổn thất cao.",
+      "Theo dõi thời gian trung bình thực hiện/công tơ để tối ưu năng suất kiểm tra, tránh kéo dài tiến độ."
+    ];
+  } catch(e){ console.warn('enrich failed for 9KTSDĐ:', e.message); }
+  if(d['9DUBAOPHUTAI']) try { const t=d['9DUBAOPHUTAI']; const w=t.bottom3;
+    t.assessment = `Độ chính xác dự báo điện thương phẩm còn chưa ổn định giữa các Điện lực. `+
+      `${topNames(t.top3)} đạt số tháng đạt chỉ tiêu cao nhất. `+
+      `${topNames(w)} có tần suất đạt thấp nhất, cần cải thiện phương pháp dự báo.`;
+    t.recommendation = [
+      `${w[0].unit}, ${w[1].unit}, ${w[2].unit}: rà soát lại phương pháp/mô hình dự báo, đối chiếu biến động phụ tải thực tế theo mùa vụ, thời tiết, khách hàng lớn đóng/mở mới.`,
+      "Tổ chức họp rút kinh nghiệm hàng tháng giữa các Điện lực có sai số dự báo lớn để chia sẻ cách làm của đơn vị đạt tốt.",
+      "Cập nhật kịp thời các yếu tố đột biến (khách hàng ngừng/giảm sử dụng điện, dự án mới đấu nối) vào số liệu dự báo tháng tiếp theo."
+    ];
+  } catch(e){ console.warn('enrich failed for 9DUBAOPHUTAI:', e.message); }
+  if(d['8TRUYTHU']) try { const t=d['8TRUYTHU']; const w=t.bottom3;
+    const avg = t.rows.reduce((a,r)=>a+r.value,0)/t.rows.length;
+    t.assessment = `Tiến độ truy thu sản lượng hư cháy, sai lệch đo đếm lũy kế đạt trung bình toàn Công ty khoảng ${avg.toFixed(1)}% kế hoạch năm. `+
+      `${topNames(w)} có tiến độ thấp nhất, cần đẩy nhanh truy thu trong thời gian còn lại của năm.`;
+    if(t.theft_rows && t.theft_rows.length){
+      t.assessment += ` Về trộm cắp điện, ${t.theft_rows.slice(0,3).map(x=>x.unit).join(', ')} là các đơn vị phát hiện nhiều vụ việc nhất lũy kế.`;
+    }
+    t.recommendation = [
+      `${w[0].unit}, ${w[1].unit}, ${w[2].unit}: lập lại kế hoạch truy thu chi tiết theo tháng, ưu tiên các trường hợp hư hỏng/sai lệch đo đếm đã phát hiện nhưng chưa lập hóa đơn điều chỉnh.`,
+      "Đẩy nhanh xử lý hóa đơn điều chỉnh có thời gian TTTH trên 62 ngày để tránh tồn đọng kéo dài, ảnh hưởng doanh thu.",
+      "Tăng cường kiểm tra định kỳ, phúc tra tại các khu vực có tiền sử trộm cắp điện để phát hiện và xử lý kịp thời."
+    ];
+  } catch(e){ console.warn('enrich failed for 8TRUYTHU:', e.message); }
+  if(d['3HAILONGKH']) try { const t=d['3HAILONGKH'];
+    const units = [...new Set(t.rows.map(r=>r.unit))];
+    t.assessment = `Kỳ báo cáo ghi nhận ${t.total_incidents} lượt khách hàng đánh giá không hài lòng, liên quan cách giải quyết và thời gian xử lý sự cố tại ${units.join(', ')}. `+
+      `Nội dung phản ánh tập trung ở thời gian phản hồi/xử lý mất điện còn chậm.`;
+    t.recommendation = [
+      "Rà soát lại quy trình tiếp nhận - phản hồi khách hàng khi báo sự cố ngoài giờ hành chính, đảm bảo thời gian phản hồi theo quy định.",
+      "Nhân viên trực xử lý sự cố phải mặc đồng phục, chủ động thông tin tiến độ xử lý cho khách hàng, tránh im lặng kéo dài.",
+      "Gọi điện xin lỗi và giải thích lại với các khách hàng đã đánh giá không hài lòng, ghi nhận vào hệ thống CSKH để theo dõi cải thiện."
+    ];
+  } catch(e){ console.warn('enrich failed for 3HAILONGKH:', e.message); }
+  if(d['1CRM']) try { const t=d['1CRM'];
+    const rep = t.counts.filter(c=>c[1]>1).map(c=>`${c[0]} (${c[1]} phiếu)`).join(', ') || 'không có đơn vị nào lặp lại từ 2 lần trở lên';
+    t.assessment = `Kỳ báo cáo phát sinh ${t.total_incidents} phiếu yêu cầu gọi nhiều lần trên CRM. ${rep} cần chấn chỉnh việc xử lý dứt điểm ngay từ lần tiếp nhận đầu tiên.`;
+    t.recommendation = [
+      "Xử lý dứt điểm yêu cầu ngay từ lần tiếp nhận đầu, tránh để khách hàng phải gọi lại nhiều lần cùng một nội dung.",
+      "Với các phiếu liên quan sự cố/tài sản khách hàng, cần khảo sát và tư vấn phương án xử lý rõ ràng ngay lần đầu tiên.",
+      "Phân tích nguyên nhân gốc (do quá tải trực tổng đài, do chờ điều độ, do tài sản khách hàng...) để có giải pháp phù hợp từng nhóm nguyên nhân."
+    ];
+  } catch(e){ console.warn('enrich failed for 1CRM:', e.message); }
+  if(d['2MATDIENTBACC']) try { const t=d['2MATDIENTBACC']; const w=t.rows.slice(0,3);
+    t.assessment = `Kỳ báo cáo ghi nhận ${t.total_tram} Điện lực có trạm bị mất điện lặp lại từ 2 lần trở lên trong tuần. `+
+      `${topNames(w)} là các đơn vị có số lần mất điện lặp lại nhiều nhất, cần rà soát nguyên nhân sự cố lưới điện.`;
+    t.recommendation = [
+      `${w[0].unit}: kiểm tra, phúc tra tình trạng lưới điện tại các trạm mất điện lặp lại, xác định nguyên nhân gốc (quá tải, tiếp xúc kém, sự cố thiết bị).`,
+      "Đối chiếu số liệu CRM - đo xa - OMS để xác nhận chính xác số lần, thời điểm mất điện thực tế, tránh sai lệch trong báo cáo.",
+      "Lập kế hoạch bảo trì, sửa chữa lưới điện ưu tiên cho các trạm có tần suất mất điện cao."
+    ];
+  } catch(e){ console.warn('enrich failed for 2MATDIENTBACC:', e.message); }
+  if(d['10DIENNHANTUAN']) try { const t=d['10DIENNHANTUAN'];
+    const delta = (t.tongsosanh-100).toFixed(1);
+    const maxDay = [...t.rows].sort((a,b)=>b.sosanh-a.sosanh)[0];
+    t.assessment = `Tổng sản lượng điện nhận kỳ này đạt ${t.tong37.toLocaleString('vi-VN')} kWh, ${t.tongsosanh>=100?'tăng':'giảm'} ${Math.abs(delta)}% so với kỳ trước `+
+      `(${t.tong36.toLocaleString('vi-VN')} kWh). Ngày ${maxDay.ngay} biến động mạnh nhất, phản ánh nhu cầu sử dụng điện thay đổi theo thời tiết/sinh hoạt.`;
+    t.recommendation = [
+      "Theo dõi sát biến động phụ tải theo ngày để chủ động phương án vận hành, tránh quá tải cục bộ vào các ngày sản lượng tăng cao.",
+      "Đối chiếu xu hướng tăng sản lượng với công tác dự báo điện thương phẩm tháng để cập nhật số liệu dự báo kịp thời.",
+      "Phối hợp Điều độ theo dõi các khung giờ cao điểm trong tuần có sản lượng tăng đột biến để cảnh báo sớm nguy cơ quá tải."
+    ];
+  } catch(e){ console.warn('enrich failed for 10DIENNHANTUAN:', e.message); }
+  return result;
+}
+
+
+
+
 
 // 1 Bản duy nhất của handleExcelFileUpload() (Đã vá lỗi trùng lặp Mục 4.4)
 function handleExcelFileUpload(file) {
