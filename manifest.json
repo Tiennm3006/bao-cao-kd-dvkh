@@ -1,0 +1,24 @@
+{
+  "name": "Dashboard Kinh Doanh — PC Đồng Nai",
+  "short_name": "Dashboard KD",
+  "description": "Báo cáo điều hành Kinh doanh & Dịch vụ Khách hàng hàng tuần PC Đồng Nai",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F172A",
+  "theme_color": "#0284C7",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
