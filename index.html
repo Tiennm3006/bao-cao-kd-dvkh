@@ -512,6 +512,7 @@ th.num { text-align: right; }
           <option value="leadership">👔 Phó Giám đốc (Lãnh đạo / Chỉ đọc)</option>
           <option value="manager">📋 Trưởng phòng (Phê duyệt / Quản lý)</option>
           <option value="deputy_manager">📝 Phó phòng (Cập nhật / Rà soát)</option>
+          <option value="employee">🧑‍💻 Chuyên viên / Nhân viên (Theo dõi / Chỉ đọc)</option>
           <option value="admin">👑 Quản trị viên (Admin Hệ thống)</option>
         </select>
       </div>
@@ -654,6 +655,8 @@ const DEMO_USERS = {
   'phogiamdoc': { password: '123', name: 'Lãnh đạo', title: 'Phó Giám đốc', role: 'leadership' },
   'truongphong': { password: '123', name: 'Trưởng phòng', title: 'Trưởng phòng Kinh doanh', role: 'manager' },
   'phophong': { password: '123', name: 'Phó phòng', title: 'Phó phòng Kinh doanh', role: 'deputy_manager' },
+  'chuyenvien': { password: '123', name: 'Chuyên viên', title: 'Chuyên viên Kinh doanh', role: 'employee' },
+  'nhanvien': { password: '123', name: 'Nhân viên', title: 'Nhân viên Kinh doanh', role: 'employee' },
   'admin': { password: '123', name: 'Quản trị viên', title: 'Admin Hệ thống', role: 'admin' }
 };
 
@@ -737,7 +740,7 @@ function handleJwtLogin(e) {
       username: username || 'user',
       password: password,
       name: username.toUpperCase(),
-      title: roleSelect === 'leadership' ? 'Lãnh đạo' : (roleSelect === 'manager' ? 'Trưởng phòng' : 'Chuyên viên'),
+      title: roleSelect === 'leadership' ? 'Lãnh đạo' : (roleSelect === 'manager' ? 'Trưởng phòng' : (roleSelect === 'deputy_manager' ? 'Phó phòng' : (roleSelect === 'employee' ? 'Chuyên viên / Nhân viên' : 'Quản trị viên'))),
       role: roleSelect
     };
   } else {
