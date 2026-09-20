@@ -8,9 +8,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
-<!-- Secure Fixed CDN Libraries (Vá CVE SheetJS 0.20.2 & Fixed Chart.js v4.4.1) -->
+<!-- Secure Fixed CDN Libraries (Vá CVE SheetJS 0.20.2 & Multi-CDN Fallback) -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.20.2/dist/xlsx.full.min.js" crossorigin="anonymous"></script>
+<script>
+if (typeof XLSX === 'undefined') {
+  document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"><\/script>');
+}
+</script>
 
 <style>
 :root {
@@ -997,16 +1002,43 @@ function generateWeeklyInsights(weekData) {
   };
 }
 
+function ensureXlsxLoaded(callback) {
+  if (typeof XLSX !== 'undefined') {
+    callback();
+    return;
+  }
+  const fallbacks = [
+    'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
+    'https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js',
+    'https://cdn.jsdelivr.net/npm/xlsx@0.20.2/dist/xlsx.full.min.js'
+  ];
+  let idx = 0;
+  function tryNext() {
+    if (idx >= fallbacks.length) {
+      alert('⚠️ Không thể tải thư viện Excel do kết nối mạng bị gián đoạn. Vui lòng thử lại sau giây phút.');
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = fallbacks[idx++];
+    script.onload = function() {
+      if (typeof XLSX !== 'undefined') callback();
+      else tryNext();
+    };
+    script.onerror = tryNext;
+    document.head.appendChild(script);
+  }
+  tryNext();
+}
+
 function exportWeekToExcel(weekKey) {
+  ensureXlsxLoaded(() => doExportWeekToExcel(weekKey));
+}
+
+function doExportWeekToExcel(weekKey) {
   const wKey = weekKey || currentWeekKey;
   const weekData = STORE[wKey];
   if (!weekData) {
     alert('Không tìm thấy dữ liệu cho ' + wKey);
-    return;
-  }
-
-  if (typeof XLSX === 'undefined') {
-    alert('Thư viện Excel đang được khởi tạo, vui lòng bấm lại sau vài giây.');
     return;
   }
 
@@ -1340,7 +1372,10 @@ function handleExcelFileUpload(file) {
     alert('⚠️ Bạn không có quyền nạp dữ liệu báo cáo mới. Chỉ tài khoản Quản trị (Admin) hoặc Phó phòng mới được nạp.');
     return;
   }
+  ensureXlsxLoaded(() => doHandleExcelFileUpload(file));
+}
 
+function doHandleExcelFileUpload(file) {
   const reader = new FileReader();
   reader.onload = function(e) {
     try {
