@@ -572,6 +572,9 @@ th.num { text-align: right; }
     <a class="nav-item" id="nav-compare" onclick="showTab('compare')">
       <span>📊 So sánh giữa các tuần</span>
     </a>
+    <a class="nav-item" id="nav-report" onclick="showTab('report')">
+      <span>📋 Báo cáo điều hành</span>
+    </a>
 
     <div class="sidebar-title">Chuyên đề báo cáo</div>
     <div id="sidebar-topics"></div>
@@ -585,6 +588,11 @@ th.num { text-align: right; }
     <section id="tab-overview"></section>
     <section id="tab-compare" style="display:none;"></section>
     <section id="tab-topic" style="display:none;"></section>
+    <section id="tab-report" style="display:none;">
+      <div class="card" style="padding:0; overflow:hidden; min-height:900px;">
+        <iframe id="executiveReportFrame" title="Báo cáo điều hành Tuần 38" src="BAO_CAO_DIEU_HANH_TUAN_38.html" style="width:100%; height:calc(100vh - 150px); min-height:850px; border:0; background:#f5f8fc;"></iframe>
+      </div>
+    </section>
   </main>
 </div>
 
@@ -597,6 +605,9 @@ th.num { text-align: right; }
     <button class="bottom-nav-btn" id="mnav-compare" onclick="showTab('compare')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y4="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       <span>So sánh</span>
+    </button>
+    <button class="bottom-nav-btn" id="mnav-report" onclick="showTab('report')">
+      <span>📋 Báo cáo</span>
     </button>
     <button class="bottom-nav-btn" onclick="exportWeekToExcel(currentWeekKey)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -894,6 +905,7 @@ function showTab(tabName) {
   document.getElementById('tab-overview').style.display = tabName === 'overview' ? 'block' : 'none';
   document.getElementById('tab-compare').style.display = tabName === 'compare' ? 'block' : 'none';
   document.getElementById('tab-topic').style.display = tabName === 'topic' ? 'block' : 'none';
+  document.getElementById('tab-report').style.display = tabName === 'report' ? 'block' : 'none';
 
   document.querySelectorAll('.nav-item, .bottom-nav-btn').forEach(el => el.classList.remove('active'));
 
@@ -905,6 +917,18 @@ function showTab(tabName) {
     document.getElementById('nav-compare')?.classList.add('active');
     document.getElementById('mnav-compare')?.classList.add('active');
     renderCompare();
+  } else if (tabName === 'report') {
+    document.getElementById('nav-report')?.classList.add('active');
+    document.getElementById('mnav-report')?.classList.add('active');
+    renderExecutiveReport();
+  }
+}
+
+function renderExecutiveReport() {
+  const frame = document.getElementById('executiveReportFrame');
+  if (frame && !frame.getAttribute('data-loaded')) {
+    frame.setAttribute('data-loaded', 'true');
+    frame.src = 'BAO_CAO_DIEU_HANH_TUAN_38.html?t=' + Date.now();
   }
 }
 
@@ -2010,6 +2034,7 @@ function renderApp() {
   if (activeTab === 'overview') renderOverview();
   else if (activeTab === 'compare') renderCompare();
   else if (activeTab === 'topic') renderTopicDetails(activeTopicId);
+  else if (activeTab === 'report') renderExecutiveReport();
 }
 
 // Khởi chạy kiểm tra xác thực JWT

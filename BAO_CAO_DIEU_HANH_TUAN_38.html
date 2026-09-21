@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Báo cáo điều hành Tuần 38/2026 - PC Đồng Nai</title>
+  <style>
+    :root { --ink:#172033; --muted:#60708a; --line:#dce4ef; --blue:#075985; --bg:#f5f8fc; --card:#fff; --red:#a61b1b; }
+    * { box-sizing:border-box; } body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.65 Segoe UI, Arial, sans-serif; }
+    main { max-width:1100px; margin:0 auto; padding:28px 18px 60px; } article { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:30px 38px; box-shadow:0 8px 30px #183b5d12; }
+    h1 { color:var(--blue); line-height:1.2; margin-top:0; } h2 { border-bottom:2px solid var(--line); padding-bottom:7px; margin-top:32px; } h3 { color:#155e75; margin-top:24px; }
+    table { width:100%; border-collapse:collapse; margin:14px 0 20px; } th,td { border:1px solid var(--line); padding:8px 10px; vertical-align:top; text-align:left; } th { background:#eaf3fb; }
+    blockquote { margin:16px 0; padding:12px 16px; border-left:4px solid var(--red); background:#fff4f4; color:#6b1d1d; }
+    code { background:#eef3f8; padding:2px 5px; border-radius:4px; } li { margin:4px 0; }
+    .toolbar { display:flex; gap:8px; margin-bottom:14px; } button { border:1px solid var(--line); background:#fff; border-radius:8px; padding:8px 12px; cursor:pointer; }
+    @media print { body { background:#fff; } main { padding:0; } article { border:0; box-shadow:none; padding:0; } .toolbar { display:none; } }
+    @media (max-width:700px) { article { padding:20px 16px; } table { display:block; overflow-x:auto; } }
+  </style>
+</head>
+<body>
+<main>
+  <div class="toolbar"><button onclick="window.print()">In / Lưu PDF</button><button onclick="location.reload()">Tải lại</button></div>
+  <article id="report"><p>Đang tải báo cáo...</p></article>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+fetch('BAO_CAO_DIEU_HANH_TUAN_38.md?t=' + Date.now())
+  .then(r => r.text())
+  .then(md => { document.getElementById('report').innerHTML = marked.parse(md); })
+  .catch(() => { document.getElementById('report').innerHTML = '<p>Không tải được file Markdown. Hãy mở <code>BAO_CAO_DIEU_HANH_TUAN_38.md</code> trực tiếp.</p>'; });
+</script>
+</body>
+</html>
