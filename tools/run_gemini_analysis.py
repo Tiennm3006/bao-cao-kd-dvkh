@@ -99,7 +99,7 @@ def main() -> None:
                     body = exc.read().decode("utf-8", errors="replace")[:500]
                     last_error = f"HTTP {exc.code}: {body}"
                     time.sleep(2 ** attempt)
-                except (urllib.error.URLError, KeyError, ValueError, json.JSONDecodeError) as exc:
+                except (urllib.error.URLError, KeyError, ValueError, json.JSONDecodeError, TypeError, IndexError) as exc:
                     last_error = str(exc)
                     time.sleep(2 ** attempt)
             if analysis is None:

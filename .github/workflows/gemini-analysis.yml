@@ -60,6 +60,7 @@ jobs:
           --output gemini_analysis_results.json
 
       - name: Upload auditable analysis artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: gemini-weekly-analysis
@@ -69,9 +70,11 @@ jobs:
           retention-days: 30
 
       - name: Publish analysis results
+        if: success()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
           git add -f gemini_analysis_results.json
           git commit -m "data: publish Gemini weekly analysis [skip ci]" || exit 0
           git push
