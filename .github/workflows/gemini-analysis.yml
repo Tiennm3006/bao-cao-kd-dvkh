@@ -70,7 +70,7 @@ jobs:
           retention-days: 30
 
       - name: Publish analysis results
-        if: success()
+        if: always() && hashFiles('gemini_analysis_results.json') != ''
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

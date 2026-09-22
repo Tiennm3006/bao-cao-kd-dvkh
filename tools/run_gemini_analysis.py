@@ -102,6 +102,9 @@ def main() -> None:
                 except (urllib.error.URLError, KeyError, ValueError, json.JSONDecodeError, TypeError, IndexError) as exc:
                     last_error = str(exc)
                     time.sleep(2 ** attempt)
+                except Exception as exc:
+                    last_error = f"{type(exc).__name__}: {exc}"
+                    time.sleep(2 ** attempt)
             if analysis is None:
                 analysis = normalize_result({
                     "assessment": "Không tạo được phân tích Gemini cho sheet này.",
