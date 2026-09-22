@@ -91,7 +91,7 @@ def main() -> None:
         else:
             analysis = None
             last_error = None
-            for attempt in range(1):
+            for attempt in range(3):
                 try:
                     analysis = normalize_result(call_gemini(api_key, args.model, item["prompt"]))
                     break
@@ -101,10 +101,10 @@ def main() -> None:
                     time.sleep(2 ** attempt)
                 except (urllib.error.URLError, KeyError, ValueError, json.JSONDecodeError, TypeError, IndexError) as exc:
                     last_error = str(exc)
-                    time.sleep(2 ** attempt)
+                    time.sleep(10 * (attempt + 1))
                 except Exception as exc:
                     last_error = f"{type(exc).__name__}: {exc}"
-                    time.sleep(2 ** attempt)
+                    time.sleep(10 * (attempt + 1))
             if analysis is None:
                 analysis = normalize_result({
                     "assessment": "Không tạo được phân tích Gemini cho sheet này.",
