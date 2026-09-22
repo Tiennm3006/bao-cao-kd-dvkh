@@ -4,3 +4,5 @@ node_modules/
 scratch/
 gemini_analysis_requests.json
 gemini_analysis_results.json
+__pycache__/
+*.py[cod]
