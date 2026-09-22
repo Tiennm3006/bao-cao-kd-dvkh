@@ -20,7 +20,7 @@ on:
       gemini_model:
         description: Gemini model name
         required: true
-        default: gemini-3.6-flash
+        default: gemini-3.8-flash
 
 permissions:
   contents: write
@@ -53,7 +53,7 @@ jobs:
       - name: Analyze with Gemini
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: ${{ inputs.gemini_model || 'gemini-3.6-flash' }}
+          GEMINI_MODEL: ${{ inputs.gemini_model || 'gemini-3.8-flash' }}
         run: >-
           python tools/run_gemini_analysis.py
           gemini_analysis_requests.json

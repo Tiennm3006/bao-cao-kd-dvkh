@@ -12,7 +12,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-DEFAULT_MODEL = "gemini-3.6-flash"
+DEFAULT_MODEL = "gemini-3.8-flash"
 
 
 def call_gemini(api_key: str, model: str, prompt: str, timeout: int = 45) -> dict:
