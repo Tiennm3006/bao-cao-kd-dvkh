@@ -6,6 +6,7 @@ on:
       - "*.xlsx"
       - "Prompt-danh-gia-theo-sheet.md"
       - "tools/**"
+      - ".github/workflows/gemini-analysis.yml"
   workflow_dispatch:
     inputs:
       current_workbook:
