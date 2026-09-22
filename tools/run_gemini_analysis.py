@@ -12,7 +12,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-DEFAULT_MODEL = "gemini-2.5-flash"
+DEFAULT_MODEL = "gemini-2.0-flash"
 
 
 def call_gemini(api_key: str, model: str, prompt: str, timeout: int = 120) -> dict:
@@ -95,7 +95,11 @@ def main() -> None:
                 try:
                     analysis = normalize_result(call_gemini(api_key, args.model, item["prompt"]))
                     break
-                except (urllib.error.URLError, urllib.error.HTTPError, KeyError, ValueError, json.JSONDecodeError) as exc:
+                except urllib.error.HTTPError as exc:
+                    body = exc.read().decode("utf-8", errors="replace")[:500]
+                    last_error = f"HTTP {exc.code}: {body}"
+                    time.sleep(2 ** attempt)
+                except (urllib.error.URLError, KeyError, ValueError, json.JSONDecodeError) as exc:
                     last_error = str(exc)
                     time.sleep(2 ** attempt)
             if analysis is None:
