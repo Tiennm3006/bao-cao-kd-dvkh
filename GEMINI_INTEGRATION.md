@@ -36,7 +36,7 @@ For a real run, keep the key outside the repository:
 
 ```powershell
 $env:GEMINI_API_KEY = "..."
-$env:GEMINI_MODEL = "gemini-2.0-flash"
+$env:GEMINI_MODEL = "gemini-3.6-flash"
 python tools/run_gemini_analysis.py gemini_analysis_requests.json
 ```
 
