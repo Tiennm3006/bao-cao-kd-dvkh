@@ -15,7 +15,7 @@ from pathlib import Path
 DEFAULT_MODEL = "gemini-3.6-flash"
 
 
-def call_gemini(api_key: str, model: str, prompt: str, timeout: int = 120) -> dict:
+def call_gemini(api_key: str, model: str, prompt: str, timeout: int = 45) -> dict:
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
     instruction = (
         "Bạn phải trả về đúng một JSON object, không markdown và không giải thích ngoài JSON. "
@@ -91,7 +91,7 @@ def main() -> None:
         else:
             analysis = None
             last_error = None
-            for attempt in range(3):
+            for attempt in range(1):
                 try:
                     analysis = normalize_result(call_gemini(api_key, args.model, item["prompt"]))
                     break
