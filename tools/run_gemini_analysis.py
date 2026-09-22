@@ -98,7 +98,7 @@ def main() -> None:
                 except urllib.error.HTTPError as exc:
                     body = exc.read().decode("utf-8", errors="replace")[:500]
                     last_error = f"HTTP {exc.code}: {body}"
-                    time.sleep(2 ** attempt)
+                    time.sleep(10 * (attempt + 1))
                 except (urllib.error.URLError, KeyError, ValueError, json.JSONDecodeError, TypeError, IndexError) as exc:
                     last_error = str(exc)
                     time.sleep(10 * (attempt + 1))
