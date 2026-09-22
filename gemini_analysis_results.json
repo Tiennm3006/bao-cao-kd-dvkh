@@ -1,0 +1,190 @@
+{
+  "source_file": "KD-SO LIEU KD-DVKH TUAN 38.xlsx",
+  "previous_file": "KD-SO LIEU KD-DVKH TUAN 37.xlsx",
+  "model": "gemini-2.5-flash",
+  "dry_run": false,
+  "results": [
+    {
+      "sheet_name": "1CRM",
+      "prompt_id": "1CRM",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "2MATDIENTBACC",
+      "prompt_id": "2MATDIENTBACC",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "3HAILONGKH",
+      "prompt_id": "3HAILONGKH",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "4THUTD",
+      "prompt_id": "4THUTD",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "41NONSNN",
+      "prompt_id": "5NONSNN",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "5NLMT",
+      "prompt_id": "6NLMT",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "6THAYDK",
+      "prompt_id": "7THAYDK",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "7DOXA",
+      "prompt_id": "8DOXA",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "8TRUYTHU ",
+      "prompt_id": "9TRUYTHU",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "9KTSDĐ",
+      "prompt_id": "10KTSDĐ",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "9DUBAOPHUTAI",
+      "prompt_id": "11DUBAOPHUTAI",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "10DIENNHANTUAN",
+      "prompt_id": "12DIENNHANTUAN",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    },
+    {
+      "sheet_name": "11LAPDATTBDD",
+      "prompt_id": "13LAPDATTBDD",
+      "analysis": {
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
+        "data_quality_notes": [
+          "HTTP Error 404: Not Found"
+        ]
+      }
+    }
+  ]
+}
