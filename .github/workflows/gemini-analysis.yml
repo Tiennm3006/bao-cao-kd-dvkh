@@ -1,6 +1,11 @@
 name: Analyze weekly workbook with Gemini
 
 on:
+  push:
+    paths:
+      - "*.xlsx"
+      - "Prompt-danh-gia-theo-sheet.md"
+      - "tools/**"
   workflow_dispatch:
     inputs:
       current_workbook:
@@ -39,15 +44,15 @@ jobs:
       - name: Prepare sheet prompts
         run: >-
           python tools/prepare_gemini_analysis.py
-          "${{ inputs.current_workbook }}"
-          --previous "${{ inputs.previous_workbook }}"
+          "${{ inputs.current_workbook || 'KD-SO LIEU KD-DVKH TUAN 38.xlsx' }}"
+          --previous "${{ inputs.previous_workbook || 'KD-SO LIEU KD-DVKH TUAN 37.xlsx' }}"
           --prompts Prompt-danh-gia-theo-sheet.md
           --output gemini_analysis_requests.json
 
       - name: Analyze with Gemini
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: ${{ inputs.gemini_model }}
+          GEMINI_MODEL: ${{ inputs.gemini_model || 'gemini-2.5-flash' }}
         run: >-
           python tools/run_gemini_analysis.py
           gemini_analysis_requests.json
