@@ -921,7 +921,7 @@ function renderDirectivesAndAssignmentsCard(selectedWeekKey, insights) {
     html += '<textarea id="pgdDirectiveInput" class="form-input" rows="4" style="width:100%; font-size:13.5px; line-height:1.5; margin-bottom:10px; background:white;">' + escapeHtml(currentPgdVal) + '</textarea>';
     html += '<div style="display:flex; justify-content:space-between; align-items:center;">';
     html += '<span style="font-size:12px; color:#64748b;">' + (pgdDir ? ('🕒 Cập nhật lần cuối: ' + escapeHtml(pgdDir.updated_at)) : 'Chưa phát lệnh chỉ đạo') + '</span>';
-    html += '<button class="btn btn-primary" onclick="submitPgdDirective('' + selectedWeekKey + '')" style="background:#1d4ed8; font-weight:700; padding:8px 18px;">🎯 PHÁT LỆNH CHỈ ĐẠO</button>';
+    html += '<button class="btn btn-primary" onclick="submitPgdDirective(\'' + selectedWeekKey + '\')" style="background:#1d4ed8; font-weight:700; padding:8px 18px;">🎯 PHÁT LỆNH CHỈ ĐẠO</button>';
     html += '</div></div>';
 
     // Also display Trưởng phòng Assignment status if exists
@@ -955,7 +955,7 @@ function renderDirectivesAndAssignmentsCard(selectedWeekKey, insights) {
     html += '<textarea id="tpAssignmentInput" class="form-input" rows="4" style="width:100%; font-size:13.5px; line-height:1.5; margin-bottom:10px; background:white;">' + escapeHtml(currentTpVal) + '</textarea>';
     html += '<div style="display:flex; justify-content:space-between; align-items:center;">';
     html += '<span style="font-size:12px; color:#64748b;">' + (tpAss ? ('🕒 Cập nhật lần cuối: ' + escapeHtml(tpAss.updated_at)) : 'Chưa thực hiện giao việc') + '</span>';
-    html += '<button class="btn btn-success" onclick="submitTpAssignment('' + selectedWeekKey + '')" style="background:#16a34a; font-weight:700; padding:8px 18px; color:white;">📋 GIAO VIỆC CHO PHÓ PHÒNG & NHÂN VIÊN</button>';
+    html += '<button class="btn btn-success" onclick="submitTpAssignment(\'' + selectedWeekKey + '\')" style="background:#16a34a; font-weight:700; padding:8px 18px; color:white;">📋 GIAO VIỆC CHO PHÓ PHÒNG & NHÂN VIÊN</button>';
     html += '</div></div>';
   }
 
