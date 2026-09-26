@@ -8,40 +8,36 @@
       "sheet_name": "1CRM",
       "prompt_id": "1CRM",
       "analysis": {
-        "assessment": "Trong tuần từ 11/9 đến 17/9/2026, toàn Công ty phát sinh 08 phiếu (gồm 07 phiếu gọi nhiều lần và 01 phiếu kiến nghị cấp điện mới quá hạn cam kết). Phân bổ theo Điện lực: Đồng Xoài nhiều nhất với 03 phiếu (chiếm 37,5%), tiếp theo là Nhơn Trạch, Long Thành, Định Quán, Lộc Ninh và Long Bình mỗi đơn vị 01 phiếu. Nguyên nhân chính phát sinh phiếu lần 2 gồm: (1) Do trực ban vận hành tập trung xử lý sự cố lưới điện do mưa bão dẫn đến chậm liên hệ KH và chưa kịp cập nhật tiến độ xử lý vào hệ thống: 04 phiếu (Đồng Xoài 03, Lộc Ninh 01); (2) Do bận thao tác chuyển tải sửa chữa lớn, bàn giao ca chưa kịp liên hệ KH và cập nhật phiếu: 01 phiếu (Định Quán); (3) Do thiếu sót trong quá trình theo dõi, chậm trễ xử lý sau khi đã hẹn KH: 01 phiếu (Nhơn Trạch); (4) Đóng/hoàn tất phiếu khi chưa liên hệ làm việc dứt điểm với KH: 01 phiếu (Long Bình); (5) Hiểu lầm của khách hàng về ranh giới trách nhiệm cung cấp điện (sự cố sau CB đo đếm): 01 phiếu (Long Thành).",
+        "assessment": "Trong tuần từ ngày 11/9 - 17/9 phát sinh tổng cộng 08 phiếu (07 phiếu gọi nhiều lần và 01 phiếu loại 38.1 kiến nghị cấp điện mới do quá hạn cam kết/xử lý). Điện lực có số lượng phiếu phát sinh nhiều nhất là Đồng Xoài (03 phiếu), tiếp theo là Nhơn Trạch, Long Thành, Định Quán, Lộc Ninh và Long Bình mỗi đơn vị 01 phiếu. Nguyên nhân chính được chia thành 4 nhóm: (1) Do ảnh hưởng mưa lớn diện rộng, tập trung nhân sự xử lý sự cố nên chậm liên hệ khách hàng và chưa cập nhật lịch sử phiếu kịp thời: 04 phiếu (Đồng Xoài 03 phiếu, Lộc Ninh 01 phiếu); (2) Do đơn vị thiếu sót trong theo dõi, tự ý hoàn tất phiếu lần 1 khi chưa liên hệ/xử lý dứt điểm cho khách hàng: 02 phiếu (Nhơn Trạch 01 phiếu, Long Bình 01 phiếu); (3) Do áp lực công tác sửa chữa lớn/chuyển tải lưới điện dẫn đến bàn giao ca chưa kịp liên hệ KH và cập nhật tiến độ: 01 phiếu (Định Quán); (4) Do khách hàng hiểu lầm về trách nhiệm xử lý sự cố hư hỏng điện sau CB điện kế (thuộc tài sản khách hàng): 01 phiếu (Long Thành).",
         "recommendation": [
-          "Yêu cầu Điện lực Đồng Xoài và Lộc Ninh chấn chỉnh quy trình trực ca khi xảy ra sự cố diện rộng do thời tiết: phân công nhân sự trực tiếp nhận/liên hệ thông tin tiến độ kịp thời cho khách hàng, tuyệt đối không để phiếu quá hạn trên CRM mà không cập nhật lịch sử.",
-          "Yêu cầu Điện lực Long Bình và Nhơn Trạch rà soát khâu kiểm soát hồ sơ cấp điện mới và dịch vụ đo đếm, nghiêm cấm việc tự ý hoàn tất phiếu trên hệ thống khi chưa liên hệ hoặc chưa xử lý xong cho khách hàng.",
-          "Điện lực Long Thành và các đơn vị tăng cường công tác tư vấn, giải thích rõ ranh giới đo đếm và trách nhiệm tài sản sau CB điện kế ngay từ cuộc gọi đầu tiên để tránh khách hàng hiểu lầm khiếu nại lặp lại."
+          "Điện lực Đồng Xoài và Lộc Ninh: Rà soát, bố trí phân công nhân sự hợp lý trong ca trực khi xảy ra thiên tai mưa bão, đảm bảo có nhân sự chuyên trách tiếp nhận CRM, liên hệ khách hàng thông tin tiến độ xử lý và cập nhật đầy đủ lịch sử trên hệ thống, tránh để phiếu quá hạn tạo phiếu lần 2.",
+          "Điện lực Long Bình và Nhơn Trạch: Chấn chỉnh nghiêm túc quy trình nghiệp vụ tiếp nhận và giải quyết dịch vụ khách hàng; nghiêm cấm việc tự ý hoàn tất/đóng phiếu trên hệ thống khi chưa liên hệ khách hàng hoặc chưa hoàn thành công việc thực tế.",
+          "Điện lực Định Quán: Siết chặt quy trình giao nhận ca trực CRM trong các đợt thi công sửa chữa lớn/chuyển tải, đảm bảo thông tin liên lạc với khách hàng và cập nhật tiến độ xử lý không bị gián đoạn.",
+          "Tất cả các Điện lực: Tiếp tục tăng cường giải thích rõ ràng phạm vi tài sản và trách nhiệm quản lý điện sau công tơ khi hướng dẫn khách hàng để tránh phát sinh thắc mắc, khiếu nại lặp lại."
         ],
         "risk_level": "medium",
         "key_metrics": [
           {
-            "label": "Tổng số phiếu phát sinh tuần 11/9-17/9",
-            "value": "8"
+            "label": "Tổng số phiếu phát sinh tuần 11/9 - 17/9",
+            "value": "8 phiếu (7 phiếu gọi nhiều lần, 1 phiếu kiến nghị quá hạn)"
           },
           {
-            "label": "Điện lực có số phiếu nhiều nhất (Đồng Xoài)",
-            "value": "3"
+            "label": "Đơn vị phát sinh nhiều phiếu nhất tuần",
+            "value": "Đồng Xoài (3 phiếu)"
           },
           {
-            "label": "Số phiếu do chậm liên hệ/cập nhật vì sự cố thời tiết",
-            "value": "4"
+            "label": "Tỷ lệ phiếu do sự cố thời tiết/chậm liên hệ KH",
+            "value": "50% (4/8 phiếu)"
           },
           {
-            "label": "Số phiếu liên quan đến thiếu sót nghiệp vụ/hoàn tất phiếu khi chưa xong",
-            "value": "2"
-          },
-          {
-            "label": "Số phiếu tuần trước (01/9-10/9)",
-            "value": "7"
+            "label": "Tỷ lệ phiếu do chủ quan hoàn tất phiếu/thiếu theo dõi",
+            "value": "25% (2/8 phiếu)"
           }
         ],
-        "comparison": "So với tuần trước (01/9 - 10/9/2026 có 07 phiếu), tổng số phiếu tuần này tăng thêm 01 phiếu (từ 07 lên 08 phiếu, tăng 14,3%). Điện lực Đồng Xoài có xu hướng tăng mạnh từ 01 phiếu lên 03 phiếu và là đơn vị có số phiếu cao nhất tuần này. Lộc Ninh giảm từ 02 phiếu xuống 01 phiếu; Định Quán giảm từ 02 phiếu xuống 01 phiếu. Trảng Bom và Dầu Giây không còn phát sinh phiếu lặp lại; tuy nhiên phát sinh mới tại Nhơn Trạch (01 phiếu), Long Thành (01 phiếu) và Long Bình (01 phiếu). Nguyên nhân chủ yếu xuyên suốt cả hai tuần vẫn là tình trạng quá tải do mưa bão, sự cố diện rộng dẫn đến chưa kịp thời liên hệ khách hàng và đóng phiếu/hoàn tất phiếu chưa đúng thực tế.",
+        "comparison": "So với tuần trước (01/9 - 10/9 có 07 phiếu gọi nhiều lần), số lượng phiếu trong tuần từ 11/9 - 17/9 tăng thêm 01 phiếu (tổng 08 phiếu). Tình trạng chậm liên hệ và cập nhật phiếu do thời tiết mưa lớn gây sự cố diện rộng tiếp tục tái diễn tại Đồng Xoài và Lộc Ninh. Đáng chú ý, tuần này phát sinh thêm các lỗi chủ quan từ phía đơn vị như đóng phiếu khi chưa liên hệ khách hàng hoặc thiếu sót theo dõi tại Nhơn Trạch và Long Bình.",
         "data_quality_notes": [
-          "Dữ liệu tuần 01/9 - 10/9 để trống ô 'Đánh giá của PKD Cty' tại STT 5 (Điện lực Lộc Ninh, MP 29297894).",
-          "Thời gian ghi nhận trong dữ liệu của cả 2 tuần đều thuộc năm 2026.",
-          "Tiêu đề tuần 11/9 - 17/9 tách riêng 07 phiếu gọi nhiều lần và 01 phiếu loại 38.1 (kiến nghị cấp điện mới), bảng dữ liệu chi tiết tổng hợp gồm 8 dòng."
+          "Dữ liệu tuần trước (01/9 - 10/9) tại STT 5 (phiếu 29297894 của Lộc Ninh) để trống nội dung đánh giá của PKD Cty.",
+          "Tuần 11/9 - 17/9 ghi nhận 08 phiếu, trong đó có 07 phiếu gọi nhiều lần (mã 20, 33, 34, 35) và 01 phiếu mã 38.1 (kiến nghị cấp điện mới do quá hạn xử lý)."
         ]
       }
     },
@@ -49,40 +45,40 @@
       "sheet_name": "2MATDIENTBACC",
       "prompt_id": "2MATDIENTBACC",
       "analysis": {
-        "assessment": "Trong tuần từ 11/09 đến 17/09/2026, toàn Công ty ghi nhận 6 trạm biến áp có khách hàng gọi báo mất điện, phân bổ tại 4 Điện lực: Định Quán (2 trạm), Lộc Ninh (2 trạm), Bình Long (1 trạm) và Trị An (1 trạm); trong đó Định Quán và Lộc Ninh là hai đơn vị có số trạm phát sinh nhiều nhất (mỗi đơn vị 2 trạm). Đáng chú ý, 100% trạm trong danh sách (6/6 trạm) đều xảy ra tình trạng mất điện lặp lại từ 2 lần trở lên trong tuần, cá biệt có trạm NT GIA CANH 1 (Điện lực Định Quán) mất điện tới 3 lần. Dữ liệu đối chiếu cho thấy sự thiếu đồng bộ nghiêm trọng giữa phản ánh CRM/đo xa với hệ thống OMS khi có tới 7 lượt sự cố ghi nhận 'Không có OMS' tập trung tại Bình Long, Lộc Ninh và Định Quán, đồng thời tồn tại sự lệch mốc thời gian mất điện/khôi phục điện giữa đo xa và OMS tại các sự cố có cập nhật OMS.",
+        "assessment": "Trong tuần từ 11/09 đến 17/09/2026, ghi nhận 6 trạm biến áp có khách hàng gọi báo mất điện, phân bổ tại 4 Điện lực: Định Quán (2 trạm), Lộc Ninh (2 trạm), Bình Long (1 trạm) và Trị An (1 trạm); trong đó Định Quán và Lộc Ninh là hai đơn vị có nhiều trạm nhất. Đáng chú ý, 100% trạm (6/6 trạm) đều ghi nhận từ 2 lần mất điện trở lên trong tuần theo CRM, cá biệt trạm NT GIA CANH 1 mất điện 3 lần. Dữ liệu đối chiếu cho thấy sự thiếu đồng bộ nghiêm trọng giữa CRM/đo xa với hệ thống OMS khi có tới 4/6 trạm xuất hiện các lần mất điện không được ghi nhận trên OMS.",
         "recommendation": [
-          "Yêu cầu Điện lực Định Quán và Điện lực Lộc Ninh khẩn trương rà soát toàn diện đường dây và thiết bị tại các trạm lặp lại sự cố (GIA CANH 2.3, NT GIA CANH 1, Măng Cải 82/04B, Bù Nồm hai 16) để xác định triệt để nguyên nhân kỹ thuật gây gián đoạn điện nhiều lần.",
-          "Yêu cầu Điện lực Bình Long, Điện lực Lộc Ninh và Điện lực Định Quán kiểm tra, làm rõ nguyên nhân không cập nhật phiếu sự cố trên OMS đối với các vụ mất điện đã ghi nhận qua CRM và đo xa (trạm Hưng Chiến 19B/13, Măng Cải 82/04B, Bù Nồm hai 16, GIA CANH 2.3 lần 1).",
-          "Chỉ đạo các Điện lực phối hợp bộ phận kỹ thuật/điều độ chuẩn hóa quy trình ghi nhận thời gian sự cố trên OMS, khắc phục độ lệch thời gian giữa hệ thống đo xa và OMS nhằm đảm bảo tính chính xác của dữ liệu SAIDI/SAIFI."
+          "Điện lực Định Quán khẩn trương kiểm tra hiện trường, rà soát lưới điện khu vực trạm NT GIA CANH 1 (3 lần mất điện) và GIA CANH 2.3 (2 lần mất điện) để xử lý dứt điểm tình trạng mất điện lặp lại.",
+          "Điện lực Lộc Ninh và Điện lực Bình Long kiểm tra toàn diện nguyên nhân kỹ thuật gây mất điện tại các trạm Măng Cải 82/04B, Bù Nồm hai 16, Hưng Chiến 19B/13, đồng thời làm rõ lý do toàn bộ các lần mất điện đo xa ghi nhận đều hiển thị 'Không có OMS'.",
+          "Phòng Kỹ thuật/Điều độ phối hợp các Điện lực kiểm tra quy trình cập nhật dữ liệu OMS và đồng bộ thời gian giám sát giữa hệ thống đo xa và OMS để đảm bảo dữ liệu vận hành thống nhất."
         ],
         "risk_level": "high",
         "key_metrics": [
           {
-            "label": "Tổng số trạm phát sinh gọi mất điện",
-            "value": "6 trạm"
+            "label": "Tổng số trạm phát sinh cuộc gọi mất điện",
+            "value": "6"
           },
           {
-            "label": "Điện lực có nhiều trạm nhất",
-            "value": "Định Quán (2 trạm), Lộc Ninh (2 trạm)"
-          },
-          {
-            "label": "Số trạm mất điện từ 2 lần trở lên",
-            "value": "6/6 trạm (100%)"
+            "label": "Số trạm có từ 2 lần mất điện trở lên",
+            "value": "6"
           },
           {
             "label": "Trạm có số lần mất điện nhiều nhất",
             "value": "NT GIA CANH 1 (3 lần)"
           },
           {
-            "label": "Số lượt sự cố không có dữ liệu OMS",
-            "value": "7 lượt"
+            "label": "Điện lực có nhiều trạm mất điện nhất",
+            "value": "Định Quán (2 trạm), Lộc Ninh (2 trạm)"
+          },
+          {
+            "label": "Số trạm có sự cố không ghi nhận trên OMS",
+            "value": "4/6 trạm"
           }
         ],
-        "comparison": "So sánh giữa các đơn vị và trạm: Điện lực Định Quán có trạm NT GIA CANH 1 mất điện nhiều nhất (3 lần), trạm GIA CANH 2.3 mất điện 2 lần; Điện lực Lộc Ninh có 2 trạm đều mất điện 2 lần (Măng Cải 82/04B, Bù Nồm hai 16); Điện lực Bình Long có trạm Hưng Chiến 19B/13 mất điện 2 lần; Điện lực Trị An có trạm TCC - Bơm Tân Hiền mất điện 2 lần. Về tính đồng bộ hệ thống: Điện lực Trị An có đủ dữ liệu OMS cho cả 2 lần sự cố nhưng lệch mốc giờ so với đo xa; Điện lực Định Quán ghi nhận 3/4 lượt có OMS; riêng Điện lực Bình Long và Lộc Ninh toàn bộ 100% các lần mất điện (6/6 lượt của 3 trạm) đều hiển thị 'Không có OMS'.",
+        "comparison": "So sánh giữa các hệ thống ghi nhận sự không nhất quán lớn: Các trạm Hưng Chiến 19B/13 (Bình Long), Măng Cải 82/04B và Bù Nồm hai 16 (Lộc Ninh) hoàn toàn không có dữ liệu trên OMS ở cả 2 lần mất điện dù đo xa và CRM đều ghi nhận. Trạm GIA CANH 2.3 (Định Quán) không có OMS ở lần 1. Đối với các trường hợp có OMS (GIA CANH 2.3 lần 2, NT GIA CANH 1 lần 1-2, TCC - Bơm Tân Hiền lần 1-2), thời gian mất điện ghi nhận giữa đo xa và OMS đều có độ lệch đáng kể (ví dụ NT GIA CANH 1 lần 1 đo xa ghi 12h51-14h13 trong khi OMS ghi 12h12-15h39; TCC - Bơm Tân Hiền đo xa ghi nhận thời điểm 22:53 và 23:28 trong khi OMS ghi nhận khoảng thời gian kéo dài qua ngày hôm sau).",
         "data_quality_notes": [
-          "Ghi nhận 7 lượt sự cố hiển thị 'Không có OMS' gồm: Hưng Chiến 19B/13 (2 lần), Măng Cải 82/04B (2 lần), Bù Nồm hai 16 (2 lần) và GIA CANH 2.3 (Lần 1).",
-          "Lệch thời gian giữa đo xa và OMS: Trạm GIA CANH 2.3 Lần 2 đo xa ghi nhận 11h56-12h26 trong khi OMS ghi nhận 12h10-12h14; Trạm NT GIA CANH 1 Lần 1 đo xa ghi nhận 12h51-14h13 trong khi OMS ghi nhận 12h12-15h39; Lần 2 đo xa 12h06-12h37 trong khi OMS 12h10-12h14; Trạm TCC - Bơm Tân Hiền đo xa chỉ ghi nhận thời điểm (22:53:00 và 23:28:00) lệch so với khoảng thời gian khẩn cấp trên OMS (20h30-01h12 và 22:00-02:05).",
-          "Định dạng dữ liệu thời gian đo xa không đồng nhất: xen lẫn định dạng khoảng thời gian ngày/tháng/năm (giờ...-giờ...) và định dạng timestamp YYYY-MM-DD HH:MM:SS."
+          "Xuất hiện 7 lượt sự cố ghi nhận trạng thái 'Không có OMS' trên tổng số các lần đối chiếu đo xa tại Bình Long, Lộc Ninh và Định Quán.",
+          "Định dạng dữ liệu thời gian đo xa không đồng nhất: một số dòng ghi nhận khoảng thời gian (hh'mm - hh'mm), một số dòng chỉ ghi mốc thời gian ISO (YYYY-MM-DD hh:mm:ss).",
+          "Tồn tại độ lệch lớn về thời điểm bắt đầu và kết thúc mất điện giữa đo xa và OMS ở các sự cố có ghi nhận OMS."
         ]
       }
     },
@@ -90,40 +86,13 @@
       "sheet_name": "3HAILONGKH",
       "prompt_id": "3HAILONGKH",
       "analysis": {
-        "assessment": "Tuần từ 13/9 đến 18/9/2026, toàn PC ghi nhận 6 phiếu đánh giá không hài lòng theo bảng chi tiết (100% đều thuộc nhóm 'Cách giải quyết, thời gian, thủ tục'; 0 phiếu về 'Thái độ, kỹ năng nghiệp vụ' và 'Nhũng nhiễu, vòi vĩnh'). Số phiếu phân bổ đều tại 6 Điện lực: Đồng Xoài (1 phiếu - 16,67%), Bình Long (1 phiếu - 16,67%), Đồng Phú (1 phiếu - 16,67%), Trị An (1 phiếu - 16,67%), Trảng Bom (1 phiếu - 16,67%), Long Bình (1 phiếu - 16,67%), không có đơn vị nào chiếm tỷ trọng vượt trội. Phân loại theo nguyên nhân nội dung phản ánh gồm 2 nhóm chính: (1) Thời gian xử lý sự cố chậm, sai lệch giờ dự kiến cấp điện lại và thất hẹn với khách hàng gồm 4 phiếu (Trị An - trễ hơn thông báo 3 tiếng ảnh hưởng người bệnh dùng máy thở, Trảng Bom - hẹn nhưng không đến trong đêm, Long Bình - lùi giờ cấp điện từ 22h00 sang 00h00, Đồng Phú - xử lý chậm sau nhiều giờ báo); (2) Thông tin, liên lạc và phản hồi tiến độ xử lý chưa kịp thời gồm 2 phiếu (Đồng Xoài - phát sinh mất điện không báo trước và không phản hồi sau báo hỏng, Bình Long - hệ thống ghi nhận nhưng ĐL chưa liên hệ hỗ trợ KH).",
-        "recommendation": [
-          "Chấn chỉnh khâu cập nhật và thông báo thời gian cấp điện trở lại chính xác trên App CSKH/kênh tự động, tránh dời giờ nhiều lần gây bức xúc, đặc biệt đối với khu vực có khách hàng sử dụng thiết bị y tế/máy thở (Điện lực Trị An, Long Bình).",
-          "Nghiêm cấm tình trạng hẹn kiểm tra khắc phục sự cố điện nhưng không đến và không thông báo lại, để khách hàng phải tự liên hệ nhắc việc vào ngày hôm sau (Điện lực Trảng Bom).",
-          "Tăng cường tính chủ động phản hồi thông tin tiến độ xử lý sự cố mất điện, liên hệ trực tiếp khách hàng theo đúng số điện thoại đã cập nhật trên hệ thống (Điện lực Đồng Xoài, Bình Long, Đồng Phú).",
-          "Rà soát quy trình trực ca và điều độ xử lý mất điện nhanh chóng khi tiếp nhận phản ánh ban đầu của khách hàng để rút ngắn thời gian cấp điện lại."
-        ],
-        "risk_level": "medium",
-        "key_metrics": [
-          {
-            "label": "Tổng số phiếu KHL tuần 13/9-18/9 (bảng chi tiết)",
-            "value": "6 phiếu"
-          },
-          {
-            "label": "Tỷ lệ nhóm Cách giải quyết, thời gian, thủ tục",
-            "value": "100% (6/6 phiếu)"
-          },
-          {
-            "label": "Số Điện lực phát sinh phiếu KHL",
-            "value": "6 đơn vị"
-          },
-          {
-            "label": "Số phiếu KHL tuần trước (29/8-11/9)",
-            "value": "3 phiếu"
-          },
-          {
-            "label": "Mức tăng phiếu so với tuần trước",
-            "value": "+3 phiếu (+100%)"
-          }
-        ],
-        "comparison": "So với giai đoạn trước (29/8 đến 11/9/2026 ghi nhận 3 phiếu KHL), số lượng phiếu KHL tuần này tăng từ 3 lên 6 phiếu (tăng 3 phiếu, tương ứng tăng 100%). Hai đơn vị tiếp tục lặp lại tình trạng có khách hàng không hài lòng qua cả 2 tuần là Điện lực Đồng Xoài và Điện lực Trảng Bom.",
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
         "data_quality_notes": [
-          "Có sự không khớp số liệu trong tuần 13/9-18/9/2026: Dòng tổng cộng bảng chi tiết ghi nhận 6 phiếu (phân bổ cho 6 ĐL), tuy nhiên dòng thuyết minh cuối sheet lại ghi nhận 08 trường hợp khảo sát không hài lòng.",
-          "Bảng so sánh tuần trước có sự sai lệch về khoảng thời gian: Tiêu đề ghi 'Từ 29/8 đến ngày 11/9/2026' (2 tuần) nhưng phần thuyết minh dưới cùng lại ghi 'Trong tuần từ 28/8 đến 03/9/2026'."
+          "HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
         ]
       }
     },
@@ -131,25 +100,25 @@
       "sheet_name": "4THUTD",
       "prompt_id": "4THUTD",
       "analysis": {
-        "assessment": "Trong tháng 08/2026, toàn Công ty Điện lực Đồng Nai đạt tỷ lệ thu tiền điện bình quân là 99,951%, vượt 0,151 điểm % so với kế hoạch giao (99,800%). Toàn bộ 23 đơn vị trực thuộc đều hoàn thành và vượt chỉ tiêu kế hoạch. Cơ cấu tồn nợ cuối kỳ cho thấy nợ hóa đơn mới phát sinh trong vòng 07 ngày chiếm tỷ trọng áp đảo (2.354.490.686.762 đồng / 2.363.532.248.835 đồng tồn cuối kỳ, tương đương 99,62%), phản ánh dòng tiền luân chuyển tốt và nợ khó đòi ở mức thấp. Tuy nhiên, vẫn còn tồn dư nợ khối ngân sách nhà nước tập trung lớn tại một số ít đơn vị.",
+        "assessment": "Tháng 08/2026, toàn Công ty Điện lực Đồng Nai ghi nhận kết quả thu tiền điện khả quan khi tỷ lệ thu đạt 99,9509%, vượt 0,1509 điểm % so với kế hoạch giao (99,80%). Toàn bộ 23/23 đơn vị trực thuộc đều hoàn thành và vượt chỉ tiêu thu tiền điện, không có đơn vị nào không đạt kế hoạch. Tồn cuối kỳ toàn công ty là 2.363.532.248.835 đồng, trong đó 99,62% (2.354.490.686.762 đồng) là hóa đơn mới phát sinh lập trong vòng 07 ngày, phản ánh chất lượng nợ duy trì ở mức an toàn cao. Tuy nhiên, dư nợ khách hàng khối Ngân sách Nhà nước (cơ quan công quyền + thủy nông) ghi nhận 5.531.349.809 đồng, tập trung chủ yếu ở một số đơn vị ngoại thành.",
         "recommendation": [
-          "Tập trung làm việc với các cơ quan hành chính sự nghiệp, đơn vị công ích và thủy nông tại Điện lực Định Quán, Trị An, Bù Đăng để giải tỏa 4,21 tỷ đồng nợ NSNN tồn đọng (chiếm 76,1% tổng nợ NSNN toàn công ty).",
-          "Tăng cường giám sát tiến độ thu tại Điện lực Lộc Ninh (99,8003%), Điện lực Bù Đăng (99,8517%) và Điện lực Phước Long (99,8557%) do kết quả thu nằm sát ngưỡng kế hoạch sàn 99,800%.",
-          "Đẩy nhanh tiến độ quyết toán và thu dứt điểm các hóa đơn mới phát sinh ≤7 ngày trước kỳ chốt số tiếp theo để hạn chế chuyển nhóm nợ sang nợ quá hạn."
+          "Đôn đốc Điện lực Lộc Ninh (đạt 99,8003%, chỉ vượt kế hoạch 0,0003 điểm %) tăng cường rà soát danh sách khách hàng chậm trả để tạo khoảng cách an toàn so với chỉ tiêu giao.",
+          "Tập trung phối hợp với Kho bạc Nhà nước và các cơ quan hành chính sự nghiệp, thủy nông để giải quyết dứt điểm nợ ngân sách nhà nước tại Điện lực Định Quán (nợ NSNN 2.243.701.516 đồng) và Điện lực Trị An (1.084.368.540 đồng).",
+          "Giám sát sát sao dòng tiền đối với các đơn vị có số phát sinh và tồn thu lớn như Điện lực Long Thành (tồn 262,08 tỷ đồng), Long Bình (tồn 231,32 tỷ đồng), Trảng Bom (tồn 230,42 tỷ đồng) nhằm đảm bảo tỷ lệ thu tiền điện gối đầu không bị quá hạn 07 ngày."
         ],
         "risk_level": "low",
         "key_metrics": [
           {
-            "label": "Tỷ lệ thu bình quân toàn Công ty",
-            "value": "99,951%"
+            "label": "Tỷ lệ thu thực hiện toàn Công ty",
+            "value": "99,9509%"
           },
           {
-            "label": "Kế hoạch giao toàn Công ty",
-            "value": "99,800%"
+            "label": "Kế hoạch tỷ lệ thu",
+            "value": "99,8000%"
           },
           {
-            "label": "Mức vượt kế hoạch toàn Công ty",
-            "value": "+0,151 điểm %"
+            "label": "Chênh lệch vượt kế hoạch toàn Công ty",
+            "value": "+0,1509 điểm %"
           },
           {
             "label": "Tổng số thu được trong kỳ",
@@ -160,19 +129,19 @@
             "value": "2.363.532.248.835 đồng"
           },
           {
-            "label": "Dư nợ hóa đơn ≤07 ngày",
-            "value": "2.354.490.686.762 đồng (99,62%)"
+            "label": "Dư nợ hóa đơn ≤7 ngày",
+            "value": "2.354.490.686.762 đồng"
           },
           {
             "label": "Dư nợ khách hàng NSNN",
-            "value": "5.531.349.809 đồng (0,23%)"
+            "value": "5.531.349.809 đồng"
           }
         ],
-        "comparison": "Đơn vị có tỷ lệ thu cao nhất là Phòng Kinh doanh (100%, vượt 0,200 điểm %) và Điện lực Xuân Lộc (99,997%, vượt 0,197 điểm %). Đơn vị có tỷ lệ thu thấp nhất là Điện lực Lộc Ninh đạt 99,8003%, chỉ vượt kế hoạch ở mức tối thiểu (+0,0003 điểm %), không có đơn vị nào bị âm chênh lệch so với kế hoạch. Về cơ cấu tồn nợ, dư nợ NSNN phân bổ lệch lớn, tập trung chủ yếu tại Điện lực Định Quán (2.243.701.516 đồng, chiếm 40,56% tổng nợ NSNN) và Điện lực Trị An (1.084.368.540 đồng, chiếm 19,60% tổng nợ NSNN).",
+        "comparison": "Đơn vị có tỷ lệ thu cao nhất là P. Kinh doanh đạt 100% (vượt 0,2000 điểm %), tiếp theo là Điện lực Xuân Lộc đạt 99,9975% (vượt 0,1975 điểm %) và Điện lực Bình Long đạt 99,9828% (vượt 0,1828 điểm %). Đơn vị có tỷ lệ thu thấp nhất là Điện lực Lộc Ninh đạt 99,8003% (chênh lệch dương thấp nhất: +0,0003 điểm %, không có đơn vị nào chênh lệch âm), kế tiếp là Điện lực Bù Đăng đạt 99,8517% (vượt 0,0517 điểm %) và Điện lực Phước Long đạt 99,8557% (vượt 0,0557 điểm %). Về cơ cấu nợ NSNN, Điện lực Định Quán chiếm tỷ trọng cao nhất với 2,24 tỷ đồng (40,56% tổng nợ NSNN toàn công ty), Điện lực Trị An chiếm 1,08 tỷ đồng (19,60%), trong khi nhiều đơn vị kiểm soát nợ NSNN bằng 0 đồng như Phú Riềng, Lộc Ninh, Xuân Lộc và P. Kinh doanh.",
         "data_quality_notes": [
-          "Toàn bộ 23/23 đơn vị đều có chênh lệch đánh giá dương (đạt và vượt kế hoạch 99,800%), không phát sinh đơn vị có tỷ lệ chênh lệch âm.",
-          "Cột 'Phải trả' để trống ở toàn bộ các đơn vị cấp dưới và ghi nhận giá trị 0 tại dòng Tổng.",
-          "Dư nợ hóa đơn ≤7 ngày của Phòng Kinh doanh bằng 100% tồn cuối kỳ (319.127.035.565 đồng) và không có nợ tồn NSNN."
+          "Toàn bộ 23 đơn vị đều đạt tỷ lệ thu từ 99,80% trở lên, không có đơn vị nào âm so với kế hoạch.",
+          "Cột 'Phải trả' trong bảng dữ liệu để trống cho toàn bộ các đơn vị và có giá trị 0 ở dòng Tổng.",
+          "Dư nợ hóa đơn ≤7 ngày của P. Kinh doanh bằng chính xác 100% tồn cuối kỳ (319.127.035.565 đồng), không phát sinh nợ quá hạn."
         ]
       }
     },
@@ -180,43 +149,44 @@
       "sheet_name": "5NONSNN",
       "prompt_id": "5NONSNN",
       "analysis": {
-        "assessment": "Tính đến ngày 19/9/2026, toàn Công ty Điện lực Đồng Nai ghi nhận tổng số nợ tiền điện ngân sách nhà nước (NSNN) là 5.131.677.021 đồng với 475 hóa đơn. Cơ cấu nợ tập trung phần lớn vào nợ cũ kéo dài từ T1-T5/2026 (3.316.060.178 đồng, chiếm 64,62%) và nợ tồn từ năm 2025 (292.944.452 đồng, chiếm 5,71%), tổng nợ lũy kế từ T5/2026 trở về trước chiếm tới 70,33%. Nợ mới phát sinh trong T6/2026 là 564.064.762 đồng (10,99%) và T7/2026 là 635.824.702 đồng (12,39%). Nợ NSNN tồn đọng chủ yếu tập trung tại một số ít đơn vị trọng điểm.",
+        "assessment": "Tính đến ngày 19/9/2026, toàn Công ty Điện lực Đồng Nai ghi nhận tổng số nợ ngân sách nhà nước là 475 hóa đơn với tổng số tiền nợ là 5.131.677.021 đồng. Nợ tập trung chủ yếu ở một số ít đơn vị và phần lớn là nợ lũy kế từ tháng 1 đến tháng 5/2026. Đáng chú ý, Điện lực Long Thành là đơn vị duy nhất có nợ khó đòi tồn đọng từ năm 2025 với 7 hóa đơn, số tiền 292.944.452 đồng. Nợ mới phát sinh tháng 6 và tháng 7/2026 chiếm lần lượt 564.064.762 đồng và 635.824.702 đồng.",
         "recommendation": [
-          "Điện lực Long Thành khẩn trương làm việc trực tiếp với khách hàng NSNN và cơ quan tài chính/kho bạc để thu hồi dứt điểm khoản nợ khó đòi từ năm 2025 (292.944.452 đồng, 7 HĐ).",
-          "Các Điện lực Định Quán, Trị An, Bù Đăng tập trung nguồn lực làm việc với các đơn vị thụ hưởng ngân sách để giải tỏa nợ giai đoạn T1-T5/2026 (chiếm trên 3,73 tỷ đồng tại 3 đơn vị này).",
-          "Phòng Kinh doanh phối hợp các Điện lực lập biên bản đối chiếu công nợ NSNN, rà soát tiến độ giải ngân vốn ngân sách và báo cáo UBND tỉnh/huyện để đôn đốc thanh toán trước khi kết thúc năm ngân sách."
+          "Thành lập tổ công tác chuyên trách làm việc trực tiếp với Kho bạc Nhà nước, Sở Tài chính và các cơ quan hành chính sự nghiệp là khách hàng nợ ngân sách, đặc biệt tại Long Thành, Định Quán, Trị An và Bù Đăng.",
+          "Ưu tiên xử lý dứt điểm khoản nợ tồn năm 2025 tại Điện lực Long Thành (292.944.452 đồng) và nợ T1-T5/2026 tại Định Quán (hơn 2,01 tỷ đồng).",
+          "Phối hợp với chính quyền địa phương đôn đốc giải ngân dự toán ngân sách chi thường xuyên về tiền điện kịp thời trước kỳ lập báo cáo quý tiếp theo."
         ],
         "risk_level": "high",
         "key_metrics": [
           {
-            "label": "Tổng số tiền nợ NSNN",
+            "label": "Tổng số hóa đơn nợ toàn Công ty",
+            "value": "475 hóa đơn"
+          },
+          {
+            "label": "Tổng tiền nợ toàn Công ty",
             "value": "5.131.677.021 đồng"
           },
           {
-            "label": "Tổng số hóa đơn nợ NSNN",
-            "value": "475 HĐ"
+            "label": "Nợ tồn từ năm 2025 (Long Thành)",
+            "value": "292.944.452 đồng"
           },
           {
-            "label": "Nợ tồn năm 2025",
-            "value": "292.944.452 đồng (7 HĐ)"
-          },
-          {
-            "label": "Nợ lũy kế T1-T5/2026",
-            "value": "3.316.060.178 đồng (152 HĐ)"
+            "label": "Nợ giai đoạn T1-T5/2026",
+            "value": "3.316.060.178 đồng"
           },
           {
             "label": "Nợ tháng 6/2026",
-            "value": "564.064.762 đồng (69 HĐ)"
+            "value": "564.064.762 đồng"
           },
           {
             "label": "Nợ tháng 7/2026",
-            "value": "635.824.702 đồng (142 HĐ)"
+            "value": "635.824.702 đồng"
           }
         ],
-        "comparison": "Top 3 Điện lực có nợ NSNN lớn nhất chiếm 80,45% tổng tiền nợ toàn Công ty: ĐL Định Quán đứng đầu với 2.171.063.628 đồng (chiếm 42,31%), tiếp theo là ĐL Trị An với 1.076.240.523 đồng (chiếm 20,97%) và ĐL Bù Đăng với 881.027.567 đồng (chiếm 17,17%). Về nợ cũ tồn từ năm 2025, ĐL Long Thành là đơn vị duy nhất có nợ phát sinh năm 2025 với 292.944.452 đồng (7 HĐ, chiếm 46,93% tổng nợ của chính đơn vị này). Toàn bộ 4 đơn vị hoàn toàn không có nợ là ĐL Phú Riềng, Lộc Ninh, Xuân Lộc và Long Bình.",
+        "comparison": "Ba đơn vị có nợ lớn nhất chiếm 80,45% tổng tiền nợ toàn Công ty: Điện lực Định Quán dẫn đầu với 2.171.063.628 đồng (chiếm 42,31%), tiếp theo là Điện lực Trị An với 1.076.240.523 đồng (chiếm 20,97%) và Điện lực Bù Đăng với 881.027.567 đồng (chiếm 17,17%). Điện lực Long Thành đứng thứ tư với 624.233.714 đồng (chiếm 12,16%) nhưng là đơn vị duy nhất gánh toàn bộ nợ cũ năm 2025. Có 4 đơn vị hoàn toàn không phát sinh nợ là Phú Riềng, Lộc Ninh, Xuân Lộc và Long Bình.",
         "data_quality_notes": [
-          "Dòng Tổng cộng của cột HĐT7/2026 ghi 142 HĐ, nhưng tổng cộng dồn từng hàng là 219 HĐ.",
-          "Tổng số HĐ các kỳ ở dòng Tổng cộng (7 + 152 + 69 + 142 = 370 HĐ) lệch so với cột Tổng HĐ nợ (475 HĐ), cần đối soát lại số liệu hóa đơn chi tiết từng kỳ."
+          "Tổng số hóa đơn các kỳ trong dòng Tổng cộng (7 + 152 + 69 + 142 = 370 HĐ) không khớp với cột Tổng HĐ nợ (475 HĐ), chênh lệch 105 HĐ.",
+          "Tổng số tiền nợ các kỳ trong dòng Tổng cộng (292.944.452 + 3.316.060.178 + 564.064.762 + 635.824.702 = 4.808.894.094 đồng) lệch 322.782.927 đồng so với cột Tổng tiền nợ (5.131.677.021 đồng).",
+          "Bảng số liệu có các đơn vị thuộc tỉnh Bình Phước (Đồng Xoài, Phước Long, Bù Đăng, Chơn Thành,...) nằm chung danh sách với Công ty Điện lực Đồng Nai mà không có chú giải về ranh giới quản lý/bàn giao."
         ]
       }
     },
@@ -224,39 +194,39 @@
       "sheet_name": "6NLMT",
       "prompt_id": "6NLMT",
       "analysis": {
-        "assessment": "Tính đến hết ngày 19/09/2026, toàn Công ty có 181 hồ sơ ĐMTMN cần xử lý tồn tại; đã làm việc được 179 hồ sơ (98,9%) và xử lý hoàn tất 146 hồ sơ (tỷ lệ hoàn thành đạt 80,66%); số lượng còn lại phải xử lý hoàn tất là 35 hồ sơ (19,34%). Điện lực có số lượng tồn nhiều nhất là Trấn Biên với 13 hồ sơ còn lại chưa hoàn tất. Điện lực có tiến độ xử lý hoàn tất chậm nhất về tỷ lệ là Xuân Lộc (chỉ đạt 25% với 1/4 hồ sơ xong). Có 02 trường hợp chưa làm việc thuộc về Long Khánh (1 hồ sơ) và Định Quán (1 hồ sơ). Nguyên nhân chậm trễ ghi nhận trong báo cáo gồm: khách hàng không có ở địa phương/không liên hệ được (Long Khánh) và khách hàng đã bán nhà đi nơi khác (Định Quán); các đơn vị còn lại không có ghi chú nguyên nhân cụ thể.",
+        "assessment": "Tính đến hết ngày 19/09/2026, toàn Công ty Điện lực Đồng Nai có tổng cộng 181 hồ sơ ĐMTMN cần xử lý. Tiến độ đã tiếp cận làm việc được 179/181 khách hàng (đạt 98,90%), trong đó đã xử lý hoàn tất 146/181 hồ sơ (đạt tỷ lệ 80,66%). Toàn Công ty hiện còn tồn 35 hồ sơ phải xử lý hoàn tất (chiếm 19,34%), bao gồm 33 hồ sơ đã làm việc nhưng chưa xử lý dứt điểm và 02 hồ sơ chưa thể làm việc. Điện lực Trấn Biên là đơn vị có số lượng hồ sơ còn tồn nhiều nhất với 13 hồ sơ (trên tổng số 44 hồ sơ cần xử lý). Xét về tiến độ hoàn tất, Điện lực Xuân Lộc có tỷ lệ thấp nhất khi mới chỉ hoàn thành 1/4 hồ sơ (25,00%), còn tồn 3 hồ sơ. Ngoài ra, có 02 Điện lực còn trường hợp chưa thể tiếp cận làm việc gồm Long Khánh (01 hồ sơ do không liên hệ được, khách hàng không có ở địa phương) và Định Quán (01 hồ sơ do khách hàng đã bán nhà đi nơi khác).",
         "recommendation": [
-          "Tập trung đôn đốc Điện lực Trấn Biên xử lý dứt điểm 13 hồ sơ đã tiếp xúc nhưng chưa hoàn tất pháp lý.",
-          "Yêu cầu Điện lực Long Khánh và Định Quán phối hợp chính quyền địa phương rà soát, xác minh thông tin 02 khách hàng chưa làm việc (vắng mặt/đã bán nhà) để có giải pháp xử lý dứt điểm.",
-          "Đôn đốc các Điện lực còn tồn (Trấn Biên, Long Thành, Long Bình, Long Khánh, Định Quán, Xuân Lộc, Trảng Bom) bám sát khách hàng hoàn tất bổ sung hồ sơ pháp lý ĐMTMN chậm nhất trong tháng 9/2026 theo kế hoạch."
+          "Yêu cầu các Điện lực còn tồn nhiều hồ sơ (đặc biệt là Trấn Biên với 13 hồ sơ, Long Thành 5 hồ sơ, Long Bình 5 hồ sơ) tập trung nguồn lực bám sát, đôn đốc khách hàng hoàn tất bổ sung hồ sơ pháp lý, bảo đảm dứt điểm chậm nhất trong tháng 9/2026 theo kế hoạch.",
+          "Chỉ đạo Điện lực Long Khánh và Điện lực Định Quán phối hợp chính quyền địa phương, công an khu vực để xác minh thông tin chủ sở hữu mới hoặc nơi cư trú hiện tại đối với 02 trường hợp chưa làm việc được (bán nhà, vắng mặt tại địa phương).",
+          "Tiếp tục duy trì và nhân rộng cách làm của 3 đơn vị đã hoàn tất 100% hồ sơ gồm Điện lực Dầu Giây (15/15), Điện lực Nhơn Trạch (2/2) và Điện lực Cẩm Mỹ (7/7)."
         ],
         "risk_level": "medium",
         "key_metrics": [
           {
-            "label": "Tổng số cần xử lý",
-            "value": "181 hồ sơ"
+            "label": "Tổng số hồ sơ cần xử lý",
+            "value": "181"
+          },
+          {
+            "label": "Đã làm việc với khách hàng",
+            "value": "179 (98,90%)"
+          },
+          {
+            "label": "Chưa làm việc với khách hàng",
+            "value": "2 (1,10%)"
           },
           {
             "label": "Đã xử lý hoàn tất",
-            "value": "146 hồ sơ (80,66%)"
+            "value": "146 (80,66%)"
           },
           {
-            "label": "Số lượng còn lại phải xử lý",
-            "value": "35 hồ sơ (19,34%)"
-          },
-          {
-            "label": "Đã làm việc",
-            "value": "179 hồ sơ (98,90%)"
-          },
-          {
-            "label": "Chưa làm việc",
-            "value": "2 hồ sơ (1,10%)"
+            "label": "Số lượng còn lại phải xử lý hoàn tất",
+            "value": "35 (19,34%)"
           }
         ],
-        "comparison": "03 Điện lực đã hoàn thành 100% việc xử lý gồm Dầu Giây (15/15), Cẩm Mỹ (7/7), Nhơn Trạch (2/2). Nhóm còn tồn hồ sơ gồm Trấn Biên (còn 13/44 hồ sơ), Long Thành (còn 5/30), Long Bình (còn 5/32), Long Khánh (còn 4/24), Định Quán (còn 3/11), Xuân Lộc (còn 3/4) và Trảng Bom (còn 2/12). Xuân Lộc có tỷ lệ hoàn thành thấp nhất toàn Công ty (25%), trong khi Trấn Biên gánh khối lượng tồn lớn nhất (chiếm 37,1% tổng số hồ sơ tồn toàn Công ty).",
+        "comparison": "Có sự phân hóa rõ rệt giữa các đơn vị: 3 Điện lực đã hoàn thành 100% (Dầu Giây 15/15, Nhơn Trạch 2/2, Cẩm Mỹ 7/7); các đơn vị còn lại có tiến độ hoàn thành từ 25% (Xuân Lộc: 1/4) đến 84,38% (Long Bình: 27/32), Trảng Bom đạt 83,33% (10/12), Long Khánh đạt 83,33% (20/24), Long Thành đạt 83,33% (25/30), Định Quán đạt 72,73% (8/11), và Trấn Biên đạt 70,45% (31/44).",
         "data_quality_notes": [
-          "Cột Ghi chú chỉ cung cấp thông tin giải trình nguyên nhân cho 02 trường hợp chưa làm việc tại Long Khánh và Định Quán; 8 Điện lực còn lại để trống ghi chú nên không có dữ liệu chi tiết về lý do 33 trường hợp đã làm việc nhưng chưa xử lý hoàn tất.",
-          "Mốc thời gian theo dõi trong báo cáo ghi nhận năm 2026 (hết T7-2026, ngày 19/09/2026 và kế hoạch hoàn tất tháng 9/2026)."
+          "Số liệu tính toán khớp tuyệt đối giữa bảng chi tiết và phần diễn giải tổng kết (181 = 146 hoàn tất + 35 còn lại; 181 = 179 đã làm việc + 2 chưa làm việc).",
+          "Cột ghi chú chỉ cung cấp thông tin nguyên nhân tồn đọng cho 2 Điện lực (Long Khánh và Định Quán), 8 Điện lực còn lại không ghi chú cụ thể vướng mắc chi tiết của từng hồ sơ."
         ]
       }
     },
@@ -264,40 +234,13 @@
       "sheet_name": "7THAYDK",
       "prompt_id": "7THAYDK",
       "analysis": {
-        "assessment": "Tính đến ngày 18/9/2026, toàn Công ty Điện lực Đồng Nai ghi nhận 3.586 công tơ quá hạn kiểm định (HKĐ), gồm 1.251 công tơ 1 pha và 2.259 công tơ 3 pha; cùng với 100 TU và 203 TI quá hạn. Tồn đọng tập trung lớn nhất tại Điện lực Long Bình (1.334 công tơ, gồm 865 công tơ 3 pha; 30 TU, 38 TI) và Điện lực Trảng Bom (948 công tơ, gồm 567 công tơ 3 pha; 16 TU, 82 TI), tiếp theo là Nhơn Trạch (440 công tơ, 362 công tơ 3 pha; 15 TU, 35 TI). Ngoài ra, toàn Công ty có 76 trường hợp trở ngại chưa thể thay thế, tập trung cao nhất tại Trấn Biên (25 ca), Long Bình (20 ca) và Long Thành (11 ca). Xét kế hoạch cả năm 2026, tổng công tơ quá hạn lên tới 22.696 chiếc (18.596 công tơ 1 pha, 4.024 công tơ 3 pha) cùng 135 TU và 309 TI, tạo áp lực rất lớn lên công tác quản lý đo đếm và nguy cơ thất thoát doanh thu/sai lệch đo đếm tại các phụ tải lớn.",
-        "recommendation": [
-          "Ưu tiên lập phương án và bố trí nhân lực thay thế ngay cụm công tơ 3 pha và hệ thống TU/TI quá hạn tại các đơn vị trọng điểm công nghiệp gồm Long Bình (865 công tơ 3 pha, 30 TU, 38 TI), Trảng Bom (567 công tơ 3 pha, 16 TU, 82 TI), Nhơn Trạch (362 công tơ 3 pha, 15 TU, 35 TI) và Xuân Lộc (180 công tơ 3 pha, 10 TU, 27 TI) nhằm bảo đảm tính chính xác đo đếm khách hàng lớn.",
-          "Thành lập tổ công tác chuyên trách xử lý dứt điểm 76 trường hợp trở ngại đo đếm, đặc biệt tại Trấn Biên (25 vụ), Long Bình (20 vụ) và Long Thành (11 vụ); phối hợp chính quyền địa phương hoặc khách hàng để giải quyết vướng mắc tiếp cận mặt bằng.",
-          "Xây dựng tiến độ chi tiết từng tuần/tháng từ nay đến hết năm 2026 để giải tỏa khối lượng công tơ 1 pha tồn đọng khổng lồ dự kiến phát sinh tại Trảng Bom (4.106 chiếc), Long Khánh (4.168 chiếc) và Trấn Biên (3.368 chiếc)."
-        ],
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
         "risk_level": "high",
-        "key_metrics": [
-          {
-            "label": "Tổng công tơ quá hạn đến 18/9/2026",
-            "value": "3.586 cái (1.251 1 pha, 2.259 3 pha)"
-          },
-          {
-            "label": "Tổng TU/TI quá hạn đến 18/9/2026",
-            "value": "100 TU / 203 TI"
-          },
-          {
-            "label": "Tổng số ca trở ngại không thay được",
-            "value": "76 trường hợp"
-          },
-          {
-            "label": "Dự kiến cả năm 2026 công tơ quá hạn",
-            "value": "22.696 cái (18.596 1 pha, 4.024 3 pha)"
-          },
-          {
-            "label": "Dự kiến cả năm 2026 TU/TI quá hạn",
-            "value": "135 TU / 309 TI"
-          }
-        ],
-        "comparison": "Đến ngày 18/9/2026, Long Bình dẫn đầu về lượng công tơ quá hạn (1.334 cái, chiếm 37,2% toàn Công ty) và dẫn đầu về công tơ 3 pha (865 cái); Trảng Bom đứng thứ hai về công tơ quá hạn (948 cái) nhưng có lượng TI quá hạn cao nhất (82 TI). Về trở ngại thay thế, Trấn Biên chiếm tỷ trọng cao nhất với 25/76 ca (32,9%), tiếp theo là Long Bình 20/76 ca (26,3%). Khi xét cả năm 2026, áp lực chuyển dịch sang Trảng Bom (4.914 cái), Long Khánh (4.447 cái) và Trấn Biên (3.634 cái) do lượng công tơ 1 pha đến hạn tăng vọt.",
+        "key_metrics": [],
+        "comparison": "",
         "data_quality_notes": [
-          "Cột 'Tổng cộng số công tơ quá hạn' ở cả 2 bảng bằng tổng của 'Công tơ 1 pha' + 'Công tơ 3 pha' + 'Số trường hợp trở ngại' (ví dụ bảng 1: 1.251 + 2.259 + 76 = 3.586).",
-          "Một số đơn vị có công tơ quá hạn bằng 0 nhưng vẫn ghi nhận số ca trở ngại (như Long Thành có 0 công tơ 1 pha, 0 công tơ 3 pha nhưng có 11 trường hợp trở ngại, tổng cộng tính 11 công tơ quá hạn).",
-          "Bảng dữ liệu gồm cả các Điện lực thuộc tỉnh Bình Phước cũ và Đồng Nai, cho thấy dữ liệu quản lý đo đếm tổng hợp theo danh sách 22 đơn vị trực thuộc/phân cấp."
+          "HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
         ]
       }
     },
@@ -311,7 +254,7 @@
         "key_metrics": [],
         "comparison": "",
         "data_quality_notes": [
-          "HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash\\nPlease retry in 35.56757612s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"d"
+          "HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
         ]
       }
     },
@@ -333,13 +276,39 @@
       "sheet_name": "10KTSDĐ",
       "prompt_id": "10KTSDĐ",
       "analysis": {
-        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
-        "recommendation": [],
-        "risk_level": "high",
-        "key_metrics": [],
-        "comparison": "",
+        "assessment": "Trong tuần từ 07/9/2026 đến 11/9/2026, toàn Công ty đã thực hiện kiểm tra định kỳ hệ thống đo đếm (HTĐĐ) được 3.974 công tơ (đạt 2,40% kế hoạch năm). Lũy kế thực hiện đến ngày 11/9/2026 đạt 155.041/165.325 công tơ, hoàn thành 93,78% kế hoạch. Tiến độ chung đạt khá, tuy nhiên phân bổ khối lượng không đồng đều giữa các đơn vị: có tới 10 Điện lực không phát sinh kiểm tra trong tuần (thực hiện 0 công tơ gồm Phước Long, Bù Đăng, Chơn Thành, Bình Long, Bù Đốp, Bù Gia Mập, Hớn Quản, Trị An, Định Quán, Nhơn Trạch). Xét về lũy kế kiểm tra HTĐĐ, đơn vị có tỷ lệ hoàn thành thấp nhất là Nhơn Trạch chỉ đạt 64,87% (5.075/7.823 công tơ), tiếp theo là Xuân Lộc đạt 76,20% (7.741/10.159 công tơ), Trảng Bom đạt 79,73% (12.028/15.085 công tơ) và Phú Riềng đạt 80,43% (2.162/2.688 công tơ). Ở công tác kiểm tra giá điện và số hộ, toàn Công ty lũy kế đạt 81,99% (178.349/217.515 lượt), trong đó Lộc Ninh (47,96%), Bù Đốp (48,68%) và Phước Long (55,25%) có tỷ lệ thấp nhất.",
+        "recommendation": [
+          "Yêu cầu các đơn vị có lũy kế kiểm tra HTĐĐ thấp và đứng yên trong tuần (đặc biệt là Nhơn Trạch mới đạt 64,87% và Xuân Lộc đạt 76,20%) lập kế hoạch chi tiết, huy động nhân lực đẩy nhanh tiến độ kiểm tra định kỳ hoàn thành kế hoạch 2026.",
+          "Đôn đốc các Điện lực có tiến độ kiểm tra giá điện, số hộ dưới 60% gồm Lộc Ninh, Bù Đốp, Phước Long tập trung rà soát, kiểm tra thực địa để bù tiến độ.",
+          "Chấn chỉnh công tác nhập liệu và theo dõi thời gian thực hiện kiểm tra tại các Điện lực nhằm phản ánh chính xác năng suất lao động theo định mức thời gian quy định (10 phút đối với 1 pha trực tiếp, 20 phút đối với 1 pha gián tiếp, 30 phút đối với 3 pha trực tiếp, 40 phút đối với 3 pha gián tiếp)."
+        ],
+        "risk_level": "medium",
+        "key_metrics": [
+          {
+            "label": "Kiểm tra HTĐĐ thực hiện trong tuần",
+            "value": "3.974 công tơ"
+          },
+          {
+            "label": "Lũy kế kiểm tra HTĐĐ toàn Công ty",
+            "value": "155.041 / 165.325 công tơ (93,78%)"
+          },
+          {
+            "label": "Số đơn vị thực hiện 0 công tơ HTĐĐ trong tuần",
+            "value": "10 đơn vị"
+          },
+          {
+            "label": "Đơn vị lũy kế kiểm tra HTĐĐ thấp nhất",
+            "value": "Nhơn Trạch (64,87%)"
+          },
+          {
+            "label": "Lũy kế kiểm tra giá điện, số hộ",
+            "value": "178.349 / 217.515 lượt (81,99%)"
+          }
+        ],
+        "comparison": "Trong tuần, Long Thành dẫn đầu sản lượng kiểm tra HTĐĐ với 961 công tơ, tiếp theo là Trảng Bom (914 công tơ), Long Bình (542 công tơ) và Đồng Xoài (523 công tơ). Ngược lại, 10/22 đơn vị ghi nhận 0 công tơ trong tuần; Phú Riềng chỉ làm được 35 công tơ và Xuân Lộc chỉ làm được 15 công tơ. Về lũy kế kiểm tra HTĐĐ, Bù Đăng (117,50%), Định Quán (114,20%) và Hớn Quản (105,39%) đã vượt kế hoạch, trong khi Nhơn Trạch tụt hậu xa nhất với mức hoàn thành chỉ 64,87%.",
         "data_quality_notes": [
-          "HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash\\nPlease retry in 28.992785263s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \""
+          "Số liệu 'Tổng thời gian thực hiện (giờ)' có sự bất thường và thiếu nhất quán: Định Quán ghi nhận 310,3 giờ dù thực hiện tuần bằng 0; Trảng Bom thực hiện 914 công tơ nhưng chỉ ghi nhận 3,3 giờ; Trấn Biên làm 263 công tơ chỉ ghi 0,5 giờ; Dầu Giây làm 200 công tơ nhưng ghi 0 giờ.",
+          "Dòng 'Phòng Kinh Doanh' để trống kế hoạch dẫn đến lỗi công thức #DIV/0! tại các cột tỷ lệ so sánh TH/KH của nhóm 3 pha trực tiếp, 3 pha gián tiếp và bảng tổng hợp."
         ]
       }
     },
@@ -353,7 +322,7 @@
         "key_metrics": [],
         "comparison": "",
         "data_quality_notes": [
-          "HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash\\nPlease retry in 28.129110882s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \""
+          "HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash\\nPlease retry in 44.980740378s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \""
         ]
       }
     },
@@ -361,39 +330,13 @@
       "sheet_name": "12DIENNHANTUAN",
       "prompt_id": "12DIENNHANTUAN",
       "analysis": {
-        "assessment": "Tổng điện nhận trong tuần ghi nhận mức tăng 17.71% so với tuần trước (hệ số so sánh đạt 1.1771, trên nền tổng điện nhận thể hiện ở bảng là 369.341.691 kWh). Xu hướng điện nhận diễn biến tăng rất mạnh ở các ngày giữa tuần (từ Thứ 2 đến Thứ 5 tăng từ 16.40% đến 68.57%), chững lại vào Thứ 6 (tăng 0.22%) và giảm nhẹ vào hai ngày cuối tuần (Thứ 7 giảm 2.09%, Chủ nhật giảm 1.49%). Sự sụt giảm vào cuối tuần phản ánh đúng quy luật phụ tải công nghiệp - dịch vụ giảm hoạt động vào ngày nghỉ.",
-        "recommendation": [
-          "Xác minh và cập nhật số liệu sản lượng tuyệt đối còn thiếu của Tuần 38 để hoàn thiện cơ sở dữ liệu đối chiếu chính xác.",
-          "Phân tích chi tiết nguyên nhân phụ tải tăng đột biến trong các ngày giữa tuần (đặc biệt Thứ 3 và Thứ 4) để chủ động phương án điều độ và dự báo công suất đỉnh.",
-          "Theo dõi sát chênh lệch phụ tải giữa ngày làm việc và ngày cuối tuần để tối ưu hóa kế hoạch mua điện và phương thức vận hành lưới."
-        ],
-        "risk_level": "medium",
-        "key_metrics": [
-          {
-            "label": "Tỷ lệ tăng tổng điện nhận tuần",
-            "value": "+17.71% (hệ số 1.1771)"
-          },
-          {
-            "label": "Ngày tăng cao nhất (Thứ 4)",
-            "value": "+68.57% (hệ số 1.6857)"
-          },
-          {
-            "label": "Ngày tăng cao thứ hai (Thứ 3)",
-            "value": "+47.33% (hệ số 1.4733)"
-          },
-          {
-            "label": "Ngày giảm sâu nhất (Thứ 7)",
-            "value": "-2.09% (hệ số 0.9791)"
-          },
-          {
-            "label": "Tổng điện nhận tuần ghi nhận tại bảng",
-            "value": "369.341.691 kWh"
-          }
-        ],
-        "comparison": "So với tuần trước, điện nhận các ngày trong tuần biến động mạnh: Thứ 2 tăng 19.29% (1.1929), Thứ 3 tăng 47.33% (1.4733), Thứ 4 tăng đột biến 68.57% (1.6857), Thứ 5 tăng 16.40% (1.1640), Thứ 6 gần như tương đương với mức tăng nhẹ 0.22% (1.0022); trong khi đó hai ngày cuối tuần giảm nhẹ: Thứ 7 giảm 2.09% (0.9791) và Chủ nhật giảm 1.49% (0.9851). Toàn tuần tăng ròng 17.71%.",
+        "assessment": "Không tạo được phân tích Gemini cho sheet này.",
+        "recommendation": [],
+        "risk_level": "high",
+        "key_metrics": [],
+        "comparison": "",
         "data_quality_notes": [
-          "Toàn bộ cột sản lượng điện nhận Tuần 38 bị bỏ trống trong bảng dữ liệu, không thể tính quy đổi tuyệt đối kWh phát sinh thêm nếu không rõ cột số liệu hiện có là của Tuần 37 hay Tuần 38.",
-          "Tổng cộng các dòng ngày của cột Tuần 37 trong bảng (434.749.998 kWh) không khớp với giá trị ghi tại dòng 'Tổng tuần' (369.341.691 kWh), cần kiểm tra lại công thức cộng và tính toàn vẹn của dữ liệu gốc."
+          "HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash\\nPlease retry in 44.068060634s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \""
         ]
       }
     },
@@ -407,7 +350,7 @@
         "key_metrics": [],
         "comparison": "",
         "data_quality_notes": [
-          "HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash\\nPlease retry in 49.251720988s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \""
+          "HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
         ]
       }
     }
