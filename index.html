@@ -592,11 +592,7 @@ th.num { text-align: right; }
     <section id="tab-overview"></section>
     <section id="tab-compare" style="display:none;"></section>
     <section id="tab-topic" style="display:none;"></section>
-    <section id="tab-report" style="display:none;">
-      <div class="card" style="padding:0; overflow:hidden; min-height:900px;">
-        <iframe id="executiveReportFrame" title="Báo cáo điều hành Tuần 38" src="BAO_CAO_DIEU_HANH_TUAN_38.html" style="width:100%; height:calc(100vh - 150px); min-height:850px; border:0; background:#f5f8fc;"></iframe>
-      </div>
-    </section>
+    <section id="tab-report" style="display:none;"></section>
   </main>
 </div>
 
@@ -9626,116 +9622,7 @@ function saveDirective(weekKey, type, contentText, authorName) {
   localStorage.setItem('KD_DIRECTIVES_STORE', JSON.stringify(store));
 }
 
-function submitPgdDirective(weekKey) {
-  const input = document.getElementById('pgdDirectiveInput');
-  if (!input) return;
-  const val = input.value.trim();
-  if (!val) {
-    alert('Vui lòng nhập nội dung chỉ đạo!');
-    return;
-  }
-  const author = currentUser ? (currentUser.name + ' (' + currentUser.title + ')') : 'Phó Giám đốc';
-  saveDirective(weekKey, 'pgd_directive', val, author);
-  alert('🎯 Đã phát lệnh chỉ đạo thành công! Trưởng phòng sẽ nhận được nội dung chỉ đạo này.');
-  renderApp();
-}
 
-function submitTpAssignment(weekKey) {
-  const input = document.getElementById('tpAssignmentInput');
-  if (!input) return;
-  const val = input.value.trim();
-  if (!val) {
-    alert('Vui lòng nhập nội dung giao việc!');
-    return;
-  }
-  const author = currentUser ? (currentUser.name + ' (' + currentUser.title + ')') : 'Trưởng phòng Kinh doanh';
-  saveDirective(weekKey, 'tp_assignment', val, author);
-  alert('📋 Đã giao việc thành công! Phó phòng và Nhân viên sẽ thấy nội dung giao việc này.');
-  renderApp();
-}
-
-
-function renderDirectivesAndAssignmentsCard(currentWeekKey, insights) {
-  const store = getDirectivesStore();
-  const weekDirectives = store[selectedWeekKey] || {};
-  const pgdDir = weekDirectives.pgd_directive;
-  const tpAss = weekDirectives.tp_assignment;
-  const role = currentUser ? currentUser.role : 'employee';
-  const username = currentUser ? currentUser.username : '';
-
-  let html = '<div class="card" style="margin-top:16px; border-left:4px solid var(--primary-color);">';
-  html += '<div class="card-title"><span class="dash"></span>⚡ Yêu Cầu Chỉ Đạo & Giải Pháp Khả Thi, Thực Tế</div>';
-
-  // A. Phó Giám đốc (leadership / phogiamdoc) or Admin View
-  if (role === 'leadership' || username === 'phogiamdoc' || role === 'admin') {
-    const currentPgdVal = pgdDir ? pgdDir.content : (insights.recommendations ? insights.recommendations.join('\n- ') : '');
-    html += '<div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:16px; margin-top:12px;">';
-    html += '<h5 style="color:#1e40af; font-size:15px; font-weight:700; margin-bottom:8px;">🎯 Ý kiến Chỉ Đạo của Phó Giám Đốc</h5>';
-    html += '<p style="font-size:12.5px; color:#3b82f6; margin-bottom:8px;">Nhập bổ sung hoặc chỉnh sửa nội dung chỉ đạo dành cho Trưởng phòng:</p>';
-    html += '<textarea id="pgdDirectiveInput" class="form-input" rows="4" style="width:100%; font-size:13.5px; line-height:1.5; margin-bottom:10px; background:white;">' + escapeHtml(currentPgdVal) + '</textarea>';
-    html += '<div style="display:flex; justify-content:space-between; align-items:center;">';
-    html += '<span style="font-size:12px; color:#64748b;">' + (pgdDir ? ('🕒 Cập nhật lần cuối: ' + escapeHtml(pgdDir.updated_at)) : 'Chưa phát lệnh chỉ đạo') + '</span>';
-    html += '<button class="btn btn-primary" onclick="submitPgdDirective(\'' + selectedWeekKey + '\')" style="background:#1d4ed8; font-weight:700; padding:8px 18px;">🎯 PHÁT LỆNH CHỈ ĐẠO</button>';
-    html += '</div></div>';
-
-    // Also display Trưởng phòng Assignment status if exists
-    if (tpAss) {
-      html += '<div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:14px; margin-top:12px;">';
-      html += '<h5 style="color:#15803d; font-size:14px; font-weight:700; margin-bottom:6px;">📋 Trạng thái Giao việc của Trưởng phòng:</h5>';
-      html += '<p style="font-size:13.5px; color:#166534; white-space:pre-wrap;">' + escapeHtml(tpAss.content) + '</p>';
-      html += '<div style="font-size:11.5px; color:#15803d; margin-top:6px; text-align:right;">🕒 ' + escapeHtml(tpAss.author) + ' — ' + escapeHtml(tpAss.updated_at) + '</div>';
-      html += '</div>';
-    }
-  }
-
-  // B. Trưởng phòng (manager / truongphong) View
-  if (role === 'manager' || username === 'truongphong') {
-    // Show PGĐ Directive if available
-    if (pgdDir) {
-      html += '<div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:14px; margin-top:12px;">';
-      html += '<h5 style="color:#1e40af; font-size:14.5px; font-weight:700; margin-bottom:6px;">🎯 CHỈ ĐẠO TỪ PHÓ GIÁM ĐỐC</h5>';
-      html += '<p style="font-size:13.5px; color:#1e3a8a; font-weight:600; white-space:pre-wrap; background:white; padding:10px 12px; border-radius:6px; border-left:3px solid #2563eb;">' + escapeHtml(pgdDir.content) + '</p>';
-      html += '<div style="font-size:11.5px; color:#3b82f6; margin-top:6px; text-align:right;">🕒 ' + escapeHtml(pgdDir.author) + ' — ' + escapeHtml(pgdDir.updated_at) + '</div>';
-      html += '</div>';
-    } else {
-      html += '<div style="background:#f8fafc; border:1px dashed #cbd5e1; border-radius:8px; padding:12px; margin-top:12px; font-size:13px; color:#64748b;">ℹ️ Phó Giám đốc chưa gửi nội dung chỉ đạo mới cho tuần này.</div>';
-    }
-
-    // Trưởng phòng Task Assignment Editor
-    const currentTpVal = tpAss ? tpAss.content : (insights.recommendations ? insights.recommendations.join('\n- ') : '');
-    html += '<div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:16px; margin-top:14px;">';
-    html += '<h5 style="color:#15803d; font-size:15px; font-weight:700; margin-bottom:8px;">📋 Nội dung Giao việc cho Phó phòng & Nhân viên</h5>';
-    html += '<p style="font-size:12.5px; color:#16a34a; margin-bottom:8px;">Nhập nội dung phân công giao việc chi tiết cho cấp dưới:</p>';
-    html += '<textarea id="tpAssignmentInput" class="form-input" rows="4" style="width:100%; font-size:13.5px; line-height:1.5; margin-bottom:10px; background:white;">' + escapeHtml(currentTpVal) + '</textarea>';
-    html += '<div style="display:flex; justify-content:space-between; align-items:center;">';
-    html += '<span style="font-size:12px; color:#64748b;">' + (tpAss ? ('🕒 Cập nhật lần cuối: ' + escapeHtml(tpAss.updated_at)) : 'Chưa thực hiện giao việc') + '</span>';
-    html += '<button class="btn btn-success" onclick="submitTpAssignment(\'' + selectedWeekKey + '\')" style="background:#16a34a; font-weight:700; padding:8px 18px; color:white;">📋 GIAO VIỆC CHO PHÓ PHÒNG & NHÂN VIÊN</button>';
-    html += '</div></div>';
-  }
-
-  // C. Phó phòng (deputy_manager) & Chuyên viên/Nhân viên (employee) View
-  if (role === 'deputy_manager' || role === 'employee' || username === 'phophong' || username === 'chuyenvien' || username === 'nhanvien') {
-    if (tpAss) {
-      html += '<div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:16px; margin-top:12px;">';
-      html += '<h5 style="color:#15803d; font-size:15px; font-weight:700; margin-bottom:8px;">📋 NHIỆM VỤ & GIAO VIỆC TỪ TRƯỞNG PHÒNG</h5>';
-      html += '<div style="font-size:13.5px; color:#166534; background:white; padding:12px 14px; border-radius:6px; border-left:4px solid #16a34a; line-height:1.6; white-space:pre-wrap;">' + escapeHtml(tpAss.content) + '</div>';
-      html += '<div style="font-size:12px; color:#15803d; margin-top:8px; text-align:right;">🕒 Giao bởi: <b>' + escapeHtml(tpAss.author) + '</b> (' + escapeHtml(tpAss.updated_at) + ')</div>';
-      html += '</div>';
-    } else {
-      html += '<div style="background:#f8fafc; border:1px dashed #cbd5e1; border-radius:8px; padding:14px; margin-top:12px; font-size:13px; color:#64748b;">ℹ️ Trưởng phòng chưa cập nhật nội dung giao việc cho tuần này.</div>';
-    }
-
-    if (pgdDir) {
-      html += '<div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px 14px; margin-top:10px;">';
-      html += '<h6 style="color:#1e40af; font-size:13px; font-weight:700; margin-bottom:4px;">🎯 Ý kiến Chỉ đạo từ Phó Giám đốc (Tham khảo):</h6>';
-      html += '<div style="font-size:12.5px; color:#334155; white-space:pre-wrap;">' + escapeHtml(pgdDir.content) + '</div>';
-      html += '</div>';
-    }
-  }
-
-  html += '</div>';
-  return html;
-}
 
 let STORE = {};
 
@@ -9888,12 +9775,111 @@ function showTab(tabName) {
   }
 }
 
+let currentReportWeekKey = '';
+
 function renderExecutiveReport() {
-  const frame = document.getElementById('executiveReportFrame');
-  if (frame && !frame.getAttribute('data-loaded')) {
-    frame.setAttribute('data-loaded', 'true');
-    frame.src = 'BAO_CAO_DIEU_HANH_TUAN_38.html?t=' + Date.now();
+  const container = document.getElementById('tab-report');
+  if (!container) return;
+
+  const weekData = getActiveWeekData();
+  const weekNum = (currentWeekKey || '').replace(/\D/g, '') || '38';
+
+  if (currentReportWeekKey === currentWeekKey && container.dataset.rendered === 'true') {
+    return;
   }
+  currentReportWeekKey = currentWeekKey;
+  container.dataset.rendered = 'true';
+
+  const customReportUrl = 'BAO_CAO_DIEU_HANH_TUAN_' + weekNum + '.html';
+
+  fetch(customReportUrl, { method: 'HEAD' })
+    .then(res => {
+      if (res.ok) {
+        container.innerHTML = '<div class="card" style="padding:0; overflow:hidden; min-height:850px;">' +
+          '<iframe id="executiveReportFrame" title="Báo cáo điều hành ' + escapeHtml(currentWeekKey) + '" src="' + customReportUrl + '?t=' + Date.now() + '" style="width:100%; height:calc(100vh - 150px); min-height:850px; border:0; background:#f5f8fc;"></iframe>' +
+          '</div>';
+      } else {
+        renderDynamicExecutiveReport(container, weekData);
+      }
+    })
+    .catch(() => {
+      renderDynamicExecutiveReport(container, weekData);
+    });
+}
+
+function renderDynamicExecutiveReport(container, weekData) {
+  const topics = weekData.topics || {};
+  const insights = generateWeeklyInsights(weekData);
+
+  let html = '<div class="card" style="padding: 28px 32px; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-top:0;">' +
+    '<div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #e2e8f0; padding-bottom:16px; margin-bottom:20px; flex-wrap:wrap; gap:12px;">' +
+    '<div>' +
+    '<span style="font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.05em;">Công ty Điện lực Đồng Nai</span>' +
+    '<h2 style="font-size:22px; font-weight:800; color:#1e3a8a; margin:4px 0 2px 0;">BÁO CÁO ĐIỀU HÀNH KINH DOANH & DỊCH VỤ KHÁCH HÀNG</h2>' +
+    '<p style="font-size:13.5px; color:#64748b; margin:0;">Kỳ báo cáo: <b>' + escapeHtml(currentWeekKey) + '</b> (' + escapeHtml(weekData.period || 'Số liệu cập nhật mới nhất') + ')</p>' +
+    '</div>' +
+    '<div style="display:flex; gap:8px;">' +
+    '<button class="btn btn-outline" onclick="window.print()">🖨️ In / Lưu PDF</button>' +
+    '</div></div>' +
+
+    '<div style="margin-bottom:24px;">' +
+    '<h4 style="font-size:16px; font-weight:700; color:#1e40af; margin-bottom:12px;">1. Tóm tắt Nhận định Điều hành Tuần</h4>' +
+    '<div style="background:#f8fafc; border-left:4px solid #2563eb; padding:16px 20px; border-radius:6px;">' +
+    insights.assessmentList.map(item => '<div style="font-size:13.5px; color:#334155; margin-bottom:8px; line-height:1.6;">' + item + '</div>').join('') +
+    '</div></div>' +
+
+    '<div style="margin-bottom:24px;">' +
+    '<h4 style="font-size:16px; font-weight:700; color:#1e40af; margin-bottom:12px;">2. Tổng hợp Trạng thái 12 Chuyên đề Báo cáo</h4>' +
+    '<div class="table-scroll"><table style="width:100%; border-collapse:collapse; font-size:13px;">' +
+    '<thead><tr style="background:#f1f5f9; color:#334155;">' +
+    '<th style="padding:10px; border:1px solid #cbd5e1; text-align:center; width:50px;">STT</th>' +
+    '<th style="padding:10px; border:1px solid #cbd5e1;">Chuyên đề</th>' +
+    '<th style="padding:10px; border:1px solid #cbd5e1; text-align:center;">Trạng thái</th>' +
+    '<th style="padding:10px; border:1px solid #cbd5e1;">Kết quả nổi bật</th>' +
+    '</tr></thead><tbody>';
+
+  ALL_TOPIC_IDS.forEach((id, index) => {
+    const t = topics[id];
+    const label = TOPIC_LABELS[id] || id;
+    let statusBadge = '<span class="nav-badge badge-info">Chưa có DL</span>';
+    let summaryStr = 'Chưa có số liệu cho tuần này';
+
+    if (t) {
+      if (t.type === 'ranked') {
+        const topUnit = t.top3 && t.top3[0] ? t.top3[0].unit + ' (' + t.top3[0].value + (t.value_suffix || '') + ')' : '';
+        const botUnit = t.bottom3 && t.bottom3[0] ? t.bottom3[0].unit + ' (' + t.bottom3[0].value + (t.value_suffix || '') + ')' : '';
+        const isFull = t.dat_count === t.total;
+        const cls = isFull ? 'badge-good' : (t.dat_count === 0 ? 'badge-bad' : 'badge-warn');
+        statusBadge = '<span class="nav-badge ' + cls + '">' + t.dat_count + '/' + t.total + ' đạt</span>';
+        summaryStr = 'Dẫn đầu: <b>' + escapeHtml(topUnit) + '</b>. Cần đôn đốc: <b>' + escapeHtml(botUnit) + '</b>.';
+      } else if (t.type === 'incident') {
+        const cnt = t.total_incidents ?? (t.total_tram || 0);
+        const cls = cnt === 0 ? 'badge-good' : (cnt <= 3 ? 'badge-warn' : 'badge-bad');
+        statusBadge = '<span class="nav-badge ' + cls + '">' + cnt + ' vụ việc</span>';
+        summaryStr = 'Ghi nhận ' + cnt + ' trường hợp/vụ việc phát sinh trong tuần.';
+      } else if (t.type === 'trend') {
+        statusBadge = '<span class="nav-badge badge-good">' + (t.tongsosanh || 100) + '%</span>';
+        summaryStr = 'Tổng điện nhận: <b>' + fmt(t.tong37) + ' kWh</b> (' + (t.tongsosanh || 100) + '% so tuần trước).';
+      }
+    }
+
+    html += '<tr>' +
+      '<td style="padding:8px 10px; border:1px solid #e2e8f0; text-align:center; font-weight:600; color:#64748b;">' + (index + 1) + '</td>' +
+      '<td style="padding:8px 10px; border:1px solid #e2e8f0; font-weight:600; color:#1e293b;">' + escapeHtml(label) + '</td>' +
+      '<td style="padding:8px 10px; border:1px solid #e2e8f0; text-align:center;">' + statusBadge + '</td>' +
+      '<td style="padding:8px 10px; border:1px solid #e2e8f0; color:#475569;">' + summaryStr + '</td>' +
+      '</tr>';
+  });
+
+  html += '</tbody></table></div></div>' +
+    '<div>' +
+    '<h4 style="font-size:16px; font-weight:700; color:#166534; margin-bottom:12px;">3. Đề xuất Hành động & Giải pháp Trọng tâm</h4>' +
+    '<div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:16px;">' +
+    insights.recommendations.map(rec => '<div style="font-size:13.5px; color:#15803d; margin-bottom:8px; display:flex; gap:8px;"><span>👉</span> <span>' + rec + '</span></div>').join('') +
+    '</div></div>' +
+    '</div>';
+
+  container.innerHTML = html;
 }
 
 function showTopic(topicId) {
@@ -10158,8 +10144,7 @@ function renderOverview() {
     '<div class="card-title"><span class="dash"></span>📌 Nhận Định Báo Cáo Tuần</div>' +
     '<div class="assess-box" style="margin-top:12px;">' +
     insights.assessmentList.map(item => '<p style="margin-bottom:8px;">' + item + '</p>').join('') +
-    '</div>' +
-    renderDirectivesAndAssignmentsCard(currentWeekKey, insights);
+    '</div></div>';
 
   // Section 3: Overview Grid
   html += '<div class="card-title" style="margin:20px 0 12px 0;"><span class="dash"></span>Chi Tiết 12 Chuyên Đề Báo Cáo</div>';
