@@ -539,6 +539,7 @@ th.num { text-align: right; }
     <div class="week-select-wrap">
       <label for="weekSelect">Chọn tuần:</label>
       <select id="weekSelect" class="week-select" onchange="onWeekChange(this.value)"></select>
+      <button id="btnLockWeek" class="btn btn-outline" style="font-size:12px; padding:4px 10px; font-weight:700; border-radius:6px; margin-left:6px;" onclick="toggleWeekLock()"></button>
     </div>
 
     <button class="btn btn-success" onclick="exportWeekToExcel(currentWeekKey)" title="Tải file Excel báo cáo tuần này về máy">
@@ -621,25 +622,48 @@ th.num { text-align: right; }
 </div>
 
 <div class="modal-overlay" id="uploadModal">
-  <div class="modal-card">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h3 class="modal-title">Cập nhật file báo cáo tuần mới</h3>
+  <div class="modal-card" style="max-width:540px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); padding-bottom:10px;">
+      <h3 class="modal-title">📥 Cập Nhật Báo Cáo Tuần Mới</h3>
       <button class="btn btn-outline btn-icon-only" onclick="closeUploadModal()">✕</button>
     </div>
-    <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
-      Chọn file Excel báo cáo tuần mới (ví dụ: <code>KD-SO LIEU KD-DVKH TUAN 38.xlsx</code>). Dữ liệu sẽ được nạp và phân tích vào ứng dụng.
-    </p>
 
-    <div class="drop-zone" onclick="document.getElementById('excelFileInput').click()">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="margin-bottom:8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      <div style="font-weight:700; font-size:14px;">Bấm để chọn file hoặc kéo thả file Excel vào đây</div>
-      <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">Định dạng hỗ trợ: .xlsx, .xls</div>
+    <!-- Dual Update Method Tabs -->
+    <div style="display:flex; gap:8px; margin:14px 0;">
+      <button id="tabBtnLocal" class="btn btn-primary" style="flex:1; font-weight:700;" onclick="switchUploadTab('local')">💻 1. Nạp từ Máy tính</button>
+      <button id="tabBtnGDrive" class="btn btn-outline" style="flex:1; font-weight:700;" onclick="switchUploadTab('gdrive')">☁️ 2. Nạp từ Google Drive</button>
     </div>
-    <input type="file" id="excelFileInput" accept=".xlsx, .xls" style="display:none;" onchange="handleExcelFileUpload(this.files[0])">
 
-    <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:16px;">
-      <button class="btn btn-outline" onclick="closeUploadModal()">Đóng</button>
-      <button class="btn btn-primary" onclick="exportDataJson()">💾 Xuất file Lịch sử (JSON)</button>
+    <!-- Method 1: Local Computer File -->
+    <div id="uploadTabLocal">
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">
+        Chọn file Excel báo cáo tuần mới từ máy tính của bạn (ví dụ: <code>KD-SO LIEU KD-DVKH TUAN 40.xlsx</code>).
+      </p>
+      <div class="drop-zone" onclick="document.getElementById('excelFileInput').click()">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="margin-bottom:8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <div style="font-weight:700; font-size:14px;">Bấm để chọn file hoặc kéo thả file Excel vào đây</div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">Định dạng hỗ trợ: .xlsx, .xls</div>
+      </div>
+      <input type="file" id="excelFileInput" accept=".xlsx, .xls" style="display:none;" onchange="handleExcelFileUpload(this.files[0])">
+    </div>
+
+    <!-- Method 2: Google Drive Download -->
+    <div id="uploadTabGDrive" style="display:none;">
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:12px; font-size:12.5px; color:#1e40af; margin-bottom:12px;">
+        💡 <b>Chủ nhật ở nhà:</b> Bạn thả file báo cáo vào Google Drive (tài khoản <code>tiendldn@gmail.com</code>). Bật chia sẻ <i>"Bất kỳ ai có liên kết đều xem được"</i>, dán đường dẫn file vào đây và nhấn Đồng bộ.
+      </div>
+      <label style="font-size:13px; font-weight:700; display:block; margin-bottom:6px;">Đường dẫn (Link) file Excel trên Google Drive:</label>
+      <input type="text" id="gdriveUrlInput" class="form-input" style="width:100%; font-size:13px; padding:10px; margin-bottom:12px;" placeholder="Dán link Google Drive (https://drive.google.com/file/d/.../view)...">
+      
+      <button class="btn btn-primary" style="width:100%; padding:10px; font-weight:700;" onclick="handleGoogleDriveDownload()">🔄 TẢI & NẠP DỮ LIỆU TỪ GOOGLE DRIVE</button>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:18px; border-top:1px solid var(--line); padding-top:12px;">
+      <span style="font-size:12px; color:var(--text-muted);">Tự động bóc tách 12 Chuyên đề</span>
+      <div style="display:flex; gap:8px;">
+        <button class="btn btn-outline" onclick="closeUploadModal()">Đóng</button>
+        <button class="btn btn-outline" onclick="exportDataJson()">💾 Tải data_history.json</button>
+      </div>
     </div>
   </div>
 </div>
@@ -12427,14 +12451,78 @@ function updateCompareResults() {
   let html = '';
 
   if (type === 'ranked') {
-    html += '<div class="card"><div class="card-title"><span class="dash"></span>Bảng so sánh tổng quan qua các tuần</div>' +
+    html += '<div class="card"><div class="card-title"><span class="dash"></span>1. Bảng so sánh tổng quan qua các tuần</div>' +
       '<div class="table-scroll"><table><thead><tr><th>Tuần</th><th class="num">Số đơn vị đạt</th><th class="num">Trung bình</th><th class="num">Cao nhất (Đơn vị)</th><th class="num">Thấp nhất (Đơn vị)</th></tr></thead><tbody>' +
       perWeek.map(({ week, data }) => {
         const avg = data.rows.reduce((s, r) => s + r.value, 0) / data.rows.length;
         return '<tr><td><b>' + escapeHtml(week) + '</b></td><td class="num">' + (data.dat_count !== null ? data.dat_count + '/' + data.total : '—') + '</td><td class="num">' + fmt(avg, data.value_suffix) + '</td><td class="num">' + fmt(data.rows[0]?.value, data.value_suffix) + ' (' + escapeHtml(data.rows[0]?.unit || '') + ')</td><td class="num">' + fmt(data.rows[data.rows.length - 1]?.value, data.value_suffix) + ' (' + escapeHtml(data.rows[data.rows.length - 1]?.unit || '') + ')</td></tr>';
       }).join('') +
       '</tbody></table></div></div>' +
-      '<div class="card"><div class="card-title"><span class="dash"></span>Biểu đồ xu hướng trung bình toàn Công ty</div><div style="height:280px; position:relative; margin-top:14px;"><canvas id="compareTrendChart"></canvas></div></div>';
+      '<div class="card"><div class="card-title"><span class="dash"></span>2. Biểu đồ xu hướng trung bình toàn Công ty</div><div style="height:280px; position:relative; margin-top:14px;"><canvas id="compareTrendChart"></canvas></div></div>';
+
+    // Build Full 22 Điện lực Matrix Table
+    const ALL_UNITS_MATRIX = [
+      'Biên Hòa', 'Bình Long', 'Bù Đăng', 'Bù Đốp', 'Bù Gia Mập', 'Cẩm Mỹ', 'Chơn Thành',
+      'Dầu Giây', 'Định Quán', 'Đồng Phú', 'Đồng Xoài', 'Hớn Quản', 'Lộc Ninh', 'Long Bình',
+      'Long Khánh', 'Long Thành', 'Nhơn Trạch', 'Phú Riềng', 'Phước Long', 'Trảng Bom', 'Trấn Biên', 'Trị An', 'Xuân Lộc'
+    ];
+
+    let matrixHtml = '<div class="card" style="margin-top:20px;"><div class="card-title"><span class="dash"></span>3. Bảng so sánh chi tiết TOÀN BỘ 22 ĐIỆN LỰC qua các tuần</div>' +
+      '<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">So sánh diễn biến chỉ số kết quả thực hiện của từng Điện lực qua các tuần được chọn.</p>' +
+      '<div class="table-scroll"><table style="width:100%; border-collapse:collapse; font-size:13px;">' +
+      '<thead><tr style="background:#f1f5f9; color:#334155;">' +
+      '<th style="padding:8px; border:1px solid #cbd5e1; text-align:center; width:40px;">STT</th>' +
+      '<th style="padding:8px; border:1px solid #cbd5e1; text-align:left;">Điện lực</th>';
+
+    perWeek.forEach(p => {
+      matrixHtml += '<th style="padding:8px; border:1px solid #cbd5e1; text-align:center;">' + escapeHtml(p.week) + '</th>';
+    });
+
+    matrixHtml += '<th style="padding:8px; border:1px solid #cbd5e1; text-align:center;">Xu hướng</th></tr></thead><tbody>';
+
+    ALL_UNITS_MATRIX.forEach((unitName, index) => {
+      matrixHtml += '<tr><td style="padding:8px; border:1px solid #e2e8f0; text-align:center; font-weight:600; color:#64748b;">' + (index + 1) + '</td>' +
+        '<td style="padding:8px; border:1px solid #e2e8f0; font-weight:700; color:#1e293b;">' + escapeHtml(unitName) + '</td>';
+
+      let lastVal = null;
+      let prevVal = null;
+
+      perWeek.forEach(p => {
+        const topicData = p.data;
+        let valStr = '—';
+        let statusCls = '';
+
+        if (topicData && topicData.rows) {
+          const row = topicData.rows.find(r => r.unit && r.unit.toLowerCase().includes(unitName.toLowerCase()));
+          if (row) {
+            prevVal = lastVal;
+            lastVal = row.value;
+            valStr = fmt(row.value, topicData.value_suffix || '');
+            if (row.status === 'Đạt') statusCls = 'color:#15803d; font-weight:700;';
+            else if (row.status === 'Không đạt') statusCls = 'color:#b91c1c; font-weight:700;';
+          }
+        }
+
+        matrixHtml += '<td style="padding:8px; border:1px solid #e2e8f0; text-align:center; ' + statusCls + '">' + valStr + '</td>';
+      });
+
+      let trendStr = '—';
+      if (lastVal !== null && prevVal !== null) {
+        const diff = lastVal - prevVal;
+        if (Math.abs(diff) < 0.001) {
+          trendStr = '<span style="color:#64748b;">➡️ Ổn định</span>';
+        } else if (diff > 0) {
+          trendStr = '<span style="color:#15803d; font-weight:700;">↗️ +' + r1(diff, 2) + '</span>';
+        } else {
+          trendStr = '<span style="color:#b91c1c; font-weight:700;">↘️ ' + r1(diff, 2) + '</span>';
+        }
+      }
+
+      matrixHtml += '<td style="padding:8px; border:1px solid #e2e8f0; text-align:center;">' + trendStr + '</td></tr>';
+    });
+
+    matrixHtml += '</tbody></table></div></div>';
+    html += matrixHtml;
   }
 
   container.innerHTML = html;
@@ -13091,6 +13179,105 @@ function enrichTopics(result){
 
 
 // 1 Bản duy nhất của handleExcelFileUpload() (Đã vá lỗi trùng lặp Mục 4.4)
+
+function switchUploadTab(tab) {
+  const localTab = document.getElementById('uploadTabLocal');
+  const gdriveTab = document.getElementById('uploadTabGDrive');
+  const btnLocal = document.getElementById('tabBtnLocal');
+  const btnGDrive = document.getElementById('tabBtnGDrive');
+
+  if (tab === 'local') {
+    localTab.style.display = 'block';
+    gdriveTab.style.display = 'none';
+    btnLocal.className = 'btn btn-primary';
+    btnGDrive.className = 'btn btn-outline';
+  } else {
+    localTab.style.display = 'none';
+    gdriveTab.style.display = 'block';
+    btnLocal.className = 'btn btn-outline';
+    btnGDrive.className = 'btn btn-primary';
+  }
+}
+
+function toggleWeekLock() {
+  if (!currentWeekKey || !STORE[currentWeekKey]) return;
+  if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'leadership')) {
+    alert('⚠️ Chỉ Lãnh đạo hoặc Admin Quản trị mới có quyền Khóa / Mở khóa số liệu tuần.');
+    return;
+  }
+  const isLocked = !!STORE[currentWeekKey].locked;
+  if (isLocked) {
+    if (confirm('🔓 Bạn có chắc chắn muốn MỞ KHÓA số liệu cho ' + currentWeekKey + '?')) {
+      STORE[currentWeekKey].locked = false;
+      saveStore();
+      alert('🔓 Đã MỞ KHÓA số liệu cho ' + currentWeekKey + '. Bây giờ có thể cập nhật đè số liệu mới.');
+    }
+  } else {
+    if (confirm('🔒 Bạn có chắc chắn muốn CHỐT & KHÓA SỐ LIỆU cho ' + currentWeekKey + '? Sau khi khóa, số liệu tuần này sẽ được bảo vệ tránh bị chỉnh sửa đè nhầm.')) {
+      STORE[currentWeekKey].locked = true;
+      saveStore();
+      alert('🔒 Đã CHỐT & KHÓA SỐ LIỆU thành công cho ' + currentWeekKey + '!');
+    }
+  }
+  renderWeekSelector();
+  renderApp();
+}
+
+function handleGoogleDriveDownload() {
+  const input = document.getElementById('gdriveUrlInput')?.value.trim();
+  if (!input) {
+    alert('Vui lòng dán đường dẫn file Excel trên Google Drive!');
+    return;
+  }
+
+  const matchId = input.match(/\/d\/([a-zA-Z0-9_-]+)/) || input.match(/id=([a-zA-Z0-9_-]+)/);
+  if (!matchId || !matchId[1]) {
+    alert('❌ Đường dẫn Google Drive không hợp lệ. Vui lòng kiểm tra lại link chia sẻ.');
+    return;
+  }
+
+  const fileId = matchId[1];
+  const downloadUrl = 'https://docs.google.com/spreadsheets/d/' + fileId + '/export?format=xlsx';
+
+  ensureXlsxLoaded(() => {
+    fetch(downloadUrl)
+      .then(res => {
+        if (!res.ok) throw new Error('Không thể truy cập file trên Google Drive. Vui lòng kiểm tra lại link hoặc bật chế độ chia sẻ: "Bất kỳ ai có liên kết đều có thể xem".');
+        return res.arrayBuffer();
+      })
+      .then(buffer => {
+        const data = new Uint8Array(buffer);
+        const wb = XLSX.read(data, { type: 'array' });
+        const result = buildTopicsFromWorkbook(wb);
+        enrichTopics(result);
+
+        const extractedPeriod = extractPeriodLabel(wb);
+        let weekKey = extractedPeriod ? (extractedPeriod.split(' ')[0] + ' ' + (extractedPeriod.split(' ')[1] || '')) : 'Tuần mới';
+
+        const customWeek = prompt('Đọc dữ liệu từ Google Drive thành công!\n\nNhập TÊN TUẦN để lưu (ví dụ: Tuần 40, Tuần 39):', weekKey);
+        if (!customWeek) return;
+        weekKey = customWeek.trim();
+
+        if (STORE[weekKey] && STORE[weekKey].locked && currentUser.role !== 'admin') {
+          alert('⚠️ ' + weekKey + ' ĐÃ ĐƯỢC CHỐT VÀ KHÓA DỮ LIỆU. Bạn không thể cập nhật đè trừ khi được Admin mở khóa.');
+          return;
+        }
+
+        STORE[weekKey] = result;
+        currentWeekKey = weekKey;
+        saveStore();
+
+        alert('🎉 Đã đồng bộ thành công dữ liệu ' + weekKey + ' từ Google Drive vào ứng dụng!');
+        closeUploadModal();
+        renderWeekSelector();
+        renderApp();
+      })
+      .catch(err => {
+        alert('❌ Lỗi khi nạp dữ liệu từ Google Drive:\n' + err.message + '\n\nLưu ý: Bạn chỉ cần bật quyền chia sẻ file: "Bất kỳ ai có liên kết đều có thể xem".');
+      });
+  });
+}
+
 function handleExcelFileUpload(file) {
   if (!file) return;
   if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'deputy_manager')) {
@@ -13111,6 +13298,11 @@ function doHandleExcelFileUpload(file) {
 
       const matchWeek = file.name.match(/TUAN\s*(\d+)/i);
       let weekKey = matchWeek ? 'Tuần ' + matchWeek[1] : (result.period || 'Tuần mới');
+
+      if (STORE[weekKey] && STORE[weekKey].locked && currentUser.role !== 'admin') {
+        alert('⚠️ ' + weekKey + ' ĐÃ ĐƯỢC LÃNH ĐẠO CHỐT & KHÓA SỐ LIỆU. Bạn không thể nạp đè dữ liệu mới trừ khi được Admin mở khóa.');
+        return;
+      }
 
       STORE[weekKey] = result;
       currentWeekKey = weekKey;
