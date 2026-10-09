@@ -12694,6 +12694,7 @@ function matchUnit(raw){
 // ============ Sheet helpers ============
 function findSheet(wb, patterns){
   const names = wb.SheetNames;
+  if(!names || names.length === 0) return null;
   for(const nm of names){
     const norm = normVN(nm).replace(/[\s\._\-]+/g,'');
     for(const p of patterns){
@@ -12702,13 +12703,18 @@ function findSheet(wb, patterns){
     }
   }
   for(const p of patterns){
-    const digits = p.match(/\d+/);
+    const digits = p.match(/\d+(\.\d+)?/);
     if(digits){
-      const d = digits[0];
+      const d = digits[0].replace('.', '');
       for(const nm of names){
-        const nmNorm = normVN(nm);
+        const nmNorm = normVN(nm).replace(/[\s\._\-]+/g,'');
         if(nmNorm.includes(d) || nmNorm.includes('sheet'+d) || nmNorm.includes('tab'+d)) return nm;
       }
+    }
+  }
+  for(const nm of names){
+    for(const p of patterns){
+      if(normVN(nm).includes(normVN(p))) return nm;
     }
   }
   return null;
@@ -12724,15 +12730,55 @@ function rowJoined(row){
   return normVN((row||[]).map(c=>c===null||c===undefined?'':String(c)).join(' | '));
 }
 
-function findHeaderRow(aoa, keyword){
-  const key = normVN(keyword);
-  for(let r=0;r<aoa.length;r++){
-    if(rowJoined(aoa[r]).includes(key)) return r;
+function findHeaderRow(aoa, keywords){
+  if(!aoa || !aoa.length) return 0;
+  const kwList = (Array.isArray(keywords) ? keywords : [keywords]).map(k=>normVN(k));
+  let bestRow = -1, maxMatches = 0;
+
+  for(let r=0; r<Math.min(aoa.length, 30); r++){
+    const rJoined = rowJoined(aoa[r]);
+    let matchCount = 0;
+    for(const kw of kwList){
+      if(rJoined.includes(kw)) matchCount++;
+    }
+    if(matchCount > maxMatches){
+      maxMatches = matchCount;
+      bestRow = r;
+    }
   }
-  return -1;
+  if(bestRow !== -1) return bestRow;
+
+  // Fallback: row containing at least 2 matched unit names
+  for(let r=0; r<Math.min(aoa.length, 30); r++){
+    const row = aoa[r];
+    if(!row) continue;
+    let unitsFound = 0;
+    for(let c=0; c<row.length; c++){
+      if(matchUnit(row[c])) unitsFound++;
+    }
+    if(unitsFound >= 2) return Math.max(0, r - 1);
+  }
+  return 0;
 }
 
-// Collect {unit, rowIdx} pairs by scanning a window after a header/title row
+function findColByKeywords(aoa, headerRowIdx, keywords, defaultCol){
+  if(!aoa || headerRowIdx < 0 || headerRowIdx >= aoa.length) return defaultCol;
+  const kwList = (Array.isArray(keywords) ? keywords : [keywords]).map(k=>normVN(k));
+  const scanRows = [headerRowIdx, headerRowIdx + 1, headerRowIdx + 2, headerRowIdx - 1].filter(r=> r>=0 && r<aoa.length);
+
+  for(const r of scanRows){
+    const row = aoa[r];
+    if(!row) continue;
+    for(let c=0; c<row.length; c++){
+      const cellText = normVN(row[c]);
+      for(const kw of kwList){
+        if(cellText.includes(kw)) return c;
+      }
+    }
+  }
+  return defaultCol;
+}
+
 function collectUnitRows(aoa, headerIdx, unitCol, window){
   window = window || 60;
   headerIdx = headerIdx < 0 ? 0 : headerIdx;
@@ -12744,7 +12790,7 @@ function collectUnitRows(aoa, headerIdx, unitCol, window){
   for(let r = startR; r < endR; r++){
     const row = aoa[r];
     if(!row) continue;
-    let u = (unitCol !== undefined && unitCol !== null) ? matchUnit(row[unitCol]) : null;
+    let u = (unitCol !== undefined && unitCol !== null && unitCol < row.length) ? matchUnit(row[unitCol]) : null;
     let foundCol = unitCol;
     if(!u){
       for(let c = 0; c < row.length; c++){
@@ -12762,13 +12808,22 @@ function collectUnitRows(aoa, headerIdx, unitCol, window){
 
 function cellVal(row, primaryCol, fallbackCols){
   if(!row) return null;
-  let v = num(row[primaryCol]);
-  if(v !== null) return v;
+  if(primaryCol !== null && primaryCol !== undefined && primaryCol < row.length){
+    let v = num(row[primaryCol]);
+    if(v !== null) return v;
+  }
   if(Array.isArray(fallbackCols)){
     for(const c of fallbackCols){
-      v = num(row[c]);
-      if(v !== null) return v;
+      if(c < row.length){
+        let v = num(row[c]);
+        if(v !== null) return v;
+      }
     }
+  }
+  // Ultimate fallback: scan row for first numeric cell
+  for(let c = 0; c < row.length; c++){
+    let v = num(row[c]);
+    if(v !== null) return v;
   }
   return null;
 }
@@ -12853,13 +12908,12 @@ function buildTopicsFromWorkbook(wb){
     if(!aoa || aoa.length===0) throw new Error('Tab "' + name + '" trống, không có dữ liệu.');
     return {name, aoa};
   }
-  function getHeader(aoa, sheetName, keyword){
-    const h = findHeaderRow(aoa, keyword);
-    if(h===-1) throw new Error('Không tìm thấy vùng dữ liệu (tiêu đề "' + keyword + '") trong tab "' + sheetName + '". Cấu trúc tab có thể đã thay đổi.');
+  function getHeader(aoa, sheetName, keywords){
+    const h = findHeaderRow(aoa, keywords);
+    if(h===-1) throw new Error('Không tìm thấy vùng dữ liệu trong tab "' + sheetName + '". Cấu trúc tab có thể đã thay đổi.');
     return h;
   }
 
-  // wrap each topic block so one missing/changed sheet doesn't break the whole file
   function section(id, label, fn){
     try{
       const t = fn();
@@ -12872,13 +12926,18 @@ function buildTopicsFromWorkbook(wb){
 
   // ---- 4THUTD ----
   section('4THUTD','Thu tiền điện', ()=>{
-    const {name, aoa} = getAOA(['4THUTD','THUTD']);
-    const h = getHeader(aoa, name, 'Tên đơn vị');
-    const found = collectUnitRows(aoa, h, 1, 30);
+    const {name, aoa} = getAOA(['4THUTD','THUTD','THU TIEN DIEN']);
+    const h = getHeader(aoa, name, ['tỷ lệ thu', 'tên đơn vị', 'đơn vị', 'stt']);
+    const ratioCol = findColByKeywords(aoa, h, ['tỷ lệ', 'ty le', '%', 'thực hiện'], 9);
+    const khCol = findColByKeywords(aoa, h, ['chỉ tiêu', 'kế hoạch', 'kh'], 10);
+    const found = collectUnitRows(aoa, h, 1, 35);
     const rows = found.map(({r,unit})=>{
       const row = aoa[r];
-      const ratio = num(row[9]); const kh = num(row[10]);
+      let ratio = cellVal(row, ratioCol, [9, 8, 10, 11, 7, 6, 12]);
+      let kh = cellVal(row, khCol, [10, 9, 11, 12, 8]);
       if(ratio===null) return null;
+      if(ratio > 1.5) ratio = ratio / 100;
+      if(kh > 1.5) kh = kh / 100;
       return {unit, value:r1(ratio*100,2), target: kh? r1(kh*100,2):null, status: (kh && ratio>=kh)?'Đạt':'Không đạt'};
     }).filter(Boolean);
     if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
@@ -12889,15 +12948,17 @@ function buildTopicsFromWorkbook(wb){
       rows: sorted, top3, bottom3, dat_count: dat, total: rows.length, type:'ranked', value_suffix:'%', higher_is_better:true};
   });
 
-    // ---- 41NONSNN ----
+  // ---- 41NONSNN ----
   section('41NONSNN','Nợ NSNN', ()=>{
     const {name, aoa} = getAOA(['41NONSNN','NONSNN','NSNN','NGÂN SÁCH','4.1','4.1 NỢ']);
-    const h = getHeader(aoa, name, ['Tổng tiền nợ','Tiền nợ','Số tiền','Dư nợ','Đơn vị','Tên đơn vị','STT']);
+    const h = getHeader(aoa, name, ['tổng tiền nợ', 'tiền nợ', 'số tiền', 'dư nợ', 'đơn vị', 'stt']);
+    const tienCol = findColByKeywords(aoa, h, ['tổng tiền nợ', 'tiền nợ', 'dư nợ', 'số tiền', 'tổng'], 11);
+    const hdCol = findColByKeywords(aoa, h, ['ngày', 'hợp đồng', 'hạn', 'số ngày'], 10);
     const found = collectUnitRows(aoa, h, 1, 40);
     const rows = found.map(({r,unit})=>{
       const row = aoa[r];
-      const tien = cellVal(row, 11, [10,12,9,8,7,13,14,6,5,4,3,2,1,0]);
-      const hd = cellVal(row, 10, [9,11,8,7,12,6,5,4,3]);
+      const tien = cellVal(row, tienCol, [11,10,12,9,8,7,13,14,6,5,4,3,2,1]);
+      const hd = cellVal(row, hdCol, [10,9,11,8,7,12,6,5,4,3]);
       if(tien === null) return null;
       return {unit, value: r1(tien/1e6, 1), hd: hd || 0};
     }).filter(Boolean);
@@ -12911,14 +12972,17 @@ function buildTopicsFromWorkbook(wb){
 
   // ---- 5NLMT ----
   section('5NLMT','Điện mặt trời mái nhà', ()=>{
-    const {name, aoa} = getAOA(['5NLMT','NLMT']);
-    const h = getHeader(aoa, name, 'cần xử lý');
-    const found = collectUnitRows(aoa, h, 1, 20);
+    const {name, aoa} = getAOA(['5NLMT','NLMT','MAT TROI']);
+    const h = getHeader(aoa, name, ['cần xử lý', 'hồ sơ', 'tồn tại', 'nlmt', 'đmtmn', 'stt']);
+    const cantongCol = findColByKeywords(aoa, h, ['tổng số', 'cần xử lý', 'tồn tại', 'tổng'], 2);
+    const hoantatCol = findColByKeywords(aoa, h, ['hoàn tất', 'đã xử lý', 'đạt', 'xử lý xong'], 6);
+    const found = collectUnitRows(aoa, h, 1, 30);
     const rows = found.map(({r,unit})=>{
       const row = aoa[r];
-      const cantong = num(row[2]); const hoantat = num(row[6]);
+      const cantong = cellVal(row, cantongCol, [2, 1, 3, 4]);
+      const hoantat = cellVal(row, hoantatCol, [6, 5, 7, 8, 4, 3]) || 0;
       if(!cantong) return null;
-      return {unit, value:r1((hoantat||0)/cantong*100,1), total_cases:cantong, done:hoantat};
+      return {unit, value:r1(hoantat/cantong*100,1), total_cases:cantong, done:hoantat};
     }).filter(Boolean);
     if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
     const {sorted, top3, bottom3} = topBottom(rows, true);
@@ -12927,14 +12991,15 @@ function buildTopicsFromWorkbook(wb){
       rows: sorted, top3, bottom3, dat_count: rows.filter(r=>r.value>=100).length, total: rows.length, type:'ranked', value_suffix:'%', higher_is_better:true};
   });
 
-  // ---- 6THAYDK (bảng lũy kế năm) ----
+  // ---- 6THAYDK ----
   section('6THAYDK','Thiết bị đo đếm quá hạn', ()=>{
-    const {name, aoa} = getAOA(['6THAYDK','THAYDK']);
-    const h = getHeader(aoa, name, 'CÒN LẠI CỦA NĂM');
-    const found = collectUnitRows(aoa, h, 1, 30);
+    const {name, aoa} = getAOA(['6THAYDK','THAYDK','THIET BI DO DEM']);
+    const h = getHeader(aoa, name, ['còn lại của năm', 'quá hạn', 'thay đk', 'công tơ', 'thiết bị', 'stt']);
+    const tongCol = findColByKeywords(aoa, h, ['còn lại', 'quá hạn', 'tổng', 'lũy kế'], 5);
+    const found = collectUnitRows(aoa, h, 1, 35);
     const rows = found.map(({r,unit})=>{
       const row = aoa[r];
-      const tong = num(row[5]);
+      const tong = cellVal(row, tongCol, [5, 4, 6, 3, 7, 8, 2]);
       if(tong===null) return null;
       return {unit, value: tong};
     }).filter(Boolean);
@@ -12948,36 +13013,23 @@ function buildTopicsFromWorkbook(wb){
 
   // ---- 7DOXA ----
   section('7DOXA','Công tác đo xa', ()=>{
-    const {name, aoa} = getAOA(['7DOXA','DOXA']);
-    let h = findHeaderRow(aoa, 'thu thập dữ liệu chung');
-    let rows;
-    if(h!==-1){
-      // mẫu mới: cột gộp sẵn tỷ lệ chung + cột đánh giá đạt/không đạt
-      const found = collectUnitRows(aoa, h, 1, 30);
-      rows = found.map(({r,unit})=>{
-        const row = aoa[r];
-        const c = num(row[2]), dd = num(row[3]);
-        const e = row[4], f = row[5];
-        if(c===null) return null;
-        return {unit, value:r1(c*100,1), khaithac:r1((dd||0)*100,1), status_doxa:e, status_khaithac:f};
-      }).filter(Boolean);
-    } else {
-      // mẫu cũ: cột riêng DCU/Modem, không có cột đánh giá sẵn -> tự tính
-      h = getHeader(aoa, name, 'khai thác công tơ điện tử trên đo xa');
-      const found = collectUnitRows(aoa, h, 1, 30);
-      rows = found.map(({r,unit})=>{
-        const row = aoa[r];
-        const khaithac = num(row[2]); // tỷ lệ khai thác CTĐT (0-1)
-        const dcu = num(row[3]);      // đã ở dạng % (vd 98.3)
-        const modem = num(row[4]);    // đã ở dạng % (vd 99.0)
-        if(khaithac===null) return null;
-        const chung = r1(((dcu||0)+(modem||0))/2, 1);
-        const kt = r1(khaithac*100,1);
-        return {unit, value: chung, khaithac: kt,
-          status_doxa: chung>=99 ? 'Đạt' : 'Không đạt',
-          status_khaithac: kt>=99.5 ? 'Đạt' : 'Không đạt'};
-      }).filter(Boolean);
-    }
+    const {name, aoa} = getAOA(['7DOXA','DOXA','CONG TAC DO XA']);
+    let h = findHeaderRow(aoa, ['thu thập dữ liệu', 'khai thác công tơ', 'đo xa', 'tỷ lệ chung', 'stt']);
+    const chungCol = findColByKeywords(aoa, h, ['chung', 'thu thập', 'đo xa', 'tỷ lệ'], 2);
+    const ktCol = findColByKeywords(aoa, h, ['khai thác', 'ctđt', 'công tơ'], 3);
+    const found = collectUnitRows(aoa, h, 1, 35);
+    let rows = found.map(({r,unit})=>{
+      const row = aoa[r];
+      let c = cellVal(row, chungCol, [2, 3, 4, 5]);
+      let dd = cellVal(row, ktCol, [3, 4, 2, 5]);
+      const e = row[4] || (c && c>=0.99 ? 'Đạt' : 'Không đạt');
+      const f = row[5] || (dd && dd>=0.995 ? 'Đạt' : 'Không đạt');
+      if(c===null) return null;
+      if(c <= 1.5) c = c * 100;
+      if(dd <= 1.5) dd = dd * 100;
+      return {unit, value:r1(c,1), khaithac:r1(dd||0,1), status_doxa: typeof e === 'string' && e.includes('Đạt') ? e : (c>=99?'Đạt':'Không đạt'), status_khaithac: typeof f === 'string' && f.includes('Đạt') ? f : (dd>=99.5?'Đạt':'Không đạt')};
+    }).filter(Boolean);
+
     if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
     const {sorted, top3, bottom3} = topBottom(rows, true);
     return {nav:'Công tác đo xa', title:'Tỷ lệ thu thập dữ liệu & khai thác công tơ điện tử qua đo xa', unit_label:'Điện lực',
@@ -12987,14 +13039,16 @@ function buildTopicsFromWorkbook(wb){
 
   // ---- 9KTSDĐ ----
   section('9KTSDĐ','Kiểm tra SDĐ định kỳ', ()=>{
-    const {name, aoa} = getAOA(['9KTSD','KTSD']);
-    const h = getHeader(aoa, name, 'KẾT QUẢ KIỂM TRA ĐỊNH KỲ');
-    const found = collectUnitRows(aoa, h, 1, 30);
+    const {name, aoa} = getAOA(['9KTSD','KTSD','KIEM TRA SDD']);
+    const h = getHeader(aoa, name, ['kết quả kiểm tra', 'định kỳ', 'thực hiện', 'kế hoạch', 'lũy kế', 'stt']);
+    const gCol = findColByKeywords(aoa, h, ['thực hiện', 'tỷ lệ', '%', 'kết quả', 'lũy kế'], 6);
+    const found = collectUnitRows(aoa, h, 1, 35);
     const rows = found.map(({r,unit})=>{
       const row = aoa[r];
-      const g = num(row[6]);
+      let g = cellVal(row, gCol, [6, 5, 7, 4, 8, 3]);
       if(g===null) return null;
-      return {unit, value:r1(g*100,1)};
+      if(g <= 1.5) g = g * 100;
+      return {unit, value:r1(g,1)};
     }).filter(Boolean);
     if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
     const {sorted, top3, bottom3} = topBottom(rows, true);
@@ -13005,9 +13059,9 @@ function buildTopicsFromWorkbook(wb){
 
   // ---- 9DUBAOPHUTAI ----
   section('9DUBAOPHUTAI','Dự báo phụ tải', ()=>{
-    const {name, aoa} = getAOA(['9DUBAOPHUTAI','DUBAOPHUTAI','DUBAO']);
-    const h = getHeader(aoa, name, 'CHẤM ĐIỂM');
-    const found = collectUnitRows(aoa, h, 1, 30);
+    const {name, aoa} = getAOA(['9DUBAOPHUTAI','DUBAOPHUTAI','DUBAO','PHU TAI']);
+    const h = getHeader(aoa, name, ['chấm điểm', 'dự báo', 'phụ tải', 'thương phẩm', 'stt']);
+    const found = collectUnitRows(aoa, h, 1, 35);
     const frac = v=>{ if(!v) return 0; const m=String(v).split('/'); const n=parseInt(m[0],10); return isNaN(n)?0:n; };
     const rows = found.map(({r,unit})=>{
       const row = aoa[r];
@@ -13024,24 +13078,26 @@ function buildTopicsFromWorkbook(wb){
   // ---- 8TRUYTHU ----
   section('8TRUYTHU','Truy thu hư hỏng & trộm cắp', ()=>{
     const {name, aoa} = getAOA(['8TRUYTHU','TRUYTHU']);
-    const h = getHeader(aoa, name, 'Bảng dữ liệu lũy kế truy thu');
-    const found = collectUnitRows(aoa, h, 1, 30);
+    const h = getHeader(aoa, name, ['lũy kế truy thu', 'truy thu', 'sản lượng', 'stt']);
+    const gCol = findColByKeywords(aoa, h, ['tỷ lệ', '%', 'thực hiện', 'kế hoạch', 'lũy kế'], 6);
+    const found = collectUnitRows(aoa, h, 1, 35);
     const rows = found.map(({r,unit})=>{
       const row = aoa[r];
-      const g = num(row[6]);
+      let g = cellVal(row, gCol, [6, 5, 7, 4, 8, 3]);
       if(g===null) return null;
-      return {unit, value:r1(g*100,1)};
+      if(g <= 1.5) g = g * 100;
+      return {unit, value:r1(g,1)};
     }).filter(Boolean);
     if(rows.length===0) throw new Error('Không đọc được dòng dữ liệu Điện lực nào trong tab.');
     const {sorted, top3, bottom3} = topBottom(rows, true);
     let theft = [];
     try{
-      const h2 = findHeaderRow(aoa, 'Bảng dữ liệu trộm cắp điện');
+      const h2 = findHeaderRow(aoa, ['trộm cắp', 'bảng dữ liệu trộm cắp']);
       if(h2!==-1){
         const found2 = collectUnitRows(aoa, h2, 1, 30);
         theft = found2.map(({r,unit})=>{
-          const row = aoa[r]; const vu = num(row[2]);
-          return {unit, vu: vu||0};
+          const row = aoa[r]; const vu = cellVal(row, 2, [3, 1, 4]) || 0;
+          return {unit, vu: vu};
         }).sort((a,b)=>b.vu-a.vu).slice(0,5);
       }
     }catch(e){ theft = []; }
@@ -13054,14 +13110,23 @@ function buildTopicsFromWorkbook(wb){
 
   // ---- 3HAILONGKH ----
   section('3HAILONGKH','Khách hàng không hài lòng', ()=>{
-    const {name, aoa} = getAOA(['3HAILONGKH','HAILONGKH']);
-    const h = getHeader(aoa, name, 'Nội dung ghi nhận');
+    const {name, aoa} = getAOA(['3HAILONGKH','HAILONGKH','KHONG HAI LONG']);
+    const h = getHeader(aoa, name, ['nội dung ghi nhận', 'nội dung', 'phản ánh', 'khách hàng', 'stt']);
     const rows = [];
     for(let r=h+1; r<aoa.length; r++){
-      const row = aoa[r]; if(!row) { if(rows.length) break; else continue; }
-      const maphieu = num(row[2]);
-      if(maphieu===null){ if(rows.length) break; else continue; }
-      rows.push({unit: matchUnit(row[1]) || (row[1]||'').toString(), noidung: row[3]});
+      const row = aoa[r]; if(!row) continue;
+      let matchedU = null;
+      let textContent = '';
+      for(let c=0; c<row.length; c++){
+        const u = matchUnit(row[c]);
+        if(u && !matchedU) matchedU = u;
+        else if(row[c] && typeof row[c] === 'string' && row[c].trim().length > 3 && !textContent){
+          textContent = row[c].trim();
+        }
+      }
+      if(matchedU){
+        rows.push({unit: matchedU, noidung: textContent || 'Phản ánh chất lượng dịch vụ'});
+      }
     }
     return {nav:'Khách hàng không hài lòng', title:'Khách hàng đánh giá không hài lòng', unit_label:'Điện lực',
       metric_label:'Số lượt không hài lòng', target_desc:'Chỉ tiêu: 0 lượt khách hàng đánh giá không hài lòng',
@@ -13071,13 +13136,23 @@ function buildTopicsFromWorkbook(wb){
   // ---- 1CRM ----
   section('1CRM','Phiếu yêu cầu nhiều lần (CRM)', ()=>{
     const {name, aoa} = getAOA(['1CRM','CRM']);
-    const h = getHeader(aoa, name, 'Mã phiếu');
+    const h = getHeader(aoa, name, ['mã phiếu', 'phiếu yêu cầu', 'crm', 'điện lực', 'stt']);
     const rows = [];
     for(let r=h+1; r<aoa.length; r++){
-      const row = aoa[r]; if(!row) { if(rows.length) break; else continue; }
-      const stt = num(row[0]);
-      if(stt===null){ if(rows.length) break; else continue; }
-      rows.push({unit: matchUnit(row[2]) || (row[2]||'').toString(), loai: row[3], danhgia: row[6]});
+      const row = aoa[r]; if(!row) continue;
+      let matchedU = null;
+      let loaiText = '', danhGiaText = '';
+      for(let c=0; c<row.length; c++){
+        const u = matchUnit(row[c]);
+        if(u && !matchedU) matchedU = u;
+        else if(row[c] && typeof row[c] === 'string' && row[c].trim().length > 2){
+          if(!loaiText) loaiText = row[c].trim();
+          else if(!danhGiaText) danhGiaText = row[c].trim();
+        }
+      }
+      if(matchedU){
+        rows.push({unit: matchedU, loai: loaiText, danhgia: danhGiaText});
+      }
     }
     const cnt = {};
     rows.forEach(rr=>{ cnt[rr.unit] = (cnt[rr.unit]||0)+1; });
@@ -13090,19 +13165,32 @@ function buildTopicsFromWorkbook(wb){
   // ---- 2MATDIENTBACC ----
   section('2MATDIENTBACC','Trạm mất điện lặp lại', ()=>{
     const {name, aoa} = getAOA(['2MATDIENTBACC','MATDIENTBACC','MATDIEN']);
-    const h = getHeader(aoa, name, 'Tên trạm');
+    const h = getHeader(aoa, name, ['tên trạm', 'trạm biến áp', 'mất điện', 'lần', 'stt']);
     const rows = [];
     for(let r=h+1; r<aoa.length; r++){
-      const row = aoa[r]; if(!row) { if(rows.length) break; else continue; }
-      const stt = num(row[0]);
-      if(stt===null){ if(rows.length) break; else continue; }
-      rows.push({unit: matchUnit(row[1]) || (row[1]||'').toString(), tram: row[3], lanmatdien: num(row[11])});
+      const row = aoa[r]; if(!row) continue;
+      let matchedU = null;
+      let tramText = '';
+      let lanMat = null;
+      for(let c=0; c<row.length; c++){
+        const u = matchUnit(row[c]);
+        if(u && !matchedU) matchedU = u;
+        else if(row[c] && typeof row[c] === 'string' && row[c].trim().length > 2 && !tramText){
+          tramText = row[c].trim();
+        } else {
+          const val = num(row[c]);
+          if(val !== null && val > 0 && val < 1000 && lanMat === null) lanMat = val;
+        }
+      }
+      if(matchedU){
+        rows.push({unit: matchedU, tram: tramText || 'Trạm biến áp', lanmatdien: lanMat || 1});
+      }
     }
     const groups = {};
     rows.forEach(rr=>{
       if(!groups[rr.unit]) groups[rr.unit] = {unit:rr.unit, so_tram:0, tong_lan:0};
       groups[rr.unit].so_tram += 1;
-      groups[rr.unit].tong_lan += (rr.lanmatdien||0);
+      groups[rr.unit].tong_lan += (rr.lanmatdien||1);
     });
     const combined = Object.values(groups).sort((a,b)=>b.tong_lan-a.tong_lan);
     return {nav:'Trạm mất điện lặp lại', title:'Danh sách trạm mất điện lặp lại trong tuần', unit_label:'Điện lực',
@@ -13110,21 +13198,39 @@ function buildTopicsFromWorkbook(wb){
       rows: combined, total_incidents: rows.length, total_tram: combined.length, type:'incident'};
   });
 
-  // ---- 10/12 DIENNHANTUAN (tab cuối - tên/nội dung có thể đổi theo tuần) ----
+  // ---- 10/12 DIENNHANTUAN ----
   section('10DIENNHANTUAN','Điện nhận tuần', ()=>{
-    const {name, aoa} = getAOA(['DIENNHANTUAN']);
-    const h = getHeader(aoa, name, 'Tuần 36');
+    const {name, aoa} = getAOA(['DIENNHANTUAN','DIEN NHAN TUAN','SAN LUONG DIEN NHAN','10DIENNHANTUAN']);
+    const h = getHeader(aoa, name, ['tuần', 'ngày', 'thứ', 'sản lượng', 'điện nhận']);
     const rows = [];
     let tong36=null, tong37=null, tongsosanh=null;
-    for(let r=h+1; r<Math.min(aoa.length,h+9); r++){
+    const col36 = findColByKeywords(aoa, h, ['tuần trước', 'tuần 36', 'tuần 37', 'tuần 38', 'lần 1'], 2);
+    const col37 = findColByKeywords(aoa, h, ['tuần này', 'tuần 37', 'tuần 38', 'tuần 39', 'tuần 40', 'lần 2'], 3);
+    const colSS = findColByKeywords(aoa, h, ['so sánh', 'tỷ lệ', '%', 'tăng giảm'], 4);
+
+    for(let r=h+1; r<Math.min(aoa.length, h+12); r++){
       const row = aoa[r]; if(!row) continue;
-      const ngay = row[1];
-      if(ngay===null || ngay===undefined) continue;
-      if(String(ngay).toLowerCase().includes('tổng')){
-        tong36=num(row[2]); tong37=num(row[3]); tongsosanh=r1((num(row[4])||0)*100,1);
+      let ngayCell = null;
+      for(let c=0; c<Math.min(row.length, 3); c++){
+        if(row[c] !== null && row[c] !== undefined && String(row[c]).trim().length > 0){
+          ngayCell = String(row[c]).trim();
+          break;
+        }
+      }
+      if(!ngayCell) continue;
+
+      const v36 = cellVal(row, col36, [2, 1, 3]);
+      const v37 = cellVal(row, col37, [3, 2, 4]);
+      let vSS = cellVal(row, colSS, [4, 5, 3]);
+      if(vSS !== null && vSS <= 1.5) vSS = vSS * 100;
+
+      if(normVN(ngayCell).includes('TONG')){
+        tong36 = v36; tong37 = v37; tongsosanh = r1(vSS || (v36 && v37 ? (v37/v36)*100 : 100), 1);
         continue;
       }
-      rows.push({ngay: String(ngay), tuan36:num(row[2]), tuan37:num(row[3]), sosanh: r1((num(row[4])||0)*100,1)});
+      if(normVN(ngayCell).includes('THU') || normVN(ngayCell).includes('CHU NHAT') || normVN(ngayCell).includes('CN')){
+        rows.push({ngay: ngayCell, tuan36: v36, tuan37: v37, sosanh: r1(vSS || (v36 && v37 ? (v37/v36)*100 : 100), 1)});
+      }
     }
     if(rows.length===0) throw new Error('Không đọc được dữ liệu theo ngày trong tab.');
     return {nav:'Điện nhận tuần', title:'Sản lượng điện nhận theo ngày trong tuần', unit_label:'Ngày',
