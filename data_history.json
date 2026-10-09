@@ -8765,7 +8765,7 @@
         "rows": [
           {
             "unit": "Xuân Lộc",
-            "value": 100.0,
+            "value": 100,
             "target": 99.8,
             "status": "Đạt"
           },
@@ -8899,7 +8899,7 @@
         "top3": [
           {
             "unit": "Xuân Lộc",
-            "value": 100.0,
+            "value": 100,
             "target": 99.8,
             "status": "Đạt"
           },
@@ -8987,7 +8987,7 @@
           },
           {
             "unit": "Chơn Thành",
-            "value": 170.0,
+            "value": 170,
             "hd": 0
           },
           {
@@ -9111,103 +9111,103 @@
         "rows": [
           {
             "unit": "Dầu Giây",
-            "value": 100.0,
-            "total_cases": 15.0,
-            "done": 15.0
+            "value": 100,
+            "total_cases": 15,
+            "done": 15
           },
           {
             "unit": "Xuân Lộc",
-            "value": 100.0,
-            "total_cases": 4.0,
-            "done": 4.0
+            "value": 100,
+            "total_cases": 4,
+            "done": 4
           },
           {
             "unit": "Nhơn Trạch",
-            "value": 100.0,
-            "total_cases": 2.0,
-            "done": 2.0
+            "value": 100,
+            "total_cases": 2,
+            "done": 2
           },
           {
             "unit": "Cẩm Mỹ",
-            "value": 100.0,
-            "total_cases": 7.0,
-            "done": 7.0
+            "value": 100,
+            "total_cases": 7,
+            "done": 7
           },
           {
             "unit": "Long Khánh",
             "value": 91.7,
-            "total_cases": 24.0,
-            "done": 22.0
+            "total_cases": 24,
+            "done": 22
           },
           {
             "unit": "Trảng Bom",
             "value": 91.7,
-            "total_cases": 12.0,
-            "done": 11.0
+            "total_cases": 12,
+            "done": 11
           },
           {
             "unit": "Long Bình",
             "value": 84.4,
-            "total_cases": 32.0,
-            "done": 27.0
+            "total_cases": 32,
+            "done": 27
           },
           {
             "unit": "Long Thành",
             "value": 83.3,
-            "total_cases": 30.0,
-            "done": 25.0
+            "total_cases": 30,
+            "done": 25
           },
           {
             "unit": "Định Quán",
             "value": 72.7,
-            "total_cases": 11.0,
-            "done": 8.0
+            "total_cases": 11,
+            "done": 8
           },
           {
             "unit": "Trấn Biên",
             "value": 70.5,
-            "total_cases": 44.0,
-            "done": 31.0
+            "total_cases": 44,
+            "done": 31
           }
         ],
         "top3": [
           {
             "unit": "Dầu Giây",
-            "value": 100.0,
-            "total_cases": 15.0,
-            "done": 15.0
+            "value": 100,
+            "total_cases": 15,
+            "done": 15
           },
           {
             "unit": "Xuân Lộc",
-            "value": 100.0,
-            "total_cases": 4.0,
-            "done": 4.0
+            "value": 100,
+            "total_cases": 4,
+            "done": 4
           },
           {
             "unit": "Nhơn Trạch",
-            "value": 100.0,
-            "total_cases": 2.0,
-            "done": 2.0
+            "value": 100,
+            "total_cases": 2,
+            "done": 2
           }
         ],
         "bottom3": [
           {
             "unit": "Trấn Biên",
             "value": 70.5,
-            "total_cases": 44.0,
-            "done": 31.0
+            "total_cases": 44,
+            "done": 31
           },
           {
             "unit": "Định Quán",
             "value": 72.7,
-            "total_cases": 11.0,
-            "done": 8.0
+            "total_cases": 11,
+            "done": 8
           },
           {
             "unit": "Long Thành",
             "value": 83.3,
-            "total_cases": 30.0,
-            "done": 25.0
+            "total_cases": 30,
+            "done": 25
           }
         ],
         "dat_count": 4,
@@ -9225,147 +9225,147 @@
         "rows": [
           {
             "unit": "Trảng Bom",
-            "value": 4460.0
+            "value": 4460
           },
           {
             "unit": "Long Khánh",
-            "value": 4132.0
+            "value": 4132
           },
           {
             "unit": "Nhơn Trạch",
-            "value": 3456.0
+            "value": 3456
           },
           {
             "unit": "Trấn Biên",
-            "value": 2555.0
+            "value": 2555
           },
           {
             "unit": "Long Bình",
-            "value": 1608.0
+            "value": 1608
           },
           {
             "unit": "Long Bình",
-            "value": 976.0
+            "value": 976
           },
           {
             "unit": "Trảng Bom",
-            "value": 835.0
+            "value": 835
           },
           {
             "unit": "Dầu Giây",
-            "value": 521.0
+            "value": 521
           },
           {
             "unit": "Xuân Lộc",
-            "value": 495.0
+            "value": 495
           },
           {
             "unit": "Bình Long",
-            "value": 433.0
+            "value": 433
           },
           {
             "unit": "Nhơn Trạch",
-            "value": 306.0
+            "value": 306
           },
           {
             "unit": "Đồng Phú",
-            "value": 222.0
+            "value": 222
           },
           {
             "unit": "Chơn Thành",
-            "value": 202.0
+            "value": 202
           },
           {
             "unit": "Phú Riềng",
-            "value": 182.0
+            "value": 182
           },
           {
             "unit": "Xuân Lộc",
-            "value": 178.0
+            "value": 178
           },
           {
             "unit": "Bù Đăng",
-            "value": 139.0
+            "value": 139
           },
           {
             "unit": "Bù Gia Mập",
-            "value": 126.0
+            "value": 126
           },
           {
             "unit": "Định Quán",
-            "value": 116.0
+            "value": 116
           },
           {
             "unit": "Trấn Biên",
-            "value": 108.0
+            "value": 108
           },
           {
             "unit": "Long Khánh",
-            "value": 96.0
+            "value": 96
           },
           {
             "unit": "Trị An",
-            "value": 61.0
+            "value": 61
           },
           {
             "unit": "Đồng Xoài",
-            "value": 45.0
+            "value": 45
           },
           {
             "unit": "Bù Đăng",
-            "value": 35.0
+            "value": 35
           },
           {
             "unit": "Hớn Quản",
-            "value": 30.0
+            "value": 30
           },
           {
             "unit": "Định Quán",
-            "value": 24.0
+            "value": 24
           },
           {
             "unit": "Đồng Xoài",
-            "value": 15.0
+            "value": 15
           },
           {
             "unit": "Trị An",
-            "value": 13.0
+            "value": 13
           },
           {
             "unit": "Long Thành",
-            "value": 11.0
+            "value": 11
           },
           {
             "unit": "Long Thành",
-            "value": 11.0
+            "value": 11
           },
           {
             "unit": "Lộc Ninh",
-            "value": 10.0
+            "value": 10
           },
           {
             "unit": "Đồng Phú",
-            "value": 7.0
+            "value": 7
           },
           {
             "unit": "Bình Long",
-            "value": 5.0
+            "value": 5
           },
           {
             "unit": "Cẩm Mỹ",
-            "value": 5.0
+            "value": 5
           },
           {
             "unit": "Bù Đốp",
-            "value": 2.0
+            "value": 2
           },
           {
             "unit": "Bù Đốp",
-            "value": 1.0
+            "value": 1
           },
           {
             "unit": "Phước Long",
-            "value": 1.0
+            "value": 1
           },
           {
             "unit": "Phước Long",
@@ -9417,15 +9417,15 @@
         "bottom3": [
           {
             "unit": "Trảng Bom",
-            "value": 4460.0
+            "value": 4460
           },
           {
             "unit": "Long Khánh",
-            "value": 4132.0
+            "value": 4132
           },
           {
             "unit": "Nhơn Trạch",
-            "value": 3456.0
+            "value": 3456
           }
         ],
         "dat_count": 8,
@@ -9444,133 +9444,133 @@
           {
             "unit": "Dầu Giây",
             "value": 99.3,
-            "target": 99.0,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Long Thành",
             "value": 99.3,
-            "target": 99.0,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Cẩm Mỹ",
             "value": 99.3,
-            "target": 99.0,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Trị An",
             "value": 99.2,
-            "target": 99.0,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Xuân Lộc",
             "value": 99.2,
-            "target": 99.0,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Đồng Xoài",
-            "value": 99.0,
-            "target": 99.0,
+            "value": 99,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Phú Riềng",
-            "value": 99.0,
-            "target": 99.0,
+            "value": 99,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Trấn Biên",
-            "value": 99.0,
-            "target": 99.0,
+            "value": 99,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Long Khánh",
-            "value": 99.0,
-            "target": 99.0,
+            "value": 99,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Định Quán",
-            "value": 99.0,
-            "target": 99.0,
+            "value": 99,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Long Bình",
-            "value": 99.0,
-            "target": 99.0,
+            "value": 99,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Trảng Bom",
             "value": 98.5,
-            "target": 99.0,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Nhơn Trạch",
             "value": 98.4,
-            "target": 99.0,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Phước Long",
             "value": 98.3,
-            "target": 99.0,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Bù Đăng",
             "value": 97.7,
-            "target": 99.0,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Lộc Ninh",
             "value": 97.4,
-            "target": 99.0,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Bù Đốp",
             "value": 97.1,
-            "target": 99.0,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Chơn Thành",
-            "value": 97.0,
-            "target": 99.0,
+            "value": 97,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Bình Long",
-            "value": 97.0,
-            "target": 99.0,
+            "value": 97,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Bù Gia Mập",
-            "value": 97.0,
-            "target": 99.0,
+            "value": 97,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Đồng Phú",
             "value": 96.5,
-            "target": 99.0,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Hớn Quản",
-            "value": 95.0,
-            "target": 99.0,
+            "value": 95,
+            "target": 99,
             "status": "Không đạt"
           }
         ],
@@ -9578,39 +9578,39 @@
           {
             "unit": "Dầu Giây",
             "value": 99.3,
-            "target": 99.0,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Long Thành",
             "value": 99.3,
-            "target": 99.0,
+            "target": 99,
             "status": "Đạt"
           },
           {
             "unit": "Cẩm Mỹ",
             "value": 99.3,
-            "target": 99.0,
+            "target": 99,
             "status": "Đạt"
           }
         ],
         "bottom3": [
           {
             "unit": "Hớn Quản",
-            "value": 95.0,
-            "target": 99.0,
+            "value": 95,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Đồng Phú",
             "value": 96.5,
-            "target": 99.0,
+            "target": 99,
             "status": "Không đạt"
           },
           {
             "unit": "Bù Gia Mập",
-            "value": 97.0,
-            "target": 99.0,
+            "value": 97,
+            "target": 99,
             "status": "Không đạt"
           }
         ],
@@ -9681,7 +9681,7 @@
           },
           {
             "unit": "Long Thành",
-            "value": 681.0
+            "value": 681
           },
           {
             "unit": "Xuân Lộc",
@@ -9717,11 +9717,11 @@
           },
           {
             "unit": "Long Khánh",
-            "value": 482.0
+            "value": 482
           },
           {
             "unit": "Long Khánh",
-            "value": 482.0
+            "value": 482
           },
           {
             "unit": "Cẩm Mỹ",
@@ -9773,7 +9773,7 @@
           },
           {
             "unit": "Xuân Lộc",
-            "value": 283.0
+            "value": 283
           },
           {
             "unit": "Chơn Thành",
@@ -9785,19 +9785,19 @@
           },
           {
             "unit": "Hớn Quản",
-            "value": 238.0
+            "value": 238
           },
           {
             "unit": "Hớn Quản",
-            "value": 238.0
+            "value": 238
           },
           {
             "unit": "Bù Đốp",
-            "value": 233.0
+            "value": 233
           },
           {
             "unit": "Bù Đốp",
-            "value": 233.0
+            "value": 233
           },
           {
             "unit": "Phước Long",
@@ -9845,7 +9845,7 @@
           },
           {
             "unit": "Dầu Giây",
-            "value": 128.0
+            "value": 128
           },
           {
             "unit": "Bù Gia Mập",
@@ -9857,7 +9857,7 @@
           },
           {
             "unit": "Bình Long",
-            "value": 95.0
+            "value": 95
           },
           {
             "unit": "Lộc Ninh",
@@ -9869,7 +9869,7 @@
           },
           {
             "unit": "Bù Đốp",
-            "value": 52.0
+            "value": 52
           },
           {
             "unit": "Bù Đăng",
@@ -9893,91 +9893,91 @@
           },
           {
             "unit": "Đồng Xoài",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Phước Long",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Bù Đăng",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Phú Riềng",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Chơn Thành",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Bình Long",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Lộc Ninh",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Bù Đốp",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Đồng Phú",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Bù Gia Mập",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Hớn Quản",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Trấn Biên",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Dầu Giây",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Trị An",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Long Khánh",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Xuân Lộc",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Định Quán",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Long Thành",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Nhơn Trạch",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Cẩm Mỹ",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Trảng Bom",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Long Bình",
-            "value": 0.0
+            "value": 0
           }
         ],
         "top3": [
@@ -9997,15 +9997,15 @@
         "bottom3": [
           {
             "unit": "Long Bình",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Trảng Bom",
-            "value": 0.0
+            "value": 0
           },
           {
             "unit": "Cẩm Mỹ",
-            "value": 0.0
+            "value": 0
           }
         ],
         "dat_count": 66,
@@ -10024,397 +10024,397 @@
           {
             "unit": "Định Quán",
             "value": 121.8,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Long Bình",
             "value": 115.8,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Cẩm Mỹ",
             "value": 115.6,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Định Quán",
             "value": 114.2,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Long Khánh",
             "value": 112.5,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Cẩm Mỹ",
             "value": 103.3,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Long Thành",
             "value": 103.1,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Trị An",
             "value": 102.9,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Trấn Biên",
             "value": 102.4,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Long Bình",
             "value": 101.5,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Dầu Giây",
             "value": 100.6,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Dầu Giây",
             "value": 100.2,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Long Bình",
             "value": 100.1,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Dầu Giây",
-            "value": 100.0,
-            "target": 100.0,
+            "value": 100,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Xuân Lộc",
-            "value": 100.0,
-            "target": 100.0,
+            "value": 100,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Nhơn Trạch",
-            "value": 100.0,
-            "target": 100.0,
+            "value": 100,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Long Thành",
             "value": 99.7,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Thành",
             "value": 99.5,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trấn Biên",
             "value": 98.7,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Định Quán",
             "value": 97.5,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Bình",
             "value": 96.7,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Bình",
             "value": 95.4,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Dầu Giây",
             "value": 95.3,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Thành",
             "value": 94.4,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Thành",
             "value": 94.3,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Dầu Giây",
             "value": 92.3,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trị An",
             "value": 91.2,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Cẩm Mỹ",
             "value": 90.7,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Nhơn Trạch",
             "value": 88.4,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Khánh",
             "value": 86.7,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Cẩm Mỹ",
             "value": 86.6,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trấn Biên",
             "value": 85.5,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Khánh",
             "value": 84.9,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Khánh",
             "value": 84.1,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trảng Bom",
             "value": 83.6,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Định Quán",
             "value": 83.5,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trấn Biên",
             "value": 82.9,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trảng Bom",
             "value": 81.5,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trảng Bom",
             "value": 79.7,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trảng Bom",
             "value": 79.6,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trảng Bom",
             "value": 79.4,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Định Quán",
             "value": 79.3,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Xuân Lộc",
             "value": 77.8,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Khánh",
             "value": 76.9,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Xuân Lộc",
             "value": 76.2,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Xuân Lộc",
             "value": 76.1,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Xuân Lộc",
-            "value": 76.0,
-            "target": 100.0,
+            "value": 76,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trị An",
-            "value": 69.0,
-            "target": 100.0,
+            "value": 69,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Nhơn Trạch",
             "value": 64.9,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Nhơn Trạch",
             "value": 64.5,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trị An",
             "value": 59.8,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trị An",
             "value": 58.5,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Nhơn Trạch",
             "value": 54.4,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trấn Biên",
             "value": 25.7,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Nhơn Trạch",
             "value": 24.7,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trấn Biên",
             "value": 22.5,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Thành",
             "value": 13.1,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Bình",
-            "value": 9.0,
-            "target": 100.0,
+            "value": 9,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Dầu Giây",
             "value": 7.7,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trảng Bom",
             "value": 7.5,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Trị An",
             "value": 4.8,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Long Khánh",
             "value": 2.3,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Định Quán",
             "value": 0.9,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Xuân Lộc",
             "value": 0.7,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Cẩm Mỹ",
             "value": 0.2,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Cẩm Mỹ",
-            "value": 0.0,
-            "target": 100.0,
+            "value": 0,
+            "target": 100,
             "status": "Không đạt"
           }
         ],
@@ -10422,39 +10422,39 @@
           {
             "unit": "Định Quán",
             "value": 121.8,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Long Bình",
             "value": 115.8,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           },
           {
             "unit": "Cẩm Mỹ",
             "value": 115.6,
-            "target": 100.0,
+            "target": 100,
             "status": "Đạt"
           }
         ],
         "bottom3": [
           {
             "unit": "Cẩm Mỹ",
-            "value": 0.0,
-            "target": 100.0,
+            "value": 0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Cẩm Mỹ",
             "value": 0.2,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           },
           {
             "unit": "Xuân Lộc",
             "value": 0.7,
-            "target": 100.0,
+            "target": 100,
             "status": "Không đạt"
           }
         ],
@@ -10513,57 +10513,57 @@
           },
           {
             "unit": "Trấn Biên",
-            "value": 1.0,
+            "value": 1,
             "status": "Đạt"
           },
           {
             "unit": "Dầu Giây",
-            "value": 1.0,
+            "value": 1,
             "status": "Đạt"
           },
           {
             "unit": "Trị An",
-            "value": 1.0,
+            "value": 1,
             "status": "Đạt"
           },
           {
             "unit": "Long Khánh",
-            "value": 1.0,
+            "value": 1,
             "status": "Đạt"
           },
           {
             "unit": "Xuân Lộc",
-            "value": 1.0,
+            "value": 1,
             "status": "Đạt"
           },
           {
             "unit": "Định Quán",
-            "value": 1.0,
+            "value": 1,
             "status": "Đạt"
           },
           {
             "unit": "Long Thành",
-            "value": 1.0,
+            "value": 1,
             "status": "Đạt"
           },
           {
             "unit": "Nhơn Trạch",
-            "value": 1.0,
+            "value": 1,
             "status": "Đạt"
           },
           {
             "unit": "Cẩm Mỹ",
-            "value": 1.0,
+            "value": 1,
             "status": "Đạt"
           },
           {
             "unit": "Trảng Bom",
-            "value": 1.0,
+            "value": 1,
             "status": "Đạt"
           },
           {
             "unit": "Long Bình",
-            "value": 1.0,
+            "value": 1,
             "status": "Đạt"
           },
           {
@@ -10873,5 +10873,1503 @@
         "higher_is_better": true
       }
     }
+  },
+  "Tuần 40": {
+    "order": [
+      "4THUTD",
+      "41NONSNN",
+      "5NLMT",
+      "6THAYDK",
+      "7DOXA",
+      "8TRUYTHU",
+      "9KTSDĐ",
+      "9DUBAOPHUTAI",
+      "1CRM",
+      "2MATDIENTBACC",
+      "3HAILONGKH",
+      "10DIENNHANTUAN"
+    ],
+    "topics": {
+      "4THUTD": {
+        "nav": "Thu tiền điện",
+        "title": "Tỷ lệ thu tiền điện",
+        "unit_label": "Điện lực",
+        "metric_label": "Tỷ lệ thu/phải thu (%)",
+        "target_desc": "Chỉ tiêu công ty giao: ≥ 99,8% tổng số tiền phải thu",
+        "rows": [
+          {
+            "unit": "Xuân Lộc",
+            "value": 100,
+            "target": null,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Long Khánh",
+            "value": 99.99,
+            "target": 1315032,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Bình Long",
+            "value": 99.98,
+            "target": 1370324,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Trị An",
+            "value": 99.98,
+            "target": 1084368540,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Định Quán",
+            "value": 99.98,
+            "target": 2243701516,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Cẩm Mỹ",
+            "value": 99.98,
+            "target": 8321654,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Long Bình",
+            "value": 99.98,
+            "target": 239484833,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Đồng Phú",
+            "value": 99.97,
+            "target": 456775,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Dầu Giây",
+            "value": 99.97,
+            "target": 25185142,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Bù Đốp",
+            "value": 99.96,
+            "target": 189922,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Bù Gia Mập",
+            "value": 99.96,
+            "target": 180306,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Long Thành",
+            "value": 99.96,
+            "target": 645023198,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Phú Riềng",
+            "value": 99.95,
+            "target": null,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Chơn Thành",
+            "value": 99.94,
+            "target": 1870373,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Đồng Xoài",
+            "value": 99.92,
+            "target": 29572647,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Hớn Quản",
+            "value": 99.92,
+            "target": 6879419,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Nhơn Trạch",
+            "value": 99.91,
+            "target": 95004434,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Trấn Biên",
+            "value": 99.9,
+            "target": 242038515,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 99.87,
+            "target": 24771641,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Phước Long",
+            "value": 99.86,
+            "target": 9616,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Bù Đăng",
+            "value": 99.85,
+            "target": 881605922,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Lộc Ninh",
+            "value": 99.8,
+            "target": null,
+            "status": "Không đạt"
+          }
+        ],
+        "top3": [
+          {
+            "unit": "Xuân Lộc",
+            "value": 100,
+            "target": null,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Long Khánh",
+            "value": 99.99,
+            "target": 1315032,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Bình Long",
+            "value": 99.98,
+            "target": 1370324,
+            "status": "Không đạt"
+          }
+        ],
+        "bottom3": [
+          {
+            "unit": "Lộc Ninh",
+            "value": 99.8,
+            "target": null,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Bù Đăng",
+            "value": 99.85,
+            "target": 881605922,
+            "status": "Không đạt"
+          },
+          {
+            "unit": "Phước Long",
+            "value": 99.86,
+            "target": 9616,
+            "status": "Không đạt"
+          }
+        ],
+        "dat_count": 0,
+        "total": 22,
+        "type": "ranked",
+        "value_suffix": "%",
+        "higher_is_better": true,
+        "assessment": "Kỳ báo cáo này, 0/22 Điện lực đạt tỷ lệ thu ≥ 99,8% theo chỉ tiêu Công ty giao. Nhóm dẫn đầu gồm Xuân Lộc, Long Khánh, Bình Long duy trì tỷ lệ thu gần như tuyệt đối. Ngược lại, Lộc Ninh, Bù Đăng, Phước Long là các đơn vị có tỷ lệ thu thấp nhất, cần rà soát nguyên nhân tồn đọng nợ cuối kỳ.",
+        "recommendation": [
+          "Lộc Ninh, Bù Đăng, Phước Long: rà soát danh sách khách hàng nợ cuối kỳ, phân loại nợ khó đòi/nợ chờ xử lý, giao chỉ tiêu thu nợ theo ngày cho từng tổ/đội.",
+          "Tăng cường nhắc nợ qua Zalo/SMS/App CSKH trước hạn thanh toán 3-5 ngày để giảm phát sinh nợ mới.",
+          "Đối chiếu số liệu nợ cuối kỳ với hóa đơn phát sinh trong 7 ngày gần nhất để tránh nợ ảo do độ trễ thu tiền.",
+          "Báo cáo Công ty các trường hợp nợ do ngân sách nhà nước chưa bố trí để có hướng xử lý riêng."
+        ]
+      },
+      "41NONSNN": {
+        "nav": "Nợ NSNN",
+        "title": "Nợ ngân sách nhà nước",
+        "unit_label": "Điện lực",
+        "metric_label": "Tổng tiền nợ (triệu đồng)",
+        "target_desc": "Chỉ tiêu: không phát sinh nợ ngân sách nhà nước quá hạn (0 đồng)",
+        "rows": [
+          {
+            "unit": "Trấn Biên",
+            "value": 10172.8,
+            "hd": 837
+          },
+          {
+            "unit": "Long Bình",
+            "value": 3316.6,
+            "hd": 144
+          },
+          {
+            "unit": "Long Thành",
+            "value": 3227.2,
+            "hd": 418
+          },
+          {
+            "unit": "Đồng Xoài",
+            "value": 2979.8,
+            "hd": 555
+          },
+          {
+            "unit": "Long Khánh",
+            "value": 2778.5,
+            "hd": 713
+          },
+          {
+            "unit": "Xuân Lộc",
+            "value": 2448.2,
+            "hd": 409
+          },
+          {
+            "unit": "Định Quán",
+            "value": 2097.2,
+            "hd": 561
+          },
+          {
+            "unit": "Nhơn Trạch",
+            "value": 1868.7,
+            "hd": 398
+          },
+          {
+            "unit": "Trị An",
+            "value": 1312.2,
+            "hd": 665
+          },
+          {
+            "unit": "Dầu Giây",
+            "value": 1237.2,
+            "hd": 302
+          },
+          {
+            "unit": "Cẩm Mỹ",
+            "value": 1220.2,
+            "hd": 320
+          },
+          {
+            "unit": "Bình Long",
+            "value": 978.7,
+            "hd": 315
+          },
+          {
+            "unit": "Hớn Quản",
+            "value": 811.7,
+            "hd": 295
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 782.9,
+            "hd": 240
+          },
+          {
+            "unit": "Lộc Ninh",
+            "value": 741,
+            "hd": 274
+          },
+          {
+            "unit": "Chơn Thành",
+            "value": 486.1,
+            "hd": 48
+          },
+          {
+            "unit": "Bù Đốp",
+            "value": 473.4,
+            "hd": 264
+          },
+          {
+            "unit": "Bù Gia Mập",
+            "value": 445.6,
+            "hd": 101
+          },
+          {
+            "unit": "Phú Riềng",
+            "value": 397.5,
+            "hd": 100
+          },
+          {
+            "unit": "Đồng Phú",
+            "value": 369.5,
+            "hd": 102
+          },
+          {
+            "unit": "Bù Đăng",
+            "value": 327.1,
+            "hd": 198
+          },
+          {
+            "unit": "Phước Long",
+            "value": 0,
+            "hd": 0
+          }
+        ],
+        "top3": [
+          {
+            "unit": "Phước Long",
+            "value": 0,
+            "hd": 0
+          },
+          {
+            "unit": "Bù Đăng",
+            "value": 327.1,
+            "hd": 198
+          },
+          {
+            "unit": "Đồng Phú",
+            "value": 369.5,
+            "hd": 102
+          }
+        ],
+        "bottom3": [
+          {
+            "unit": "Trấn Biên",
+            "value": 10172.8,
+            "hd": 837
+          },
+          {
+            "unit": "Long Bình",
+            "value": 3316.6,
+            "hd": 144
+          },
+          {
+            "unit": "Long Thành",
+            "value": 3227.2,
+            "hd": 418
+          }
+        ],
+        "dat_count": 1,
+        "total": 22,
+        "type": "ranked",
+        "value_suffix": " triệu đồng",
+        "higher_is_better": false,
+        "assessment": "Nợ ngân sách nhà nước tập trung chủ yếu tại Trấn Biên, Long Bình, Long Thành. 1/22 Điện lực hiện không phát sinh nợ ngân sách nhà nước tồn đọng.",
+        "recommendation": [
+          "Trấn Biên, Long Bình, Long Thành: chủ động làm việc với đơn vị sử dụng ngân sách để xác nhận công nợ, đề xuất kế hoạch bố trí vốn thanh toán theo từng đợt.",
+          "Phối hợp Phòng Tài chính kế toán lập danh sách nợ theo niên độ ngân sách, ưu tiên xử lý các hóa đơn nợ trên 07 ngày.",
+          "Gửi văn bản đôn đốc định kỳ hàng tháng đến cơ quan chủ quản ngân sách, lưu hồ sơ làm căn cứ báo cáo Công ty."
+        ]
+      },
+      "5NLMT": {
+        "nav": "Điện mặt trời mái nhà",
+        "title": "Tiến độ xử lý tồn tại Điện mặt trời mái nhà",
+        "unit_label": "Điện lực",
+        "metric_label": "Tỷ lệ xử lý hoàn tất (%)",
+        "target_desc": "Chỉ tiêu: xử lý hoàn tất 100% hồ sơ pháp lý ĐMTMN tồn đọng",
+        "rows": [
+          {
+            "unit": "Dầu Giây",
+            "value": 100,
+            "total_cases": 15,
+            "done": 15
+          },
+          {
+            "unit": "Xuân Lộc",
+            "value": 100,
+            "total_cases": 4,
+            "done": 4
+          },
+          {
+            "unit": "Nhơn Trạch",
+            "value": 100,
+            "total_cases": 2,
+            "done": 2
+          },
+          {
+            "unit": "Cẩm Mỹ",
+            "value": 100,
+            "total_cases": 7,
+            "done": 7
+          },
+          {
+            "unit": "Long Bình",
+            "value": 93.8,
+            "total_cases": 32,
+            "done": 30
+          },
+          {
+            "unit": "Long Khánh",
+            "value": 91.7,
+            "total_cases": 24,
+            "done": 22
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 91.7,
+            "total_cases": 12,
+            "done": 11
+          },
+          {
+            "unit": "Long Thành",
+            "value": 83.3,
+            "total_cases": 30,
+            "done": 25
+          },
+          {
+            "unit": "Định Quán",
+            "value": 72.7,
+            "total_cases": 11,
+            "done": 8
+          },
+          {
+            "unit": "Trấn Biên",
+            "value": 68.2,
+            "total_cases": 44,
+            "done": 30
+          }
+        ],
+        "top3": [
+          {
+            "unit": "Dầu Giây",
+            "value": 100,
+            "total_cases": 15,
+            "done": 15
+          },
+          {
+            "unit": "Xuân Lộc",
+            "value": 100,
+            "total_cases": 4,
+            "done": 4
+          },
+          {
+            "unit": "Nhơn Trạch",
+            "value": 100,
+            "total_cases": 2,
+            "done": 2
+          }
+        ],
+        "bottom3": [
+          {
+            "unit": "Trấn Biên",
+            "value": 68.2,
+            "total_cases": 44,
+            "done": 30
+          },
+          {
+            "unit": "Định Quán",
+            "value": 72.7,
+            "total_cases": 11,
+            "done": 8
+          },
+          {
+            "unit": "Long Thành",
+            "value": 83.3,
+            "total_cases": 30,
+            "done": 25
+          }
+        ],
+        "dat_count": 4,
+        "total": 10,
+        "type": "ranked",
+        "value_suffix": "%",
+        "higher_is_better": true,
+        "assessment": "4/10 Điện lực đã xử lý hoàn tất 100% hồ sơ tồn tại ĐMTMN. Trấn Biên, Định Quán, Long Thành là các đơn vị còn tỷ lệ xử lý thấp nhất, cần đẩy nhanh tiến độ trong tuần tới.",
+        "recommendation": [
+          "Trấn Biên: tập trung xử lý dứt điểm các hồ sơ còn lại, chủ động liên hệ khách hàng để hoàn tất thủ tục pháp lý.",
+          "Với các trường hợp khách hàng chưa hợp tác hoặc đã bán/chuyển nhượng tài sản, lập biên bản và báo cáo hướng xử lý riêng.",
+          "Cập nhật tiến độ xử lý hàng tuần để Phòng Kinh doanh theo dõi, tránh phát sinh chậm trễ do thiếu đôn đốc."
+        ]
+      },
+      "6THAYDK": {
+        "nav": "Thiết bị đo đếm quá hạn",
+        "title": "Thiết bị đo đếm (công tơ, TU, TI) quá hạn kiểm định",
+        "unit_label": "Điện lực",
+        "metric_label": "Số lượng thiết bị quá hạn (cái)",
+        "target_desc": "Chỉ tiêu: không để tồn thiết bị quá hạn kiểm định (0 thiết bị)",
+        "rows": [
+          {
+            "unit": "Long Bình",
+            "value": 976
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 835
+          },
+          {
+            "unit": "Nhơn Trạch",
+            "value": 306
+          },
+          {
+            "unit": "Xuân Lộc",
+            "value": 178
+          },
+          {
+            "unit": "Trấn Biên",
+            "value": 108
+          },
+          {
+            "unit": "Long Khánh",
+            "value": 96
+          },
+          {
+            "unit": "Bù Đăng",
+            "value": 35
+          },
+          {
+            "unit": "Định Quán",
+            "value": 24
+          },
+          {
+            "unit": "Đồng Xoài",
+            "value": 15
+          },
+          {
+            "unit": "Trị An",
+            "value": 13
+          },
+          {
+            "unit": "Long Thành",
+            "value": 11
+          },
+          {
+            "unit": "Đồng Phú",
+            "value": 7
+          },
+          {
+            "unit": "Bình Long",
+            "value": 5
+          },
+          {
+            "unit": "Bù Đốp",
+            "value": 1
+          },
+          {
+            "unit": "Phước Long",
+            "value": 0
+          },
+          {
+            "unit": "Phú Riềng",
+            "value": 0
+          },
+          {
+            "unit": "Chơn Thành",
+            "value": 0
+          },
+          {
+            "unit": "Lộc Ninh",
+            "value": 0
+          },
+          {
+            "unit": "Bù Gia Mập",
+            "value": 0
+          },
+          {
+            "unit": "Hớn Quản",
+            "value": 0
+          },
+          {
+            "unit": "Dầu Giây",
+            "value": 0
+          },
+          {
+            "unit": "Cẩm Mỹ",
+            "value": 0
+          }
+        ],
+        "top3": [
+          {
+            "unit": "Cẩm Mỹ",
+            "value": 0
+          },
+          {
+            "unit": "Dầu Giây",
+            "value": 0
+          },
+          {
+            "unit": "Hớn Quản",
+            "value": 0
+          }
+        ],
+        "bottom3": [
+          {
+            "unit": "Long Bình",
+            "value": 976
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 835
+          },
+          {
+            "unit": "Nhơn Trạch",
+            "value": 306
+          }
+        ],
+        "dat_count": 8,
+        "total": 22,
+        "type": "ranked",
+        "value_suffix": " thiết bị",
+        "higher_is_better": false,
+        "assessment": "Toàn Công ty còn tồn 2.610 thiết bị đo đếm quá hạn kiểm định. Tồn đọng tập trung lớn nhất tại Long Bình, Trảng Bom, Nhơn Trạch, chiếm tỷ trọng đáng kể trong tổng số quá hạn toàn Công ty.",
+        "recommendation": [
+          "Long Bình, Trảng Bom, Nhơn Trạch: xây dựng kế hoạch thay thế công tơ/TU/TI quá hạn theo tuần, ưu tiên các vị trí có sản lượng lớn.",
+          "Rà soát nguồn lực nhân công thay công tơ, tăng ca hoặc điều phối hỗ trợ liên đội với các đơn vị tồn đọng cao.",
+          "Kiểm soát tiến độ đặt hàng vật tư (công tơ, TU, TI) để không bị động về nguồn cung khi triển khai thay thế hàng loạt."
+        ]
+      },
+      "7DOXA": {
+        "nav": "Công tác đo xa",
+        "title": "Tỷ lệ thu thập dữ liệu & khai thác công tơ điện tử qua đo xa",
+        "unit_label": "Điện lực",
+        "metric_label": "Tỷ lệ thu thập dữ liệu chung (%)",
+        "target_desc": "Chỉ tiêu: tỷ lệ đo xa ≥ 99% và tỷ lệ khai thác CTĐT ≥ 99,5%",
+        "rows": [
+          {
+            "unit": "Dầu Giây",
+            "value": 99.4,
+            "khaithac": 99.9,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Long Thành",
+            "value": 99.4,
+            "khaithac": 99.9,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Trấn Biên",
+            "value": 99.3,
+            "khaithac": 100,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Xuân Lộc",
+            "value": 99.3,
+            "khaithac": 100,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Định Quán",
+            "value": 99.3,
+            "khaithac": 99.9,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Đồng Xoài",
+            "value": 99.2,
+            "khaithac": 100,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Phú Riềng",
+            "value": 99.2,
+            "khaithac": 99.7,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Trị An",
+            "value": 99.2,
+            "khaithac": 99.6,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Cẩm Mỹ",
+            "value": 99.2,
+            "khaithac": 100,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Long Khánh",
+            "value": 99.1,
+            "khaithac": 100,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Nhơn Trạch",
+            "value": 99.1,
+            "khaithac": 99.7,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Phước Long",
+            "value": 99,
+            "khaithac": 99.8,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Bù Gia Mập",
+            "value": 99,
+            "khaithac": 99.7,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Long Bình",
+            "value": 99,
+            "khaithac": 99.9,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 98.7,
+            "khaithac": 100,
+            "status_doxa": "Không đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Chơn Thành",
+            "value": 98.4,
+            "khaithac": 99.9,
+            "status_doxa": "Không đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Bù Đăng",
+            "value": 98.3,
+            "khaithac": 99.5,
+            "status_doxa": "Không đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Bình Long",
+            "value": 98.3,
+            "khaithac": 99.6,
+            "status_doxa": "Không đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Lộc Ninh",
+            "value": 98.2,
+            "khaithac": 99.7,
+            "status_doxa": "Không đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Bù Đốp",
+            "value": 98.2,
+            "khaithac": 99.7,
+            "status_doxa": "Không đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Đồng Phú",
+            "value": 98,
+            "khaithac": 99.5,
+            "status_doxa": "Không đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Hớn Quản",
+            "value": 97.5,
+            "khaithac": 99.8,
+            "status_doxa": "Không đạt",
+            "status_khaithac": "Đạt"
+          }
+        ],
+        "top3": [
+          {
+            "unit": "Dầu Giây",
+            "value": 99.4,
+            "khaithac": 99.9,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Long Thành",
+            "value": 99.4,
+            "khaithac": 99.9,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Trấn Biên",
+            "value": 99.3,
+            "khaithac": 100,
+            "status_doxa": "Đạt",
+            "status_khaithac": "Đạt"
+          }
+        ],
+        "bottom3": [
+          {
+            "unit": "Hớn Quản",
+            "value": 97.5,
+            "khaithac": 99.8,
+            "status_doxa": "Không đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Đồng Phú",
+            "value": 98,
+            "khaithac": 99.5,
+            "status_doxa": "Không đạt",
+            "status_khaithac": "Đạt"
+          },
+          {
+            "unit": "Bù Đốp",
+            "value": 98.2,
+            "khaithac": 99.7,
+            "status_doxa": "Không đạt",
+            "status_khaithac": "Đạt"
+          }
+        ],
+        "dat_count": 14,
+        "total": 22,
+        "type": "ranked",
+        "value_suffix": "%",
+        "higher_is_better": true,
+        "assessment": "14/22 Điện lực đạt tỷ lệ thu thập dữ liệu đo xa ≥ 99%. Hớn Quản, Đồng Phú, Bù Đốp chưa đạt chỉ tiêu này, cần kiểm tra nguyên nhân mất tín hiệu modem/DCU. Chỉ tiêu khai thác công tơ điện tử (≥99,5%) hầu hết các đơn vị đã đạt.",
+        "recommendation": [
+          "Hớn Quản, Đồng Phú, Bù Đốp: kiểm tra, khắc phục các điểm đo mất tín hiệu (modem/DCU lỗi, mất sóng, mất nguồn) để tăng tỷ lệ thu thập dữ liệu.",
+          "Lập danh sách công tơ điện tử không kết nối được đo xa quá 07 ngày để xử lý ưu tiên, tránh ảnh hưởng tính hóa đơn.",
+          "Bổ sung/thay thế thiết bị DCU, modem tại các khu vực tín hiệu yếu; phối hợp nhà mạng kiểm tra chất lượng SIM."
+        ]
+      },
+      "9KTSDĐ": {
+        "nav": "Kiểm tra SDĐ định kỳ",
+        "title": "Kết quả kiểm tra sử dụng điện định kỳ (lũy kế)",
+        "unit_label": "Điện lực",
+        "metric_label": "Thực hiện/Kế hoạch lũy kế (%)",
+        "target_desc": "Chỉ tiêu: thực hiện kiểm tra định kỳ đạt 100% kế hoạch năm theo tiến độ",
+        "rows": [
+          {
+            "unit": "Đồng Xoài",
+            "value": 100
+          },
+          {
+            "unit": "Long Bình",
+            "value": 22
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 21
+          },
+          {
+            "unit": "Cẩm Mỹ",
+            "value": 20
+          },
+          {
+            "unit": "Nhơn Trạch",
+            "value": 19
+          },
+          {
+            "unit": "Long Thành",
+            "value": 18
+          },
+          {
+            "unit": "Định Quán",
+            "value": 17
+          },
+          {
+            "unit": "Xuân Lộc",
+            "value": 16
+          },
+          {
+            "unit": "Long Khánh",
+            "value": 15
+          },
+          {
+            "unit": "Trị An",
+            "value": 14
+          },
+          {
+            "unit": "Dầu Giây",
+            "value": 13
+          },
+          {
+            "unit": "Trấn Biên",
+            "value": 12
+          },
+          {
+            "unit": "Hớn Quản",
+            "value": 11
+          },
+          {
+            "unit": "Bù Gia Mập",
+            "value": 10
+          },
+          {
+            "unit": "Đồng Phú",
+            "value": 9
+          },
+          {
+            "unit": "Bù Đốp",
+            "value": 8
+          },
+          {
+            "unit": "Lộc Ninh",
+            "value": 7
+          },
+          {
+            "unit": "Bình Long",
+            "value": 6
+          },
+          {
+            "unit": "Chơn Thành",
+            "value": 5
+          },
+          {
+            "unit": "Phú Riềng",
+            "value": 4
+          },
+          {
+            "unit": "Bù Đăng",
+            "value": 3
+          },
+          {
+            "unit": "Phước Long",
+            "value": 2
+          }
+        ],
+        "top3": [
+          {
+            "unit": "Đồng Xoài",
+            "value": 100
+          },
+          {
+            "unit": "Long Bình",
+            "value": 22
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 21
+          }
+        ],
+        "bottom3": [
+          {
+            "unit": "Phước Long",
+            "value": 2
+          },
+          {
+            "unit": "Bù Đăng",
+            "value": 3
+          },
+          {
+            "unit": "Phú Riềng",
+            "value": 4
+          }
+        ],
+        "dat_count": 1,
+        "total": 22,
+        "type": "ranked",
+        "value_suffix": "%",
+        "higher_is_better": true,
+        "assessment": "Lũy kế đến kỳ báo cáo, 1/22 Điện lực có tiến độ kiểm tra sử dụng điện định kỳ đạt/vượt kế hoạch (≥100%). Phước Long, Bù Đăng, Phú Riềng có tiến độ thực hiện thấp nhất, cần đẩy nhanh khối lượng kiểm tra trong các tuần còn lại.",
+        "recommendation": [
+          "Phước Long, Bù Đăng, Phú Riềng: rà soát nhân lực đội kiểm tra sử dụng điện, xây dựng lại lịch kiểm tra tuần để bù tiến độ.",
+          "Ưu tiên kiểm tra nhóm khách hàng trọng điểm, sản lượng lớn và các vị trí có nguy cơ tổn thất cao.",
+          "Theo dõi thời gian trung bình thực hiện/công tơ để tối ưu năng suất kiểm tra, tránh kéo dài tiến độ."
+        ]
+      },
+      "9DUBAOPHUTAI": {
+        "nav": "Dự báo phụ tải",
+        "title": "Kết quả công tác dự báo điện thương phẩm (lũy kế năm)",
+        "unit_label": "Điện lực",
+        "metric_label": "Tổng số tháng đạt cả 2 tiêu chí (/16 tháng-tiêu chí)",
+        "target_desc": "Chỉ tiêu: sai số dự báo nhóm KH >1 triệu kWh và ĐTP tổng đạt so kế hoạch hàng tháng",
+        "rows": [
+          {
+            "unit": "Đồng Xoài",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Phước Long",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Bù Đăng",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Phú Riềng",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Chơn Thành",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Bình Long",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Lộc Ninh",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Bù Đốp",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Đồng Phú",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Bù Gia Mập",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Hớn Quản",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Trấn Biên",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Dầu Giây",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Trị An",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Long Khánh",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Xuân Lộc",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Định Quán",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Long Thành",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Nhơn Trạch",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Cẩm Mỹ",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Long Bình",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          }
+        ],
+        "top3": [
+          {
+            "unit": "Đồng Xoài",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Phước Long",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Bù Đăng",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          }
+        ],
+        "bottom3": [
+          {
+            "unit": "Long Bình",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          },
+          {
+            "unit": "Cẩm Mỹ",
+            "value": 0,
+            "sai_so": 0,
+            "dtp_tong": 0
+          }
+        ],
+        "dat_count": null,
+        "total": 22,
+        "type": "ranked",
+        "value_suffix": "/16",
+        "higher_is_better": true,
+        "assessment": "Độ chính xác dự báo điện thương phẩm còn chưa ổn định giữa các Điện lực. Đồng Xoài, Phước Long, Bù Đăng đạt số tháng đạt chỉ tiêu cao nhất. Long Bình, Trảng Bom, Cẩm Mỹ có tần suất đạt thấp nhất, cần cải thiện phương pháp dự báo.",
+        "recommendation": [
+          "Long Bình, Trảng Bom, Cẩm Mỹ: rà soát lại phương pháp/mô hình dự báo, đối chiếu biến động phụ tải thực tế theo mùa vụ, thời tiết, khách hàng lớn đóng/mở mới.",
+          "Tổ chức họp rút kinh nghiệm hàng tháng giữa các Điện lực có sai số dự báo lớn để chia sẻ cách làm của đơn vị đạt tốt.",
+          "Cập nhật kịp thời các yếu tố đột biến (khách hàng ngừng/giảm sử dụng điện, dự án mới đấu nối) vào số liệu dự báo tháng tiếp theo."
+        ]
+      },
+      "8TRUYTHU": {
+        "nav": "Truy thu hư hỏng & trộm cắp",
+        "title": "Truy thu sản lượng hư cháy, sai lệch đo đếm và trộm cắp điện (lũy kế)",
+        "unit_label": "Điện lực",
+        "metric_label": "So sánh kế hoạch sản lượng truy thu lũy kế (%)",
+        "target_desc": "Chỉ tiêu: thực hiện truy thu đạt tiến độ so kế hoạch sản lượng năm",
+        "rows": [
+          {
+            "unit": "Long Bình",
+            "value": 507672
+          },
+          {
+            "unit": "Long Thành",
+            "value": 503290
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 408694
+          },
+          {
+            "unit": "Định Quán",
+            "value": 391880
+          },
+          {
+            "unit": "Trấn Biên",
+            "value": 390111
+          },
+          {
+            "unit": "Trị An",
+            "value": 352886
+          },
+          {
+            "unit": "Xuân Lộc",
+            "value": 311499
+          },
+          {
+            "unit": "Nhơn Trạch",
+            "value": 246402
+          },
+          {
+            "unit": "Dầu Giây",
+            "value": 231357
+          },
+          {
+            "unit": "Long Khánh",
+            "value": 221896
+          },
+          {
+            "unit": "Cẩm Mỹ",
+            "value": 193548
+          },
+          {
+            "unit": "Đồng Xoài",
+            "value": 186291
+          },
+          {
+            "unit": "Bù Đăng",
+            "value": 173219
+          },
+          {
+            "unit": "Lộc Ninh",
+            "value": 154793
+          },
+          {
+            "unit": "Chơn Thành",
+            "value": 113677
+          },
+          {
+            "unit": "Hớn Quản",
+            "value": 109567
+          },
+          {
+            "unit": "Bù Đốp",
+            "value": 107270
+          },
+          {
+            "unit": "Phước Long",
+            "value": 101491
+          },
+          {
+            "unit": "Bình Long",
+            "value": 88635
+          },
+          {
+            "unit": "Phú Riềng",
+            "value": 84145
+          },
+          {
+            "unit": "Đồng Phú",
+            "value": 80891
+          },
+          {
+            "unit": "Bù Gia Mập",
+            "value": 58153
+          }
+        ],
+        "top3": [
+          {
+            "unit": "Long Bình",
+            "value": 507672
+          },
+          {
+            "unit": "Long Thành",
+            "value": 503290
+          },
+          {
+            "unit": "Trảng Bom",
+            "value": 408694
+          }
+        ],
+        "bottom3": [
+          {
+            "unit": "Bù Gia Mập",
+            "value": 58153
+          },
+          {
+            "unit": "Đồng Phú",
+            "value": 80891
+          },
+          {
+            "unit": "Phú Riềng",
+            "value": 84145
+          }
+        ],
+        "dat_count": 9,
+        "total": 22,
+        "type": "ranked",
+        "value_suffix": "%",
+        "higher_is_better": true,
+        "theft_rows": [
+          {
+            "unit": "Long Bình",
+            "vu": 507672
+          },
+          {
+            "unit": "Long Thành",
+            "vu": 503290
+          },
+          {
+            "unit": "Trảng Bom",
+            "vu": 408694
+          },
+          {
+            "unit": "Định Quán",
+            "vu": 391880
+          },
+          {
+            "unit": "Trấn Biên",
+            "vu": 390111
+          }
+        ],
+        "assessment": "Tiến độ truy thu sản lượng hư cháy, sai lệch đo đếm lũy kế đạt trung bình toàn Công ty khoảng 228062.1% kế hoạch năm. Bù Gia Mập, Đồng Phú, Phú Riềng có tiến độ thấp nhất, cần đẩy nhanh truy thu trong thời gian còn lại của năm. Về trộm cắp điện, Long Bình, Long Thành, Trảng Bom là các đơn vị phát hiện nhiều vụ việc nhất lũy kế.",
+        "recommendation": [
+          "Bù Gia Mập, Đồng Phú, Phú Riềng: lập lại kế hoạch truy thu chi tiết theo tháng, ưu tiên các trường hợp hư hỏng/sai lệch đo đếm đã phát hiện nhưng chưa lập hóa đơn điều chỉnh.",
+          "Đẩy nhanh xử lý hóa đơn điều chỉnh có thời gian TTTH trên 62 ngày để tránh tồn đọng kéo dài, ảnh hưởng doanh thu.",
+          "Tăng cường kiểm tra định kỳ, phúc tra tại các khu vực có tiền sử trộm cắp điện để phát hiện và xử lý kịp thời."
+        ]
+      },
+      "3HAILONGKH": {
+        "nav": "Khách hàng không hài lòng",
+        "title": "Khách hàng đánh giá không hài lòng",
+        "unit_label": "Điện lực",
+        "metric_label": "Số lượt không hài lòng",
+        "target_desc": "Chỉ tiêu: 0 lượt khách hàng đánh giá không hài lòng",
+        "rows": [
+          {
+            "unit": "Đồng Xoài",
+            "noidung": "PB0101"
+          },
+          {
+            "unit": "Trấn Biên",
+            "noidung": "PK0100"
+          },
+          {
+            "unit": "Dầu Giây",
+            "noidung": "PK0200"
+          },
+          {
+            "unit": "Long Khánh",
+            "noidung": "PK0400"
+          },
+          {
+            "unit": "Long Thành",
+            "noidung": "PK0700"
+          }
+        ],
+        "total_incidents": 5,
+        "type": "incident",
+        "assessment": "Kỳ báo cáo ghi nhận 5 lượt khách hàng đánh giá không hài lòng, liên quan cách giải quyết và thời gian xử lý sự cố tại Đồng Xoài, Trấn Biên, Dầu Giây, Long Khánh, Long Thành. Nội dung phản ánh tập trung ở thời gian phản hồi/xử lý mất điện còn chậm.",
+        "recommendation": [
+          "Rà soát lại quy trình tiếp nhận - phản hồi khách hàng khi báo sự cố ngoài giờ hành chính, đảm bảo thời gian phản hồi theo quy định.",
+          "Nhân viên trực xử lý sự cố phải mặc đồng phục, chủ động thông tin tiến độ xử lý cho khách hàng, tránh im lặng kéo dài.",
+          "Gọi điện xin lỗi và giải thích lại với các khách hàng đã đánh giá không hài lòng, ghi nhận vào hệ thống CSKH để theo dõi cải thiện."
+        ]
+      },
+      "1CRM": {
+        "nav": "Phiếu yêu cầu nhiều lần (CRM)",
+        "title": "Phiếu yêu cầu nhiều lần trên CRM",
+        "unit_label": "Điện lực",
+        "metric_label": "Số phiếu gọi nhiều lần",
+        "target_desc": "Chỉ tiêu: hạn chế tối đa phát sinh phiếu gọi lại nhiều lần (0 phiếu)",
+        "counts": [],
+        "total_incidents": 0,
+        "type": "incident",
+        "assessment": "Kỳ báo cáo phát sinh 0 phiếu yêu cầu gọi nhiều lần trên CRM. không có đơn vị nào lặp lại từ 2 lần trở lên cần chấn chỉnh việc xử lý dứt điểm ngay từ lần tiếp nhận đầu tiên.",
+        "recommendation": [
+          "Xử lý dứt điểm yêu cầu ngay từ lần tiếp nhận đầu, tránh để khách hàng phải gọi lại nhiều lần cùng một nội dung.",
+          "Với các phiếu liên quan sự cố/tài sản khách hàng, cần khảo sát và tư vấn phương án xử lý rõ ràng ngay lần đầu tiên.",
+          "Phân tích nguyên nhân gốc (do quá tải trực tổng đài, do chờ điều độ, do tài sản khách hàng...) để có giải pháp phù hợp từng nhóm nguyên nhân."
+        ]
+      },
+      "2MATDIENTBACC": {
+        "nav": "Trạm mất điện lặp lại",
+        "title": "Danh sách trạm mất điện lặp lại trong tuần",
+        "unit_label": "Điện lực",
+        "metric_label": "Tổng số lần mất điện (các trạm lặp lại)",
+        "target_desc": "Chỉ tiêu: hạn chế trạm mất điện lặp lại nhiều lần trong tuần",
+        "rows": [
+          {
+            "unit": "Lộc Ninh",
+            "so_tram": 4,
+            "tong_lan": 22
+          },
+          {
+            "unit": "Đồng Xoài",
+            "so_tram": 2,
+            "tong_lan": 5
+          },
+          {
+            "unit": "Chơn Thành",
+            "so_tram": 1,
+            "tong_lan": 1
+          }
+        ],
+        "total_incidents": 7,
+        "total_tram": 3,
+        "type": "incident",
+        "assessment": "Kỳ báo cáo ghi nhận 3 Điện lực có trạm bị mất điện lặp lại từ 2 lần trở lên trong tuần. Lộc Ninh, Đồng Xoài, Chơn Thành là các đơn vị có số lần mất điện lặp lại nhiều nhất, cần rà soát nguyên nhân sự cố lưới điện.",
+        "recommendation": [
+          "Lộc Ninh: kiểm tra, phúc tra tình trạng lưới điện tại các trạm mất điện lặp lại, xác định nguyên nhân gốc (quá tải, tiếp xúc kém, sự cố thiết bị).",
+          "Đối chiếu số liệu CRM - đo xa - OMS để xác nhận chính xác số lần, thời điểm mất điện thực tế, tránh sai lệch trong báo cáo.",
+          "Lập kế hoạch bảo trì, sửa chữa lưới điện ưu tiên cho các trạm có tần suất mất điện cao."
+        ]
+      },
+      "10DIENNHANTUAN": {
+        "nav": "Điện nhận tuần",
+        "title": "Sản lượng điện nhận theo ngày trong tuần",
+        "unit_label": "Ngày",
+        "metric_label": "Điện nhận (kWh)",
+        "target_desc": "Theo dõi biến động sản lượng điện nhận toàn Công ty theo tuần",
+        "rows": [
+          {
+            "ngay": "Thứ 2",
+            "tuan36": 64729178,
+            "tuan37": 64729178,
+            "sosanh": -4.6
+          },
+          {
+            "ngay": "Thứ 3",
+            "tuan36": 65144125,
+            "tuan37": 65144125,
+            "sosanh": 1
+          },
+          {
+            "ngay": "Thứ 4",
+            "tuan36": 66086390,
+            "tuan37": 66086390,
+            "sosanh": -1.3
+          },
+          {
+            "ngay": "Thứ 5",
+            "tuan36": 65647612,
+            "tuan37": 65647612,
+            "sosanh": -2.9
+          },
+          {
+            "ngay": "Thứ 6",
+            "tuan36": 66019946,
+            "tuan37": 66019946,
+            "sosanh": -3
+          },
+          {
+            "ngay": "Thứ 7",
+            "tuan36": 61937234,
+            "tuan37": 61937234,
+            "sosanh": -2.3
+          },
+          {
+            "ngay": "Chủ Nhật",
+            "tuan36": 49194501,
+            "tuan37": 49194501,
+            "sosanh": 3.1
+          },
+          {
+            "ngay": "Thứ 2",
+            "tuan36": 3927241,
+            "tuan37": 59236988,
+            "sosanh": 63164230
+          },
+          {
+            "ngay": "Thứ 3",
+            "tuan36": 3768775,
+            "tuan37": 62381389,
+            "sosanh": 66150164
+          },
+          {
+            "ngay": "Thứ 4",
+            "tuan36": 2796949,
+            "tuan37": 63114934,
+            "sosanh": 65911883
+          }
+        ],
+        "tong36": null,
+        "tong37": null,
+        "tongsosanh": null,
+        "type": "trend"
+      }
+    },
+    "failed": [],
+    "period": "Tuần 40/2026 (28/09 - 02/10/2026)"
   }
 }
