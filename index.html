@@ -661,6 +661,7 @@ th.num { text-align: right; }
     <div style="display:flex; justify-content:space-between; align-items:center; margin-top:18px; border-top:1px solid var(--line); padding-top:12px;">
       <span style="font-size:12px; color:var(--text-muted);">Tự động bóc tách 12 Chuyên đề</span>
       <div style="display:flex; gap:8px;">
+        <button class="btn btn-outline" style="font-size:12px;" onclick="configureGitHubToken()">⚙️ Cấu hình GitHub Token</button>
         <button class="btn btn-outline" onclick="closeUploadModal()">Đóng</button>
         <button class="btn btn-outline" onclick="exportDataJson()">💾 Tải data_history.json</button>
       </div>
@@ -753,7 +754,8 @@ function checkAuthStatus() {
     }
 
     // Role-based UI visibility
-    const canUpload = (currentUser.role === 'admin' || currentUser.role === 'deputy_manager');
+    const ALLOWED_UPLOAD_ROLES = ['admin', 'leadership', 'manager', 'deputy_manager'];
+    const canUpload = currentUser && ALLOWED_UPLOAD_ROLES.includes(currentUser.role);
     document.getElementById('btnUploadHeader').style.display = canUpload ? 'inline-flex' : 'none';
     document.getElementById('btnUploadMobile').style.display = canUpload ? 'flex' : 'none';
 
@@ -11774,7 +11776,7 @@ let STORE = {};
 
 function initStore() {
   try {
-    const saved = sessionStorage.getItem('KD_DVKH_HISTORY_STORE');
+    const saved = sessionStorage.getItem('KD_DVKH_HISTORY_STORE') || localStorage.getItem('KD_DVKH_HISTORY_STORE');
     if (saved) {
       STORE = JSON.parse(saved);
     } else {
@@ -11811,8 +11813,98 @@ initStore();
 
 function saveStore() {
   try {
-    sessionStorage.setItem('KD_DVKH_HISTORY_STORE', JSON.stringify(STORE));
+    const jsonStr = JSON.stringify(STORE);
+    sessionStorage.setItem('KD_DVKH_HISTORY_STORE', jsonStr);
+    localStorage.setItem('KD_DVKH_HISTORY_STORE', jsonStr);
   } catch(e) { console.warn('Failed to save store:', e); }
+}
+
+function configureGitHubToken() {
+  const currentToken = localStorage.getItem('KD_GITHUB_PAT') || '';
+  const token = prompt('🔑 CẤU HÌNH GITHUB ACCESS TOKEN ĐỒNG BỘ MÁY CHỦ:\n\nNhập Personal Access Token (PAT) của kho GitHub (Tiennm3006/bao-cao-kd-dvkh).\nToken này cho phép tự động push dữ liệu báo cáo tuần mới lên máy chủ cho tất cả thiết bị xem:\n', currentToken);
+  if (token !== null) {
+    const trimmed = token.trim();
+    if (trimmed) {
+      localStorage.setItem('KD_GITHUB_PAT', trimmed);
+      alert('✅ Đã lưu GitHub Token thành công trên trình duyệt!');
+    } else {
+      localStorage.removeItem('KD_GITHUB_PAT');
+      alert('ℹ️ Đã xoá GitHub Token.');
+    }
+  }
+}
+
+async function syncStoreToGitHubServer(weekKey) {
+  let token = localStorage.getItem('KD_GITHUB_PAT');
+  if (!token) {
+    token = prompt('🔐 BẬT TÍNH NĂNG ĐỒNG BỘ MÁY CHỦ CHO TẤT CẢ THIẾT BỊ:\n\nNhập GitHub Personal Access Token để tự động commit dữ liệu ' + weekKey + ' lên máy chủ GitHub (Các thiết bị khác sẽ thấy tuần mới sau 1-2 phút khi GitHub Pages cập nhật):\n\n(Token sẽ được lưu an toàn trên trình duyệt của bạn)');
+    if (token) {
+      token = token.trim();
+      localStorage.setItem('KD_GITHUB_PAT', token);
+    } else {
+      alert('⚠️ Chưa nhập GitHub Token. Dữ liệu ' + weekKey + ' đã được lưu trên thiết bị này, nhưng chưa thể tự động đẩy lên máy chủ cho các thiết bị khác.');
+      return false;
+    }
+  }
+
+  const repoOwner = 'Tiennm3006';
+  const repoName = 'bao-cao-kd-dvkh';
+  const filePath = 'data_history.json';
+  const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+
+  try {
+    const getRes = await fetch(apiUrl, {
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+
+    if (!getRes.ok) {
+      if (getRes.status === 401) {
+        localStorage.removeItem('KD_GITHUB_PAT');
+        throw new Error('GitHub Token không hợp lệ hoặc đã hết hạn. Vui lòng kiểm tra lại Token.');
+      }
+      throw new Error('Không thể kết nối đến máy chủ GitHub (HTTP ' + getRes.status + ')');
+    }
+
+    const fileData = await getRes.json();
+    const sha = fileData.sha;
+
+    const jsonStr = JSON.stringify(STORE, null, 2);
+    const utf8Bytes = new TextEncoder().encode(jsonStr);
+    let binaryStr = '';
+    for (let i = 0; i < utf8Bytes.length; i++) {
+      binaryStr += String.fromCharCode(utf8Bytes[i]);
+    }
+    const base64Content = btoa(binaryStr);
+
+    const putRes = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github.v3+json'
+      },
+      body: JSON.stringify({
+        message: `feat: tự động cập nhật dữ liệu ${weekKey} từ ứng dụng web`,
+        content: base64Content,
+        sha: sha,
+        branch: 'main'
+      })
+    });
+
+    if (!putRes.ok) {
+      const errBody = await putRes.json().catch(() => ({}));
+      throw new Error(errBody.message || ('Lỗi cập nhật GitHub API (HTTP ' + putRes.status + ')'));
+    }
+
+    return true;
+  } catch (err) {
+    console.error('Lỗi đồng bộ GitHub:', err);
+    alert('⚠️ ĐÃ LƯU TRÊN THIẾT BỊ NÀY, NHƯNG CHƯA ĐỒNG BỘ ĐƯỢC LÊN MÁY CHỦ MẠNG GITHUB:\n' + err.message + '\n\nBạn có thể bấm "Cấu hình GitHub Token" để kiểm tra/nhập lại Token.');
+    return false;
+  }
 }
 
 let currentWeekKey = '';
@@ -13224,6 +13316,11 @@ function toggleWeekLock() {
 }
 
 function handleGoogleDriveDownload() {
+  const ALLOWED_UPLOAD_ROLES = ['admin', 'leadership', 'manager', 'deputy_manager'];
+  if (!currentUser || !ALLOWED_UPLOAD_ROLES.includes(currentUser.role)) {
+    alert('⚠️ Bạn không có quyền nạp dữ liệu báo cáo mới. Chỉ tài khoản Quản trị (Admin), Phó Giám đốc, Trưởng phòng và Phó phòng mới được nạp.');
+    return;
+  }
   const input = document.getElementById('gdriveUrlInput')?.value.trim();
   if (!input) {
     alert('Vui lòng dán đường dẫn file Excel trên Google Drive!');
@@ -13267,10 +13364,15 @@ function handleGoogleDriveDownload() {
         currentWeekKey = weekKey;
         saveStore();
 
-        alert('🎉 Đã đồng bộ thành công dữ liệu ' + weekKey + ' từ Google Drive vào ứng dụng!');
         closeUploadModal();
         renderWeekSelector();
         renderApp();
+
+        syncStoreToGitHubServer(weekKey).then(synced => {
+          if (synced) {
+            alert('🎉 ĐÃ ĐỒNG BỘ THÀNH CÔNG ' + weekKey + ' VÀ ĐẨY LÊN MÁY CHỦ!\n\nTất cả các thiết bị khác khi mở app/đăng nhập sẽ thấy ngay báo cáo ' + weekKey + ' (sau 1-2 phút khi GitHub Pages cập nhật).');
+          }
+        });
       })
       .catch(err => {
         alert('❌ Lỗi khi nạp dữ liệu từ Google Drive:\n' + err.message + '\n\nLưu ý: Bạn chỉ cần bật quyền chia sẻ file: "Bất kỳ ai có liên kết đều có thể xem".');
@@ -13280,8 +13382,9 @@ function handleGoogleDriveDownload() {
 
 function handleExcelFileUpload(file) {
   if (!file) return;
-  if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'deputy_manager')) {
-    alert('⚠️ Bạn không có quyền nạp dữ liệu báo cáo mới. Chỉ tài khoản Quản trị (Admin) hoặc Phó phòng mới được nạp.');
+  const ALLOWED_UPLOAD_ROLES = ['admin', 'leadership', 'manager', 'deputy_manager'];
+  if (!currentUser || !ALLOWED_UPLOAD_ROLES.includes(currentUser.role)) {
+    alert('⚠️ Bạn không có quyền nạp dữ liệu báo cáo mới. Chỉ tài khoản Quản trị (Admin), Phó Giám đốc, Trưởng phòng và Phó phòng mới được nạp.');
     return;
   }
   ensureXlsxLoaded(() => doHandleExcelFileUpload(file));
@@ -13308,10 +13411,15 @@ function doHandleExcelFileUpload(file) {
       currentWeekKey = weekKey;
       saveStore();
 
-      alert('🎉 Đã nạp thành công dữ liệu ' + weekKey + ' vào hệ thống!');
       closeUploadModal();
       renderWeekSelector();
       renderApp();
+
+      syncStoreToGitHubServer(weekKey).then(synced => {
+        if (synced) {
+          alert('🎉 ĐÃ NẠP THÀNH CÔNG ' + weekKey + ' VÀ ĐỒNG BỘ LÊN MÁY CHỦ CHÍNH!\n\nTất cả các thiết bị khác khi mở app/đăng nhập sẽ thấy ngay báo cáo ' + weekKey + ' (sau 1-2 phút khi GitHub Pages cập nhật).');
+        }
+      });
     } catch(err) {
       alert('Lỗi khi đọc file Excel: ' + err.message);
     }
